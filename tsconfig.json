@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "es7"
+    ],
+    "skipLibCheck": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noResolve": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "sourceMap": true,
+    "allowJs": false,
+    "jsx": "react",
+    "declaration": true,
+    "declarationDir": "./dist/typings"
+  },
+  "skipLibCheck": true,
+  "exclude": [
+    "node_modules",
+    "typings"
+  ],
+  "include": [
+    "src"
+  ],
+  "compileOnSave": false,
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true,
+    "useWebpackText": true
+  }
+}

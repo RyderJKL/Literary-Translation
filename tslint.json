@@ -1,0 +1,28 @@
+{
+    "extends": ["tslint:latest", "tslint-react"],
+    "rules": {
+        "linterOptions": {
+            "exclude": [
+                "node_modules"
+            ]
+        },
+        "jsx-wrap-multiline": false,
+        "indent": [true, "spaces", 4],
+        "interface-name": [true, "never-prefix"],
+        "label-position": true,
+        "linebreak-style": [true, "LF" ],
+        "quotemark": [true, "single", "avoid-escape", "avoid-template"],
+        "no-implicit-dependencies": [ true, ["react", "react-dom", "prop-types"]],
+        "trailing-comma": false,
+        "ordered-imports": false,
+        "one-line": [true, "check-catch", "check-finally"],
+        "object-literal-sort-keys": false,
+        "member-ordering": false,
+        "prefer-object-spread": false,
+        "jsx-no-multiline-js": false,
+        "jsx-curly-spacing": [2, {"when": "never", "allowMultiline": false}],
+        "jsx-alignment": false,
+        "no-console": false,
+        "no-unused-expression": [true, "allow-new"]
+    }
+}
