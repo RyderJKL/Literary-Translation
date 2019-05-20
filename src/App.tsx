@@ -7,6 +7,7 @@ class App extends React.Component<PageInterface, {}> {
         return (<div>
                 <h1>Welcome to React with Typescript</h1>
                 <p>The color of this page is: {this.props.color}</p>
+                <h2>hello world!</h2>
             </div>
         );
     }
