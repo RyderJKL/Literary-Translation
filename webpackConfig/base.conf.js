@@ -14,7 +14,7 @@ module.exports = {
             resolve('src'),
             resolve('node_modules'),
         ],
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js'],
     },
     output: {
         path: config.build.assetsRoot,

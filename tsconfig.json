@@ -1,33 +1,57 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "es7"
-    ],
+    "compilerOptions": {
+        "target": "es5",
+        "lib": [
+            "dom",
+            "es7"
+        ],
+        "baseUrl": "src",
+        "paths": {
+            "store/*": [
+               "store/*"
+            ],
+            "actions/*": [
+                "actions/*"
+            ],
+            "components/*": [
+                "components/*"
+            ],
+            "containers/*": [
+                "containers/*"
+            ],
+            "reducers/*": [
+                "reducers/*"
+            ],
+            "utils/*": [
+                "utils/*"
+            ],
+            "vendor/*": [
+                "vendor/*"
+            ]
+        },
+        "skipLibCheck": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noResolve": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "sourceMap": true,
+        "allowJs": false,
+        "jsx": "react",
+        "declaration": true,
+        "declarationDir": "./dist/typings"
+    },
     "skipLibCheck": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noResolve": false,
-    "noImplicitAny": false,
-    "removeComments": true,
-    "sourceMap": true,
-    "allowJs": false,
-    "jsx": "react",
-    "declaration": true,
-    "declarationDir": "./dist/typings"
-  },
-  "skipLibCheck": true,
-  "exclude": [
-    "node_modules",
-    "typings"
-  ],
-  "include": [
-    "src"
-  ],
-  "compileOnSave": false,
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true,
-    "useWebpackText": true
-  }
+    "exclude": [
+        "node_modules",
+        "typings"
+    ],
+    "include": [
+        "src"
+    ],
+    "compileOnSave": false,
+    "awesomeTypescriptLoaderOptions": {
+        "forkChecker": true,
+        "useWebpackText": true
+    }
 }
