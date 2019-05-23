@@ -1,9 +1,9 @@
-import { AppContainer } from 'react-hot-loader'
-import { Provider } from 'react-redux'
+import { AppContainer } from 'react-hot-loader';
+import { Provider } from 'react-redux';
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import App from './App';
-import configureStore, { history }from './configureStore'
+import configureStore, { history } from './configureStore';
 
 const store = configureStore();
 
@@ -15,7 +15,7 @@ const render = () => {
             </Provider>
         </AppContainer>,
         document.getElementById('root') as HTMLElement
-    )
+    );
 };
 
 render();
@@ -24,6 +24,6 @@ render();
 if ((module as any).hot) {
     // Reload components
     (module as any).hot.accept('./App', () => {
-        render()
-    })
+        render();
+    });
 }

@@ -16,14 +16,15 @@ module.exports = {
         ],
         extensions: ['.ts', '.tsx', '.js'],
         alias: {
-            'store': resolve('src/store'),
-            'actions': resolve('src/actions'),
-            'views': resolve('src/views'),
-            'components': resolve('src/components'),
-            'containers': resolve('src/containers'),
-            'reducers': resolve('src/reducers'),
-            'utils': resolve('src/utils'),
-            'vendor': resolve('src/vendor'),
+            // '@': resolve('src'),
+            // 'store': resolve('src/store/'),
+            // 'actions': resolve('src/actions/'),
+            // 'views': resolve('src/views/'),
+            // 'components': resolve('src/components/'),
+            // 'containers': resolve('src/containers/'),
+            // 'reducers': resolve('src/reducers/'),
+            // 'utils': resolve('src/utils/'),
+            // 'vendor': resolve('src/vendor/'),
         }
     },
     output: {

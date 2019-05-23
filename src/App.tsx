@@ -4,7 +4,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import routes from './routes';
 
 interface AppProps {
-    history: History
+    history: History;
 }
 
 const App = ({ history }: AppProps) =>  {
@@ -12,7 +12,7 @@ const App = ({ history }: AppProps) =>  {
         <ConnectedRouter history={history}>
             { routes }
         </ConnectedRouter>
-    )
+    );
 };
 
 export default App;

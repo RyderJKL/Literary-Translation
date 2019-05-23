@@ -6,7 +6,7 @@ import {routerMiddleware} from 'connected-react-router';
 
 // import api from '../middleware/api';
 // import thunk from 'redux-thunk';
-import createRootReducer from 'store';
+import createRootReducer from './store';
 
 export const history = createBrowserHistory();
 

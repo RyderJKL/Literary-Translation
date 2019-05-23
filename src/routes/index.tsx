@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {Route, Switch} from 'react-router';
-import NavBar from 'views/NavBar';
-import Home from 'views/Home';
-import Hello from 'views/Hello';
+import NavBar from '../views/NavBar';
+import Home from '../views/Home';
+import Hello from '../views/Hello';
 
 const routes = (
     <div>
