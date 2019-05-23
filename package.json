@@ -16,7 +16,7 @@
     "@types/react-redux": "6.0.9",
     "@types/react-router": "5.0.1",
     "@types/react-router-dom": "4.3.3",
-    "@types/redux-devtools-extension": "^2.13.2",
+    "@types/redux-devtools-extension": "2.13.2",
     "awesome-typescript-loader": "5.2.1",
     "babel-core": "6.26.3",
     "babel-loader": "7.1.5",
@@ -49,16 +49,19 @@
   "dependencies": {
     "connected-react-router": "6.4.0",
     "history": "4.9.0",
-    "lego-ui": "^1.3.9",
+    "lego-ui": "1.3.9",
     "react": "16.8.6",
     "react-dom": "16.8.6",
+    "react-hot-loader": "4.8.7",
     "react-redux": "6.0.0",
     "react-router": "5.0.0",
     "react-router-dom": "5.0.0",
     "redux": "4.0.1",
+    "redux-devtools-extension": "2.13.8",
     "redux-logger": "3.0.6",
-    "react-hot-loader": "4.8.7",
-     "redux-devtools-extension": "^2.13.8"
+    "redux-observable": "1.1.0",
+    "rxjs": "6.5.2",
+    "rxjs-hooks": "0.4.3"
   },
   "engines": {
     "node": ">= 8.0.0",

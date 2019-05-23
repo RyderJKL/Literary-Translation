@@ -22,7 +22,7 @@
         "label-position": true,
         "linebreak-style": [true, "LF" ],
         "quotemark": [true, "single", "avoid-escape", "avoid-template"],
-        "no-implicit-dependencies": [ true, ["./src", "react", "react-dom", "prop-types"]],
+        "no-implicit-dependencies": [ true, ["src", "@", "react", "react-dom", "prop-types"]],
         "trailing-comma": false,
         "ordered-imports": false,
         "one-line": [true, "check-catch", "check-finally"],

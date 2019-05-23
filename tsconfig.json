@@ -7,29 +7,32 @@
         ],
         "baseUrl": "src",
         "paths": {
+            "@/*": [
+               "./*"
+            ],
             "store/*": [
-               "store/*"
+               "./store/*"
             ],
             "actions/*": [
-                "actions/*"
+                "./actions/*"
             ],
-            "views/*": [
-                "views/*"
+            "pages/*": [
+                "./pages/*"
             ],
             "components/*": [
-                "components/*"
+                "./components/*"
             ],
             "containers/*": [
-                "containers/*"
+                "./containers/*"
             ],
             "reducers/*": [
-                "reducers/*"
+                "./reducers/*"
             ],
             "utils/*": [
-                "utils/*"
+                "./utils/*"
             ],
             "vendor/*": [
-                "vendor/*"
+                "./vendor/*"
             ]
         },
         "skipLibCheck": true,

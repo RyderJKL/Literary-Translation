@@ -16,7 +16,7 @@ module.exports = {
         ],
         extensions: ['.ts', '.tsx', '.js'],
         alias: {
-            // '@': resolve('src'),
+            '@/': resolve('src/'),
             // 'store': resolve('src/store/'),
             // 'actions': resolve('src/actions/'),
             // 'views': resolve('src/views/'),
