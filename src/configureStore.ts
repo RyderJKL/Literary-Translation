@@ -1,6 +1,6 @@
 import {createStore, applyMiddleware, compose} from 'redux';
 import {createBrowserHistory} from 'history';
-import {composeWithDevTools} from 'redux-devtools-extension';
+// import {composeWithDevTools} from 'redux-devtools-extension';
 import {createLogger} from 'redux-logger';
 import {routerMiddleware} from 'connected-react-router';
 
@@ -11,11 +11,13 @@ import createRootReducer from './store';
 export const history = createBrowserHistory();
 
 export default function configStore(preloadedState?: any) {
+    const useLogger = false;
+
     const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
     let middlewares = [routerMiddleware(history)];
 
-    if (process.env.NODE_ENV !== 'production') {
+    if (useLogger && process.env.NODE_ENV !== 'production') {
         // https://github.com/LogRocket/redux-logger
         const logger = createLogger({
             collapsed: true
@@ -33,12 +35,12 @@ export default function configStore(preloadedState?: any) {
 
     // Hot reloading
     /* tslint:disable */
-    if ((module as any).hot) {
-        // Enable Webpack hot module replacement for reducers
-        (module as any).hot.accept('./store', () => {
-            store.replaceReducer(createRootReducer(history));
-        });
-    }
+    // if ((module as any).hot) {
+    //     // Enable Webpack hot module replacement for reducers
+    //     (module as any).hot.accept('./store', () => {
+    //         store.replaceReducer(createRootReducer(history));
+    //     });
+    // }
 
     return store;
 }
