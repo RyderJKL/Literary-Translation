@@ -4,6 +4,19 @@
         "exclude": ["node_modules"]
     },
     "rules": {
+        "max-line-length": {
+            "options": [120]
+        },
+        "no-submodule-imports": false,
+        "new-parens": true,
+        "no-arg": true,
+        "no-bitwise": true,
+        "no-conditional-assignment": true,
+        "no-consecutive-blank-lines": false,
+        "no-console": {
+            "severity": "warning",
+            "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
+        },
         "jsx-wrap-multiline": false,
         "indent": [true, "spaces", 4],
         "interface-name": [true, "never-prefix"],
@@ -20,7 +33,11 @@
         "jsx-no-multiline-js": false,
         "jsx-curly-spacing": [2, {"when": "never", "allowMultiline": false}],
         "jsx-alignment": false,
-        "no-console": false,
         "no-unused-expression": [true, "allow-new"]
+    },
+    "jsRules": {
+        "max-line-length": {
+            "options": [120]
+        }
     }
 }

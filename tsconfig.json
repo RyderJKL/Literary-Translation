@@ -13,6 +13,9 @@
             "actions/*": [
                 "actions/*"
             ],
+            "views/*": [
+                "views/*"
+            ],
             "components/*": [
                 "components/*"
             ],
