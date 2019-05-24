@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
+        // Module '"/Users/macbook/workSpace/lego-admin/node_modules/@types/react/index"' has no default export.
+        "allowSyntheticDefaultImports": true,
         "target": "es5",
         "lib": [
             "dom",
@@ -52,6 +54,7 @@
         "node_modules",
         "typings"
     ],
+    "allowSyntheticDefaultImports": true,
     "compileOnSave": false,
     "awesomeTypescriptLoaderOptions": {
         "forkChecker": true,

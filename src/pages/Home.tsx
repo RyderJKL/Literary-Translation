@@ -1,8 +1,9 @@
 import * as React from 'react';
+import Example from './Counter';
 
 const Home = () => (
     <div>
-        Home
+        <Example title={'jack chen'}/>
     </div>
 );
 
