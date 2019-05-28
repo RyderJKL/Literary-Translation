@@ -3,7 +3,7 @@ import Example from './Counter';
 
 const Home = () => (
     <div>
-        <Example title={'jack chen'}/>
+        <Example title={'whoops!'}/>
     </div>
 );
 

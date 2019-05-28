@@ -47,7 +47,10 @@
         "allowJs": false,
         "jsx": "react",
         "declaration": true,
-        "declarationDir": "./dist/typings"
+        // 编译后的 types 目录
+        "declarationDir": "./dist/typings",
+        // 自定义的 types 目录
+        "typeRoots": ["./types"]
     },
     "skipLibCheck": true,
     "exclude": [

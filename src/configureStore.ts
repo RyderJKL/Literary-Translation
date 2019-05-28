@@ -17,14 +17,14 @@ export default function configStore(preloadedState?: any) {
 
     let middlewares = [routerMiddleware(history)];
 
-    if (useLogger && process.env.NODE_ENV !== 'production') {
-        // https://github.com/LogRocket/redux-logger
-        const logger = createLogger({
-            collapsed: true
-        });
-
-        middlewares = [...middlewares, logger];
-    }
+    // if (useLogger && process.env.NODE_ENV !== 'production') {
+    //     // https://github.com/LogRocket/redux-logger
+    //     const logger = createLogger({
+    //         collapsed: true
+    //     });
+    //
+    //     middlewares = [...middlewares, logger];
+    // }
 
     const middlewareEnhancer = applyMiddleware(...middlewares);
 
