@@ -3,7 +3,7 @@ import {Route, Switch} from 'react-router';
 import NavBar from '../pages/NavBar';
 import Home from '../pages/Home';
 import Hello from '../pages/Hello';
-import Todo from '../pages/todo';
+import Todo from '../pages/todo/Todo';
 
 const routes = (
     <div>
