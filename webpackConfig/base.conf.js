@@ -14,7 +14,7 @@ module.exports = {
             resolve('src'),
             resolve('node_modules'),
         ],
-        extensions: ['.ts', '.tsx', '.js'],
+        extensions: ['.ts', '.tsx', '.js', '.json', '.css', '.scss'],
         alias: {
             '@/': resolve('src/'),
             // 'store': resolve('src/store/'),
@@ -56,26 +56,26 @@ module.exports = {
                 loader: ['awesome-typescript-loader'],
                 exclude: /node_modules/,
             },
-            {
-                test: /\.scss$/,
-                use: [{
-                    loader: "style-loader"
-                },
-                    {
-                        loader: "css-loader",
-                        options: {
-                            camelcase: false,
-                            modules: false
-                        }
-                    },
-                    {
-                        loader: "postcss-loader"
-                    },
-                    {
-                        loader: "sass-loader"
-                    }
-                ]
-            },
+            // {
+            //     test: /\.scss$/,
+            //     use: [{
+            //         loader: "style-loader"
+            //     },
+            //         {
+            //             loader: "css-loader",
+            //             options: {
+            //                 camelcase: false,
+            //                 modules: false
+            //             }
+            //         },
+            //         {
+            //             loader: "postcss-loader"
+            //         },
+            //         {
+            //             loader: "sass-loader"
+            //         }
+            //     ]
+            // },
             {
                 test: /\.(png|jpe?g|gif)(\?.*)?$/,
                 loader: 'url-loader',

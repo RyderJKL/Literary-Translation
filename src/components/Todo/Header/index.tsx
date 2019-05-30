@@ -21,7 +21,6 @@ export default class Header extends React.Component<Props>{
    public render() {
        return (
            <header>
-               <h1>Todos</h1>
                <TodoTextInput newTodo={true} onSave={this.handleSave} placeholder='What needs to be done?'/>
            </header>
        );

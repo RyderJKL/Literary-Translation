@@ -4,6 +4,7 @@
         "exclude": ["node_modules"]
     },
     "rules": {
+        "array-type":[false, "array-simple"],
         // react-hooks
         "react-hooks-nesting": "error",
         // for Lambdas are forbidden in JSX attributes due to their rendering performance impact
@@ -16,10 +17,11 @@
         "no-bitwise": true,
         "no-conditional-assignment": true,
         "no-consecutive-blank-lines": false,
-        "no-console": {
-            "severity": "warning",
-            "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
-        },
+        "no-console": [false, "debug", "info", "log", "time", "timeEnd", "trace"],
+//        "no-console": {
+//            "severity": "warning",
+//            "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
+//        },
         "jsx-wrap-multiline": false,
         "indent": [true, "spaces", 4],
         "interface-name": [true, "never-prefix"],

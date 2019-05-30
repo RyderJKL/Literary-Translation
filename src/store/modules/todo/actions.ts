@@ -17,7 +17,7 @@ export const completeTodo = createAction<TodoModel['id']>(Type.COMPLETE_TODO);
 export const completeAll = createAction(Type.COMPLETE_ALL);
 export const clearCompleted = createAction(Type.CLEAR_COMPLETED);
 
-const Actions = {
+const TodoActions = {
     Type,
     addTodo,
     editTodo,
@@ -27,7 +27,7 @@ const Actions = {
     clearCompleted,
 };
 
-export type TodoActions = Omit<typeof Actions, 'Type'>;
+export type TodoActionType = Omit<typeof TodoActions, 'Type'>;
 
-export default Actions;
+export default TodoActions;
 

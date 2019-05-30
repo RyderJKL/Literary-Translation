@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import styles from './style.css';
+import * as styles from './style.css';
 
 export interface Props {
     onSave: (text: string) => void;
@@ -27,6 +27,7 @@ export default class TodoTextInput extends React.Component<Props, State> {
         const text = event.target.value.trim();
         if (!this.props.newTodo) {
             this.props.onSave(text);
+            this.setState({ text: ''});
         }
     }
 
@@ -42,6 +43,7 @@ export default class TodoTextInput extends React.Component<Props, State> {
             if (this.props.newTodo) {
                 this.setState({text});
             }
+            this.setState({ text: ''});
         }
     }
 
