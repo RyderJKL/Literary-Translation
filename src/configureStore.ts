@@ -15,7 +15,7 @@ export default function configStore(preloadedState?: any) {
 
     const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-    let middlewares = [routerMiddleware(history)];
+    const middlewares = [routerMiddleware(history)];
 
     // if (useLogger && process.env.NODE_ENV !== 'production') {
     //     // https://github.com/LogRocket/redux-logger

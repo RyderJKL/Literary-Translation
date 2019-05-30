@@ -3,7 +3,7 @@ import {Route, Switch} from 'react-router';
 import NavBar from '../pages/NavBar';
 import Home from '../pages/Home';
 import Hello from '../pages/Hello';
-import Todo from '../pages/todo/Todo';
+import Index from '../pages/Todo';
 
 const routes = (
     <div>
@@ -11,7 +11,7 @@ const routes = (
         <Switch>
             <Route exact={true} path='/' component={Home}/>
             <Route path='/hello' component={Hello}/>
-            <Route path='/todo' component={Todo}/>
+            <Route path='/todo' component={Index}/>
         </Switch>
     </div>
 );

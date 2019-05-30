@@ -1,8 +1,7 @@
 import * as React from 'react';
 
 const Hello = () => (
-    <div>
-    </div>
+    <div> hello </div>
 );
 
 export default Hello;

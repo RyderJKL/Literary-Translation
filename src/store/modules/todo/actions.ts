@@ -27,7 +27,7 @@ const Actions = {
     clearCompleted,
 };
 
-export type TodoActions = Readonly<Omit<typeof Actions, 'Type'>>;
+export type TodoActions = Omit<typeof Actions, 'Type'>;
 
 export default Actions;
 
