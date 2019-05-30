@@ -1,28 +1,23 @@
 import * as React from 'react';
-import { addTodo } from '../../../store/modules/todo/actions';
+import {addTodo} from '../../../store/modules/todo/actions';
 import TodoTextInput from '../TextInput';
 
 export interface Props {
     addToDo: typeof addTodo;
 }
 
-export default class Header extends React.Component<Props>{
-   constructor(props: Props, context?: any) {
-      super(props, context);
-      this.handleSave = this.handleSave.bind(this);
-   }
+const Header = (props: Props) => {
+    const handleOnSave = (text: string) => {
+        if (text.length) {
+            props.addToDo({ text });
+        }
+    };
 
-   private handleSave(text: string) {
-       if (text.length) {
-           this.props.addToDo({ text });
-       }
-   }
+    return (
+        <header>
+            <TodoTextInput newTodo={true} onSave={handleOnSave} placeholder='What needs to be done?'/>
+        </header>
+    );
+};
 
-   public render() {
-       return (
-           <header>
-               <TodoTextInput newTodo={true} onSave={this.handleSave} placeholder='What needs to be done?'/>
-           </header>
-       );
-   }
-}
+export default Header;
