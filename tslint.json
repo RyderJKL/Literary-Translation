@@ -4,6 +4,7 @@
         "exclude": ["node_modules"]
     },
     "rules": {
+        "no-trailing-whitespace": [false],
         "array-type":[false, "array-simple"],
         // react-hooks
         "react-hooks-nesting": "error",

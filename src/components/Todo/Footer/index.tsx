@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as styles from './style.scss';
 import * as classNames from 'classnames';
-import { Filter } from '../../../store/modules/todo/model';
+import {Filter} from '../../../store/modules/todo/model';
 
 export const FILTER_TITLES = {
     [Filter.SHOW_ALL]: 'All',
@@ -10,43 +10,40 @@ export const FILTER_TITLES = {
 };
 
 export interface Props {
-   filter: Filter;
-   activeCount?: number;
-   completedCount?: number;
-   onClickFilter: (filter: Filter) => any;
-   onClickClearCompleted: () => any;
+    filter: Filter;
+    activeCount?: number;
+    completedCount?: number;
+    onClickFilter: (filter: Filter) => any;
+    onClickClearCompleted: () => any;
 }
 
-export default class TodoFooter extends React.Component<Props>{
-    public static defaultProps: Partial<Props> = {
-        activeCount: 0,
-        completedCount: 0
-    };
-
-    public renderTodoCount(): JSX.Element {
-        const { activeCount } = this.props;
+const TodoFooter = ({
+    activeCount = 0,
+    completedCount = 0,
+    ...props
+}: Props) => {
+    const renderTodoCount: () => JSX.Element = () => {
         const itemWord = activeCount === 1 ? 'item' : 'items';
-
         return (
             <span className={styles.count}>
                 <strong>{activeCount || 'No'}</strong> {itemWord} left
             </span>
         );
-    }
+    };
 
-    public renderFilterLink(filter: Filter): JSX.Element {
-        const { filter: selectedFilter, onClickFilter } = this.props;
+    const renderFilterLink: (filter: Filter) => JSX.Element = (filter) => {
+        const {filter: selectedFilter, onClickFilter} = props;
         return (
             <a
                 className={classNames({[styles.selected]: filter === selectedFilter})}
-                style={{ cursor: 'pointer'}}
+                style={{cursor: 'pointer'}}
                 onClick={() => onClickFilter(filter)}
             >{FILTER_TITLES[filter]}</a>
         );
-    }
+    };
 
-    public renderClearButton(): JSX.Element | void {
-        const { completedCount, onClickClearCompleted } = this.props;
+    const renderClearButton: () => JSX.Element | void = () => {
+        const {onClickClearCompleted} = props;
         if (completedCount! > 0) {
             return (
                 <button
@@ -56,21 +53,21 @@ export default class TodoFooter extends React.Component<Props>{
                 />
             );
         }
-    }
+    };
 
-    public render() {
-        return (
-            <footer className={styles.normal}>
-                {this.renderTodoCount()}
-                <ul className={styles.filters}>
-                    {
-                        (Object.keys(Filter) as (keyof typeof Filter)[]).map((key) => (
-                            <li key={key} children={this.renderFilterLink(Filter[key])} />
-                        ))
-                    }
-                </ul>
-                {this.renderClearButton()}
-            </footer>
-        );
-    }
-}
+    return (
+        <footer className={styles.normal}>
+            {renderTodoCount()}
+            <ul className={styles.filters}>
+                {
+                    (Object.keys(Filter) as (keyof typeof Filter)[]).map((key) => (
+                        <li key={key} children={renderFilterLink(Filter[key])}/>
+                    ))
+                }
+            </ul>
+            {renderClearButton()}
+        </footer>
+    );
+};
+
+export default TodoFooter;
