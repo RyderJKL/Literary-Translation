@@ -73,7 +73,8 @@
     "redux-logger": "3.0.6",
     "redux-observable": "1.1.0",
     "rxjs": "6.5.2",
-    "rxjs-hooks": "0.4.3"
+    "rxjs-hooks": "0.4.3",
+    "typesafe-actions": "^4.4.0"
   },
   "engines": {
     "node": ">= 8.0.0",

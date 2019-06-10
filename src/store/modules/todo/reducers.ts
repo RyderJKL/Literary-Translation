@@ -13,7 +13,6 @@ const initialState: TodoState = [
 
 export const todoReducer = handleActions<TodoState, TodoModel>({
     [TodoActions.Type.ADD_TODO]: (state, action) => {
-        console.log(action, 'todo action');
         if (action.payload && action.payload.text) {
             return [
                 {

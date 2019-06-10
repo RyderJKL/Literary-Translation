@@ -1,14 +1,6 @@
 import {createAction} from 'redux-actions';
 import {TodoModel} from './model';
-
-export enum Type {
-    ADD_TODO = 'ADD_TODO',
-    EDIT_TODO = 'EDIT_TODO',
-    DELETE_TODO = 'DELETE_TODO',
-    COMPLETE_TODO = 'COMPLETE_TODO',
-    COMPLETE_ALL = 'COMPLETE_ALL',
-    CLEAR_COMPLETED = 'CLEAR_COMPLETED',
-}
+import {Type} from './actionTypes';
 
 export const addTodo = createAction<PartialPick<TodoModel, 'text'>>(Type.ADD_TODO);
 export const editTodo = createAction<PartialPick<TodoModel, 'id'>>(Type.EDIT_TODO);

@@ -4,6 +4,7 @@
         "exclude": ["node_modules"]
     },
     "rules": {
+        "no-submodule-imports": false,
         "no-trailing-whitespace": [false],
         "array-type":[false, "array-simple"],
         // react-hooks
@@ -29,7 +30,30 @@
         "label-position": true,
         "linebreak-style": [true, "LF" ],
         "quotemark": [true, "single", "avoid-escape", "avoid-template"],
-        "no-implicit-dependencies": [ true, ["src", "@", "react", "react-dom", "prop-types"]],
+        "no-implicit-dependencies": [
+            true,
+            [
+                "react",
+                "react-dom",
+                "prop-types",
+                "@",
+                "src",
+                "actions",
+                "reducers",
+                "services",
+                "epics",
+                "models",
+                "pages",
+                "components",
+                "store",
+                "utils",
+                "vendor",
+                "routes",
+                "constant",
+                "middleware",
+                "layout"
+            ]
+        ],
         "trailing-comma": false,
         "ordered-imports": false,
         "one-line": [true, "check-catch", "check-finally"],

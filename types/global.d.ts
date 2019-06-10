@@ -17,6 +17,7 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 //  PartialPick https://stackoverflow.com/questions/53741993/typescript-partially-partial-type
 type PartialPick<T, K extends keyof T> = Partial<T> & Pick<T, K>;
 
+
 /*
 // PartialPick example
 

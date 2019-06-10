@@ -12,31 +12,49 @@
         "baseUrl": "src",
         "paths": {
             "@/*": [
-               "./*"
-            ],
-            "store/*": [
-               "./store/*"
-            ],
-            "actions/*": [
-                "./actions/*"
+                "*"
             ],
             "pages/*": [
-                "./pages/*"
+                "pages/*"
             ],
-            "components/*": [
-                "./components/*"
-            ],
-            "containers/*": [
-                "./containers/*"
+            "actions/*": [
+                "actions/*"
             ],
             "reducers/*": [
-                "./reducers/*"
+                "reducers/*"
+            ],
+            "services/*": [
+                "services/*"
+            ],
+            "epics/*": [
+                "epics/*"
+            ],
+            "models/*": [
+                "models/*"
+            ],
+            "components/*": [
+                "components/*"
+            ],
+            "store/*": [
+                "store/*"
             ],
             "utils/*": [
-                "./utils/*"
+                "utils/*"
             ],
             "vendor/*": [
-                "./vendor/*"
+                "vendor/*"
+            ],
+            "routes/*": [
+                "routes/*"
+            ],
+            "constant/*": [
+                "constant/*"
+            ],
+            "middleware/*": [
+                "middleware/*"
+            ],
+            "layout/*": [
+                "layout/*"
             ]
         },
         "skipLibCheck": true,
