@@ -1,13 +1,21 @@
 import {combineReducers} from 'redux';
 import {connectRouter} from 'connected-react-router';
-import RootState from './rootState';
-import { todoReducer } from './modules/todo/reducers';
+import {todoReducer, TodoState} from './modules/todo/reducers';
+import {weatherReducer, WeatherState} from './modules/weather';
+import {mapReducer, MapState} from './modules/map/reducers';
 
-export { RootState };
+export interface RootState {
+    todos: TodoState;
+    weather: WeatherState;
+    map: MapState;
+    router?: any;
+}
 
 // top reducer
 const rootReducer = (history) => combineReducers<RootState>({
     todos: todoReducer as any,
+    weather: weatherReducer as any,
+    map: mapReducer as any,
     router: connectRouter(history),
 });
 

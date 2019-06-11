@@ -1,37 +1,34 @@
 import {createStore, applyMiddleware, compose} from 'redux';
+import {createEpicMiddleware} from 'redux-observable';
 import {createBrowserHistory} from 'history';
-// import {composeWithDevTools} from 'redux-devtools-extension';
-import {createLogger} from 'redux-logger';
+
 import {routerMiddleware} from 'connected-react-router';
+import {ActionType as Action} from 'store/actions';
 
-// import api from '../middleware/api';
-// import thunk from 'redux-thunk';
-import createRootReducer from './store';
-
+import createRootReducer, { RootState } from './store';
 export const history = createBrowserHistory();
 
-export default function configStore(preloadedState?: any) {
-    const useLogger = false;
+export const epicMiddleware = createEpicMiddleware<Action, Action, RootState>();
 
+
+export default function configStore(preloadedState?: any) {
     const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-    const middlewares = [routerMiddleware(history)];
+    // configure middlewares
+    const middlewares = [
+        routerMiddleware(history),
+        epicMiddleware,
+    ];
 
-    // if (useLogger && process.env.NODE_ENV !== 'production') {
-    //     // https://github.com/LogRocket/redux-logger
-    //     const logger = createLogger({
-    //         collapsed: true
-    //     });
-    //
-    //     middlewares = [...middlewares, logger];
-    // }
+    // compose enhancers
+    const composedEnhancers = composeEnhancer(applyMiddleware(...middlewares));
 
-    const middlewareEnhancer = applyMiddleware(...middlewares);
-
-    // const enhancers = [middlewareEnhancer];
-    const composedEnhancers = composeEnhancer(middlewareEnhancer);
-
-    const store = createStore(createRootReducer(history), preloadedState, composedEnhancers);
+    // create store
+    const store = createStore(
+        createRootReducer(history),
+        preloadedState,
+        composedEnhancers
+    );
 
     // Hot reloading
     /* tslint:disable */

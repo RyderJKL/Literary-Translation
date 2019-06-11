@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {RouteComponentProps} from 'react-router';
-import {connect} from 'react-redux';
 import {bindActionCreators, Dispatch} from 'redux';
-import RootState, {TodoState} from '../../store/rootState';
+import {connect} from 'react-redux';
+import {RootState} from 'store';
+import {TodoState} from 'store/modules/todo/reducers';
 import TodoActions, {TodoActionType} from '../../store/modules/todo/actions';
 import {Filter as TodoFilter, TodoModel} from '../../store/modules/todo/model';
-import {omit} from '../../utils';
+import {omit} from 'utils';
 import * as styles from './style.css';
 import {Header, TodoList, Footer} from '../../components/Todo';
 

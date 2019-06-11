@@ -3,10 +3,12 @@ import { Provider } from 'react-redux';
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import App from './App';
-import configureStore, { history } from './configureStore';
+import configureStore, { history, epicMiddleware } from './configureStore';
+import epics from './epics';
 
 const store = configureStore();
 
+epicMiddleware.run(epics);
 const render = () => {
     ReactDom.render(
             <Provider store={store}>

@@ -1,5 +1,5 @@
 import {createAction, ActionType} from 'typesafe-actions';
-import * as WeatherActionTypes from 'constant/actionTypes/weather';
+import * as WeatherActionTypes from './actionTypes';
 
 export const weatherGetAction = createAction(
     WeatherActionTypes.WEATHER_GET,
@@ -16,10 +16,10 @@ export const weatherErrorAction = createAction(
     (resolve) => (error: Error) => resolve(error)
 );
 
-const actions = {
+export const actions = {
     weatherGetAction,
     weatherSetAction,
     weatherErrorAction
 };
 
-export type WeatherAction = ActionType<typeof actions>;
+export type WeatherActionType = ActionType<typeof actions>;
