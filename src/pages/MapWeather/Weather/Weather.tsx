@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {WeatherModel} from 'store/modules/weather/model';
+import { WeatherModel } from 'store/modules/weather/model';
 
 export interface WeatherProps {
     weather: WeatherModel;

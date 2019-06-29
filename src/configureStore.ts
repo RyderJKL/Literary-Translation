@@ -1,9 +1,9 @@
-import {createStore, applyMiddleware, compose} from 'redux';
-import {createEpicMiddleware} from 'redux-observable';
-import {createBrowserHistory} from 'history';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { createEpicMiddleware } from 'redux-observable';
+import { createBrowserHistory } from 'history';
 
-import {routerMiddleware} from 'connected-react-router';
-import {AllActionType as Action} from 'store/actions';
+import { routerMiddleware } from 'connected-react-router';
+import { AllActionType as Action } from 'store/actions';
 
 import createRootReducer, { RootState } from './store';
 export const history = createBrowserHistory();

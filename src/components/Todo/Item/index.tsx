@@ -1,6 +1,6 @@
 import * as React from 'react';
 import TodoActions from '../../../store/modules/todo/actions';
-import {TodoModel} from '../../../store/modules/todo/model';
+import { TodoModel } from '../../../store/modules/todo/model';
 import TodoTextInput from '../TextInput';
 import * as classNames from 'classnames';
 import * as styles from './style.css';
@@ -14,7 +14,7 @@ export interface Props {
 
 const TodoItem = (props: Props) => {
     const [editing, setEditing] = React.useState<boolean>(false);
-    const {todo, completeTodo, deleteTodo} = props;
+    const { todo, completeTodo, deleteTodo } = props;
     let element;
 
     const handleDoubleClick = () => {
@@ -25,7 +25,7 @@ const TodoItem = (props: Props) => {
         if (text.length === 0) {
             props.deleteTodo(id);
         } else {
-            props.editTodo({id, text});
+            props.editTodo({ id, text });
         }
 
         setEditing(false);

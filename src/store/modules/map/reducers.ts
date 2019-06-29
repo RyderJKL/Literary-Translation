@@ -12,7 +12,7 @@ export const mapInitialState = {
 export const mapReducer = (state: MapState = mapInitialState, action: actions.MapActionType): MapState => {
     switch (action.type) {
         case getType(actions.mapReadyAction):
-            return {...state, ready: true};
+            return { ...state, ready: true };
         default:
             return state;
     }

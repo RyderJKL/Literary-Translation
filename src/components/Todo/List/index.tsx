@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {TodoActionType} from '../../../store/modules/todo/actions';
-import {TodoModel} from '../../../store/modules/todo/model';
+import { TodoActionType } from '../../../store/modules/todo/actions';
+import { TodoModel } from '../../../store/modules/todo/model';
 import TodoItem from '../Item';
 import * as style from './style.css';
 
@@ -10,7 +10,7 @@ export interface Props {
 }
 
 const TodoList = (props: Props) => {
-    const {todos, actions} = props;
+    const { todos, actions } = props;
 
     const renderToggleAll: () => JSX.Element | void = () => {
         if (todos.length > 0) {

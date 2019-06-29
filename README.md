@@ -23,3 +23,7 @@ yarn
 ```js
 yarn dev
 ```
+
+### TSLint
+
+[弥补 TSLint 中缺少的 ESLint 规则](https://github.com/buzinas/tslint-eslint-rules)

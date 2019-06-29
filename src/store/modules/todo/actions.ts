@@ -1,6 +1,6 @@
-import {createAction} from 'redux-actions';
-import {TodoModel} from './model';
-import {Type} from './actionTypes';
+import { createAction } from 'redux-actions';
+import { TodoModel } from './model';
+import { Type } from './actionTypes';
 
 export const addTodo = createAction<PartialPick<TodoModel, 'text'>>(Type.ADD_TODO);
 export const editTodo = createAction<PartialPick<TodoModel, 'id'>>(Type.EDIT_TODO);

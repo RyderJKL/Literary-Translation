@@ -1,4 +1,4 @@
-import {getType} from 'typesafe-actions';
+import { getType } from 'typesafe-actions';
 
 import * as WeatherActions from './actions';
 import { WeatherModel } from './model';
@@ -18,7 +18,7 @@ export const weatherReducer = (
 ): WeatherState => {
     switch (action.type) {
         case getType(WeatherActions.weatherSetAction):
-            return {...state, weather: { ...state.weather, ...action.payload }};
+            return { ...state, weather: { ...state.weather, ...action.payload } };
 
         case getType(WeatherActions.weatherErrorAction):
             console.error(action.payload.message);

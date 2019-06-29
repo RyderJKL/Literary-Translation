@@ -5,7 +5,9 @@
     },
     "rules": {
         // https://eslint.org/docs/rules/object-curly-spacing
-        "object-curly-spacing": ["error", "always"],
+        "object-curly-spacing":[true, "always"],
+//        ["error", "always"],
+//        "object-curly-spacing": true,
         "no-submodule-imports": false,
         "no-trailing-whitespace": [false],
         "array-type":[false, "array-simple"],
@@ -67,6 +69,9 @@
         "jsx-alignment": false,
         "no-unused-expression": [true, "allow-new"]
     },
+    "rulesDirectory": [
+        "node_modules/tslint-eslint-rules/dist/rules"
+    ],
     "jsRules": {
         "max-line-length": {
             "options": [120]

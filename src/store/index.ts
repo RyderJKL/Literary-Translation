@@ -1,8 +1,8 @@
-import {combineReducers} from 'redux';
-import {connectRouter} from 'connected-react-router';
-import {todoReducer, TodoState} from './modules/todo/reducers';
-import {weatherReducer, WeatherState} from './modules/weather/reducers';
-import {mapReducer, MapState} from './modules/map/reducers';
+import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';
+import { todoReducer, TodoState } from './modules/todo/reducers';
+import { weatherReducer, WeatherState } from './modules/weather/reducers';
+import { mapReducer, MapState } from './modules/map/reducers';
 
 export interface RootState {
     router?: any;

@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { History} from 'history';
-import {ConnectedRouter } from 'connected-react-router';
+import { History } from 'history';
+import { ConnectedRouter } from 'connected-react-router';
 import routes from 'routes/index';
 
 interface AppProps {
     history: History;
 }
 
-const App = ({ history}: AppProps) =>  {
+const App = ({ history }: AppProps) =>  {
     return (
         <ConnectedRouter history={history}>
             { routes}

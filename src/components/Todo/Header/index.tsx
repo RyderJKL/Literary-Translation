@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {addTodo} from '../../../store/modules/todo/actions';
+import { addTodo } from '../../../store/modules/todo/actions';
 import TodoTextInput from '../TextInput';
 
 export interface Props {

@@ -1,6 +1,6 @@
-import {handleActions} from 'redux-actions';
+import { handleActions } from 'redux-actions';
 import TodoActions from './actions';
-import {TodoModel} from './model';
+import { TodoModel } from './model';
 
 export type TodoState = TodoModel[];
 
@@ -31,17 +31,17 @@ export const todoReducer = handleActions<TodoState, TodoModel>({
     [TodoActions.Type.EDIT_TODO]: (state, action) => {
         return state.map((todo) => {
             if (!todo || !action || !action.payload) { return todo; }
-            return (todo.id || 0) === action.payload.id ? {...todo, text: action.payload.text} : todo;
+            return (todo.id || 0) === action.payload.id ? { ...todo, text: action.payload.text } : todo;
         });
     },
     [TodoActions.Type.COMPLETE_TODO]: (state, action) => {
         return state.map((todo) => todo.id === (action.payload.id as any)
-            ? {...todo, completed: todo.completed}
+            ? { ...todo, completed: todo.completed }
             : todo
         );
     },
     [TodoActions.Type.COMPLETE_ALL]: (state, action) => {
-        return state.map((todo) => ({...todo, completed: true}));
+        return state.map((todo) => ({ ...todo, completed: true }));
     },
     [TodoActions.Type.CLEAR_COMPLETED]: (state, action) => {
         return state.filter((todo) => todo.completed === false);

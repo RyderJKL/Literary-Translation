@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as styles from './style.scss';
 import * as classNames from 'classnames';
-import {Filter} from '../../../store/modules/todo/model';
+import { Filter } from '../../../store/modules/todo/model';
 
 export const FILTER_TITLES = {
     [Filter.SHOW_ALL]: 'All',
@@ -32,18 +32,18 @@ const TodoFooter = ({
     };
 
     const renderFilterLink: (filter: Filter) => JSX.Element = (filter) => {
-        const {filter: selectedFilter, onClickFilter} = props;
+        const { filter: selectedFilter, onClickFilter } = props;
         return (
             <a
-                className={classNames({[styles.selected]: filter === selectedFilter})}
-                style={{cursor: 'pointer'}}
+                className={classNames({ [styles.selected]: filter === selectedFilter })}
+                style={{ cursor: 'pointer' }}
                 onClick={() => onClickFilter(filter)}
             >{FILTER_TITLES[filter]}</a>
         );
     };
 
     const renderClearButton: () => JSX.Element | void = () => {
-        const {onClickClearCompleted} = props;
+        const { onClickClearCompleted } = props;
         if (completedCount! > 0) {
             return (
                 <button

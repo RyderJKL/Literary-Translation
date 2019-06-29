@@ -1,9 +1,9 @@
-import {createAction, ActionType} from 'typesafe-actions';
+import { createAction, ActionType } from 'typesafe-actions';
 import * as WeatherActionTypes from './actionTypes';
 
 export const weatherGetAction = createAction(
     WeatherActionTypes.WEATHER_GET,
-    (resolve) => (lat: number, lng: number) => resolve({lat, lng})
+    (resolve) => (lat: number, lng: number) => resolve({ lat, lng })
 );
 
 export const weatherSetAction = createAction(

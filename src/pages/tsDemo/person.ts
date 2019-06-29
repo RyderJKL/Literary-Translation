@@ -66,7 +66,7 @@ export class DateClass implements MyDate {
     }
 }
 
-export function getDate(Class: MyDateInit, {year, month, day}): MyDate {
+export function getDate(Class: MyDateInit, { year, month, day }): MyDate {
     return new Class(year, month, day);
 }
 

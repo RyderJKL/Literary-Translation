@@ -2,11 +2,11 @@ import { ActionType } from 'typesafe-actions';
 import { Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import {mapReadyAction} from 'store/modules/map/actions';
-import {weatherSetAction, weatherErrorAction, weatherGetAction} from 'store/modules/weather/actions';
+import { mapReadyAction } from 'store/modules/map/actions';
+import { weatherSetAction, weatherErrorAction, weatherGetAction } from 'store/modules/weather/actions';
 import { RootState } from 'store';
 
-const actions = { mapReadyAction, weatherGetAction, weatherErrorAction, weatherSetAction};
+const actions = { mapReadyAction, weatherGetAction, weatherErrorAction, weatherSetAction };
 type Action = ActionType<typeof actions>;
 
 import Map from './Map';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as scriptjs from 'scriptjs';
-import {RouteComponentProps} from 'react-router';
+import { RouteComponentProps } from 'react-router';
 import {} from 'googlemaps';
 
 import * as styles from './styles.scss';

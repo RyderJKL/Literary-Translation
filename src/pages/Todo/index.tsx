@@ -1,14 +1,14 @@
 import * as React from 'react';
-import {RouteComponentProps} from 'react-router';
-import {bindActionCreators, Dispatch} from 'redux';
-import {connect} from 'react-redux';
-import {RootState} from 'store';
-import {TodoState} from 'store/modules/todo/reducers';
-import TodoActions, {TodoActionType} from '../../store/modules/todo/actions';
-import {Filter as TodoFilter, TodoModel} from '../../store/modules/todo/model';
-import {omit} from 'utils';
+import { RouteComponentProps } from 'react-router';
+import { bindActionCreators, Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { RootState } from 'store';
+import { TodoState } from 'store/modules/todo/reducers';
+import TodoActions, { TodoActionType } from '../../store/modules/todo/actions';
+import { Filter as TodoFilter, TodoModel } from '../../store/modules/todo/model';
+import { omit } from 'utils';
 import * as styles from './style.css';
-import {Header, TodoList, Footer} from '../../components/Todo';
+import { Header, TodoList, Footer } from '../../components/Todo';
 
 const FILTER_VALUES = Object.keys(TodoFilter).map((key) => TodoFilter[key]);
 const FILTER_FUNCION: Record<TodoFilter, (todo: TodoModel) => boolean> = {
@@ -27,7 +27,7 @@ interface Props extends RouteComponentProps<void> {
     (state: RootState, ownProps): Pick<Props, 'todos' | 'filter'> => {
         const hash = ownProps.location && ownProps.location.hash.replace('#', '');
         const filter = FILTER_VALUES.find((value) => value === hash) || TodoFilter.SHOW_ALL;
-        return {todos: state.todos, filter};
+        return { todos: state.todos, filter };
     },
     (dispatch: Dispatch): Pick<Props, 'actions'> => ({
         actions: bindActionCreators(omit(TodoActions, 'Type'), dispatch)
@@ -56,7 +56,7 @@ export default class Index extends React.Component<Props> {
     }
 
     public render() {
-        const {todos, actions, filter} = this.props;
+        const { todos, actions, filter } = this.props;
         const activeCount = todos.length - (todos.filter((todo) => !todo.completed)).length;
         const filteredTodos = filter ? todos.filter(FILTER_FUNCION[filter]) : todos;
         const completedCount = todos.filter((todo) => todo.completed).length;
