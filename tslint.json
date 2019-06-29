@@ -6,8 +6,6 @@
     "rules": {
         // https://eslint.org/docs/rules/object-curly-spacing
         "object-curly-spacing":[true, "always"],
-//        ["error", "always"],
-//        "object-curly-spacing": true,
         "no-submodule-imports": false,
         "no-trailing-whitespace": [false],
         "array-type":[false, "array-simple"],
