@@ -1,0 +1,71 @@
+/**
+ * reset global style
+ */
+@import "variables.scss";
+
+body, ul, li, div, p, h1, h2, h3, h4, h5, h6, label, button, span {
+	padding: 0;
+	margin: 0;
+}
+
+:focus {
+    outline: none;
+}
+
+input, button, select, textarea, span, a {
+	outline: none;
+}
+
+li {
+	list-style: none;
+}
+label {
+	font-weight: 400;
+}
+
+button {
+	border: none;
+}
+
+a {
+	color: $text-base-link;
+
+	&:hover,
+	&:focus {
+		color: $text-base-link;
+		text-decoration:none;
+		outline: none;
+	}
+}
+/*div, p, h1, h2, h3, h4, h5, h6,label, span, button, li {
+	-moz-user-select: none;
+  	-webkit-user-select: none;
+  	-ms-user-select: none;
+}*/
+div, p, h1, h2, h3, h4, h5, h6,label, span, button, ul, li {
+	outline: none;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	font-weight: 400;
+}
+
+input[placeholder]::-webkit-input-placeholder {
+	color: #999;
+}
+
+html {
+	min-height: 100%;
+	width: 100%;
+}
+body #root {
+	position: relative;
+	overflow-y: hidden;
+	width: 100%;
+	height: 100%;
+	min-height: 626px;
+}
+
+:global([role="dialog"] .modal-backdrop.in){
+	opacity: 0.3;
+}

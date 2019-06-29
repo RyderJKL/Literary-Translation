@@ -3,7 +3,7 @@ import {createEpicMiddleware} from 'redux-observable';
 import {createBrowserHistory} from 'history';
 
 import {routerMiddleware} from 'connected-react-router';
-import {ActionType as Action} from 'store/actions';
+import {AllActionType as Action} from 'store/actions';
 
 import createRootReducer, { RootState } from './store';
 export const history = createBrowserHistory();
@@ -15,10 +15,7 @@ export default function configStore(preloadedState?: any) {
     const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
     // configure middlewares
-    const middlewares = [
-        routerMiddleware(history),
-        epicMiddleware,
-    ];
+    const middlewares = [ routerMiddleware(history), epicMiddleware];
 
     // compose enhancers
     const composedEnhancers = composeEnhancer(applyMiddleware(...middlewares));

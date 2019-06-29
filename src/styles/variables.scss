@@ -1,0 +1,241 @@
+/**
+ *  Define scss global variables here.
+ *  //自定义变量 供组件scss文件复用变量
+ *  Available options for Bootstrap:
+ *  http://getbootstrap.com/customize/
+ * https://github.com/twbs/bootstrap-sass/blob/master/assets/stylesheets/bootstrap/_variables.scss
+ */
+
+/**
+ * Color
+ */
+$gray-base: #d9d9d9;
+$danger-info: #be4439;
+$gray-light: #c2c2c2;
+$text-base: #333;
+$text-light: #666;
+$text-lighter: #999;
+$text-base-link: #3A84AA;
+$text-key: #ee5f3b;
+/**
+ * logo && btn 整体颜色(品牌色)
+ */
+$theme-color: #65A6FD;
+
+/**
+ * BgColor
+ */
+$bgColor-base: #fff;
+$bgColor-gray: #e8e8e8;
+$bgColor-gray-light: #e2e2e2;
+$bgColor-gray-lighter: #ececec;
+$bgColor-active-base: #fbfbfb;
+$bgColor-img-base: #7f7e7c;
+/** button background-color style */
+$bgColor-btn-default: #fff;
+$bgColor-btn-default-active: #e6e6e6;
+$bgColor-btn-success: #69b96d;
+$bgColor-btn-success-active: #5aa25d;
+$bgColor-btn-disabled: #2d7147;
+
+$bgColor-login-home: #2f3234;
+
+/**
+ * BdColor
+ */
+$bdColor-base: #d3d3d3;
+$bdColor-base-light: #d4d4d4;
+$bdColor-base-lighter: #d9d9d9;
+$bdColor-divider-line: #f0f0f0;
+/** button border style */
+$bdColor-btn-default: #d3d3d3;
+$bdColor-btn-default-active: #d3d3d3;
+$bdColor-btn-success: #69b96d;
+$bdColor-btn-success-active: #5aa25d;
+
+/**
+ * inputError
+ */
+$errorColor: #d4493b;
+
+/**
+ * inputFocus
+ */
+$inputFocusColor: #48a2ce;
+
+/*
+ * Width
+ */
+$screen-md-min: 1170px;
+$screen-min-height: 600px;
+$quickview-container-width: 380px;
+$sideBarWidth: 72px;
+$right-container-width: 275px;
+$right-subcontainer-width: 172px;
+
+/*
+ * Height
+ */
+$header-height: 60px;
+$container-height: 45px;
+$input-height-base: 28px;
+$bottom-container-height: 170px;
+$bottom-container-timematrix-height: 202px;
+
+/**
+ * theme-black
+ */
+$bgColor-base-theme-black: #131313;
+$bgColor-base-lighter-theme-black: #1e1e1e;
+$bgColor-dark-theme-black: #2c2c2c;
+$bgColor-darker-theme-black: #222222;
+$bgColor-grey-theme-black: #444444;
+$bgColor-btn-default-theme-black: #2c2c2c;
+$bgColor-btn-default-theme-black-active: #222;
+$bgColor-input-default-theme-black: #2c2c2c;
+
+$bdColor-base-theme-black: #000000;
+$bdColor-darker-theme-black: #222222;
+$bdColor-dark-theme-black: #0f0f0f;
+$bdColor-btn-default-theme-black: #000;
+$bdColor-btn-default-theme-black-active: #000;
+
+$txtColor-base-theme-black: #bbb;
+$txtColor-grey-theme-black: #9c9c9c;
+$txtColor-light-theme-black: #fafafa;
+
+/* new style variables for theme-black*/
+$txtColor-highlight-theme-black: #fff;
+$bgColor-theme-black: #333;
+$bdColor-theme-black: #000;
+
+/**
+ * loading background-color
+ */
+$loading-bg-default: rgba(255, 255, 255, .2);
+
+/**
+ * search
+ */
+$searchImgContainerWidth: 49px;
+$searchFileContainerWidth: 140px;
+
+/**
+ * logo path & file
+ */
+$logo: "logo/logo@2x.png";
+$logo-login: "logo/logo2@2x.png";
+$logo-home: "home/logo.png";
+
+/*
+* 地图打点+-++++
+*/
+$map-normalcolor-inner:#0a94c2;
+$map-normalcolor-outer:#6CDFFF;
+$map-selectedcolor-inner:#ca6e11;
+$map-selectedcolor-outer:#FFA23E;
+
+/*
+* 7+x用户
+*/
+$map-special-normalcolor-inner: #D86900;
+$map-special-normalcolor-outer: #FF9E0E;
+$map-special-selectcolor-inner: #DF2D00;
+$map-special-selectcolor-outer: #FE805F;
+
+/**
+* 轨迹相关配色
+*/
+$maptrace-photo-color1-inner: #0069FF; // 轨迹面板-用户头像-fill
+$maptrace-photo-color1-outer: #0069FF; //轨迹面板-用户头像-border
+$maptrace-trace-color1-inner: #0069FF; // 地图-GIS打点-fill
+$maptrace-trace-color1-outer: #77AFFF; //地图-GIS打点-border
+$maptrace-trace-selected-color1-inner: $map-selectedcolor-inner; // 地图-选中的GIS打点-fill
+$maptrace-trace-selected-color1-outer: $map-selectedcolor-outer; //地图-选中的GIS打点-border
+$maptrace-trace-line-color1: #0069FF; // 地图-连线-border
+$maptrace-timeline-color1-inner: #0069FF; // 轨迹面板-时间轴事件点-fill
+$maptrace-timeline-color1-outer: #77AFFF; //轨迹面板-时间轴事件点-border
+
+$maptrace-photo-color2-inner: #ECA000; // 轨迹面板-用户头像-fill
+$maptrace-photo-color2-outer: #ECA000; //轨迹面板-用户头像-border
+$maptrace-trace-color2-inner: #C99C07; // 地图-GIS打点-fill
+$maptrace-trace-color2-outer: #F1CF60; //地图-GIS打点-border
+$maptrace-trace-selected-color2-inner: $map-selectedcolor-inner; // 地图-选中的GIS打点-fill
+$maptrace-trace-selected-color2-outer: $map-selectedcolor-outer; //地图-选中的GIS打点-border
+$maptrace-trace-line-color2: #ECA000; // 地图-连线-border
+$maptrace-timeline-color2-inner: #ECA000; // 轨迹面板-时间轴事件点-fill
+$maptrace-timeline-color2-outer: #F1CF60; //轨迹面板-时间轴事件点-border
+
+$maptrace-photo-color3-inner: #00A616; // 轨迹面板-用户头像-fill
+$maptrace-photo-color3-outer: #00A616; //轨迹面板-用户头像-border
+$maptrace-trace-color3-inner: #00A616; // 地图-GIS打点-fill
+$maptrace-trace-color3-outer: #72DF81; //地图-GIS打点-border
+$maptrace-trace-selected-color3-inner: $map-selectedcolor-inner; // 地图-选中的GIS打点-fill
+$maptrace-trace-selected-color3-outer: $map-selectedcolor-outer; //地图-选中的GIS打点-border
+$maptrace-trace-line-color3: #00A616; // 地图-连线-border
+$maptrace-timeline-color3-inner: #00A616; // 轨迹面板-时间轴事件点-fill
+$maptrace-timeline-color3-outer: #72DF81; //轨迹面板-时间轴事件点-border
+
+$maptrace-photo-color4-inner: #BC09A4; // 轨迹面板-用户头像-fill
+$maptrace-photo-color4-outer: #BC09A4; //轨迹面板-用户头像-border
+$maptrace-trace-color4-inner: #BC09A4; // 地图-GIS打点-fill
+$maptrace-trace-color4-outer: #EF7ADF; //地图-GIS打点-border
+$maptrace-trace-selected-color4-inner: $map-selectedcolor-inner; // 地图-选中的GIS打点-fill
+$maptrace-trace-selected-color4-outer: $map-selectedcolor-outer; //地图-选中的GIS打点-border
+$maptrace-trace-line-color4: #BC09A4; // 地图-连线-border
+$maptrace-timeline-color4-inner: #BC09A4; // 轨迹面板-时间轴事件点-fill
+$maptrace-timeline-color4-outer: #EF7ADF; //轨迹面板-时间轴事件点-border
+
+$maptrace-photo-color5-inner: #01A29E; // 轨迹面板-用户头像-fill
+$maptrace-photo-color5-outer: #01A29E;//轨迹面板-用户头像-border
+$maptrace-trace-color5-inner: #01A29E; // 地图-GIS打点-fill
+$maptrace-trace-color5-outer: #67E7E4; //地图-GIS打点-border
+$maptrace-trace-selected-color5-inner: $map-selectedcolor-inner; // 地图-选中的GIS打点-fill
+$maptrace-trace-selected-color5-outer: $map-selectedcolor-outer; //地图-选中的GIS打点-border
+$maptrace-trace-line-color5: #01A29E; // 地图-连线-border
+$maptrace-timeline-color5-inner: #01A29E; // 轨迹面板-时间轴事件点-fill
+$maptrace-timeline-color5-outer: #67E7E4;//轨迹面板-时间轴事件点-border
+
+$maptrace-photo-color6-inner: #AA4AEA; // 轨迹面板-用户头像-fill
+$maptrace-photo-color6-outer: #AA4AEA;//轨迹面板-用户头像-border
+$maptrace-trace-color6-inner: #9800FF; // 地图-GIS打点-fill
+$maptrace-trace-color6-outer: #CF8AFD; //地图-GIS打点-border
+$maptrace-trace-selected-color6-inner: $map-selectedcolor-inner; // 地图-选中的GIS打点-fill
+$maptrace-trace-selected-color6-outer: $map-selectedcolor-outer; //地图-选中的GIS打点-border
+$maptrace-trace-line-color6: #AA4AEA; // 地图-连线-border
+$maptrace-timeline-color6-inner: #9800FF; // 轨迹面板-时间轴事件点-fill
+$maptrace-timeline-color6-outer: #CF8AFD;//轨迹面板-时间轴事件点-border
+
+$scrollbar-white: rgba(93, 93, 93, 0.5);
+
+
+/**
+ * export variables
+ */
+:export {
+  mapTraceLineColor1: $maptrace-trace-line-color1;
+  mapTraceLineColor2: $maptrace-trace-line-color2;
+  mapTraceLineColor3: $maptrace-trace-line-color3;
+  mapTraceLineColor4: $maptrace-trace-line-color4;
+  mapTraceLineColor5: $maptrace-trace-line-color5;
+  mapTraceLineColor6: $maptrace-trace-line-color6;
+  mapNormalColorInner: $map-normalcolor-inner;
+  mapNormalColorOuter: $map-normalcolor-outer;
+  mapSelectedColorInner: $map-selectedcolor-inner;
+  mapSelectedColorOuter: $map-selectedcolor-outer;
+  searchContainerHeight: $container-height;
+  searchImgContainerWidth: $searchImgContainerWidth;
+  sideBarWidth: $sideBarWidth;
+  headerHeight: $header-height;
+}
+
+/**
+ * 重命名
+ */
+ $rename-input-border-color: #3a84aa; //重命名输入框颜色
+
+/**
+ * 2017-4-14 统一icon颜色
+ */
+ $icon-color: #666;
+ $icon-color-black: #999;

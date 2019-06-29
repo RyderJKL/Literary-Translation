@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Example from './Counter';
+import TsExample from './tsDemo/index';
 
 const Home = () => (
     <div>
-        <Example title={'whoops!'}/>
+        <TsExample title={'whoops!'}/>
     </div>
 );
 

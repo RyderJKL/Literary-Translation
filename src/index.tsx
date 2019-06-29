@@ -2,9 +2,10 @@
 import { Provider } from 'react-redux';
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import App from './App';
+import App from 'pages/App';
 import configureStore, { history, epicMiddleware } from './configureStore';
 import epics from './epics';
+import './styles/reset.scss';
 
 const store = configureStore();
 
