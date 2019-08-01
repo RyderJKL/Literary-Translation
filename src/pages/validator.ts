@@ -24,6 +24,7 @@ validators['ZIP code'] = new ZipCodeValidator();
 validators['Letters only'] = new LettersOnlyValidator();
 
 for (const s of strings) {
+    // tslint:disable-next-line:forin
     for (const name in validators) {
         const isMatch = validators[name].isAcceptable(s);
         console.log(`'${ s }' ${ isMatch ? 'matches' : 'does not match' } '${ name }'.`);

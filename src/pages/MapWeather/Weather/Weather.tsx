@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { WeatherModel } from 'store/modules/weather/model';
+import useDocumentTitle from 'hooks/useDocumentTitle';
 
 export interface WeatherProps {
-    weather: WeatherModel;
+    weather?: WeatherModel;
 }
 
-export const Weather: React.FC<Partial<WeatherProps>> = ({ weather }) => {
+export const Weather: React.FC<WeatherProps> = ({ weather }) => {
+    useDocumentTitle('weather map');
+
     if (!weather) {
         return null;
     }

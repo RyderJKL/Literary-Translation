@@ -41,6 +41,9 @@
             "utils/*": [
                 "utils/*"
             ],
+            "hooks/*": [
+                "hooks/*"
+            ],
             "vendor/*": [
                 "vendor/*"
             ],

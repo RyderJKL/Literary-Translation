@@ -26,6 +26,7 @@ module.exports = {
             "components": resolve('src/components'),
             "store": resolve('src/store'),
             "utils": resolve('src/utils'),
+            "hooks": resolve('src/hooks'),
             "vendor": resolve('src/vendor'),
             "routes": resolve('src/routes'),
             "constant": resolve('src/constant'),

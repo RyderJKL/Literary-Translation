@@ -4,6 +4,8 @@
         "exclude": ["node_modules"]
     },
     "rules": {
+        "no-namespace": false,
+        "max-classes-per-file": false,
         // https://eslint.org/docs/rules/object-curly-spacing
         "object-curly-spacing":[true, "always"],
         "no-submodule-imports": false,
@@ -49,6 +51,7 @@
                 "components",
                 "store",
                 "utils",
+                "hooks",
                 "vendor",
                 "routes",
                 "constant",
