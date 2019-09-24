@@ -1,5 +1,8 @@
 {
     "compilerOptions": {
+        // 支持 import .json 文件
+        "resolveJsonModule": true,
+//        "esModuleInterop": true,
         // 用实验性的装饰器特性
         "experimentalDecorators": true,
         // Module '"/Users/macbook/workSpace/lego-admin/node_modules/@types/react/index"' has no default export.

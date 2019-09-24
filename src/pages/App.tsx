@@ -10,7 +10,7 @@ interface AppProps {
 const App = ({ history }: AppProps) =>  {
     return (
         <ConnectedRouter history={history}>
-            { routes}
+            {routes}
         </ConnectedRouter>
     );
 };

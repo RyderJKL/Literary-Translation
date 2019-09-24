@@ -10,7 +10,6 @@ export const history = createBrowserHistory();
 
 export const epicMiddleware = createEpicMiddleware<Action, Action, RootState>();
 
-
 export default function configStore(preloadedState?: any) {
     const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

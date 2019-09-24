@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import NavBar from 'pages/NavBar';
 import Home from 'pages/Home';
-import Hello from 'pages/Hello';
+import Hello from 'pages/hello/Hello';
 import Todo from 'pages/Todo';
 import MapWeatherInner from 'pages/MapWeather';
 

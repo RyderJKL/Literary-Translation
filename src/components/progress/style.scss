@@ -1,0 +1,57 @@
+$bgColor: #EAEAF5;
+$barColor: #62BB66;
+$barBorderRadius: 100px;
+
+.progressBar {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    line-height: 1;
+    width: 100%;
+    padding-right: 25px;
+    margin-right: -35px;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+.progressBarOuter {
+    position: relative;
+    display: inline-block;
+    height: 6px;
+    border-radius: $barBorderRadius;
+    background-color: $bgColor;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.progressBarInner {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: $barColor;
+    text-align: right;
+    border-radius: $barBorderRadius;
+    line-height: 1;
+    white-space: nowrap;
+    transition: width 3s ease;
+
+    &::after {
+        display: inline-block;
+        content: "";
+        height: 100%;
+        vertical-align: middle;
+    }
+}
+
+.progressBarText {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+    font-size: 14px;
+    color: $barColor;
+}
+
+
