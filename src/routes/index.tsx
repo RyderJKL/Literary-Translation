@@ -1,21 +1,17 @@
 import * as React from 'react';
-import { Route, Switch } from 'react-router';
-import NavBar from 'pages/NavBar';
+import { Router, Route, Switch } from 'react-router';
 import Home from 'pages/Home';
 import Hello from 'pages/hello/Hello';
-import Todo from 'pages/Todo';
-import MapWeatherInner from 'pages/MapWeather';
 
-const routes = (
+const RouterViews = ({ history }) => (
     <div>
-        {/*<NavBar/>*/}
-        <Switch>
-            <Route exact={true} path='/' component={Home}/>
-            <Route path='/hello' component={Hello}/>
-            <Route path='/todo' component={Todo}/>
-            <Route path='/map' component={MapWeatherInner}/>
-        </Switch>
+        <Router history={history}>
+            <Switch>
+                <Route exact={true} path='/' component={Home}/>
+                <Route path='/hello' component={Hello}/>
+            </Switch>
+        </Router>
     </div>
 );
 
-export default routes;
+export default RouterViews;

@@ -1,18 +1,13 @@
 import * as React from 'react';
-import { History } from 'history';
-import { ConnectedRouter } from 'connected-react-router';
-import routes from 'routes/index';
+// import { History } from 'history';
+// import RouteViews from 'routes/index';
 
-interface AppProps {
-    history: History;
-}
+// interface AppProps {
+//     history: History;
+// }
 
-const App = ({ history }: AppProps) =>  {
-    return (
-        <ConnectedRouter history={history}>
-            {routes}
-        </ConnectedRouter>
-    );
+const App = () =>  {
+    return <div>App</div>;
 };
 
 export default App;
