@@ -1,13 +1,9 @@
-import { observable } from 'mobx';
+import { types, Instance } from 'mobx-state-tree';
 
-class UserStore {
-   @observable public userName: string = '';
-   @observable public userId: string = '';
-}
+export const UserStoreModel = types.model('UserStore', {
+    id: types.optional(types.string, '123'),
+    name: types.optional(types.string, 'jack'),
+});
 
-const userStore = new UserStore();
-
-export { UserStore };
-
-export default userStore;
+export type UserStoreType = Instance<typeof UserStoreModel>;
 

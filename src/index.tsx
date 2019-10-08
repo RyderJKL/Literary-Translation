@@ -2,26 +2,24 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 
-// import { useStrict } from 'mobx';
-import { Provider } from 'mobx-react';
+import { configure as configureMobx } from 'mobx';
 
-import rootStore from './store';
+import { StoreProvider } from 'hooks/use-store/use-store-context';
 import { history } from 'store/routerStore';
 import Root from './Root';
 import RouterViews from './routes';
 
-import App from 'pages/App';
 import './styles/reset.scss';
 
-// useStrict(true);
+configureMobx({ enforceActions: 'always' });
 
 const render = () => {
     ReactDom.render(
-        <Provider {...rootStore}>
+        <StoreProvider>
             <Root>
-               <RouterViews history={history}/>
+                <RouterViews history={history}/>
             </Root>
-        </Provider>,
+        </StoreProvider>,
         document.getElementById('root') as HTMLElement
     );
 };
