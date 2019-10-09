@@ -1,6 +1,8 @@
 import * as React from 'react';
+import RouterViews from '../routes';
+import { history } from 'store/routerStore';
 
-const Root: React.FC = ({ children }) => {
+const App: React.FC = () => {
     // const renderDevTool = () => {
     //     if (process.env.NODE_ENV !== 'production') {
     //         // tslint:disable-next-line:no-implicit-dependencies
@@ -12,10 +14,10 @@ const Root: React.FC = ({ children }) => {
 
     return (
         <div>
-            {children}
+            <RouterViews history={history}/>
             {/*{renderDevTool()}*/}
         </div>
     );
 };
 
-export default Root;
+export default App;

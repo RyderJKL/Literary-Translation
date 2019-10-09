@@ -3,7 +3,7 @@ import { Router, Route, Switch } from 'react-router';
 import Home from 'pages/Home';
 import Hello from 'pages/hello/Hello';
 
-const RouterViews = ({ history }) => (
+const RouterViewers = ({ history }) => (
     <div>
         <Router history={history}>
             <Switch>
@@ -14,4 +14,4 @@ const RouterViews = ({ history }) => (
     </div>
 );
 
-export default RouterViews;
+export default RouterViewers;
