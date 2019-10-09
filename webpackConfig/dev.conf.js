@@ -51,7 +51,7 @@ const devWebpackConfig = merge(webpackBaseConfig, {
             template: 'src/index.html',
             inject: true,
             // favicon: resolve('favicon.ico'),
-            title: 'lego-admin',
+            title: 'lego-ui-admin-pro',
             templateParameters: {
                 BASE_URL: config.dev.assetsPublicPath + config.dev.assetsSubDirectory,
             },

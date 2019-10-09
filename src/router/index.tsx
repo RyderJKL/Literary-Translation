@@ -1,14 +1,13 @@
 import * as React from 'react';
-import { Router, Route, Switch } from 'react-router';
-import Home from 'pages/Home';
-import Hello from 'pages/hello/Hello';
+import { Router, Switch } from 'react-router';
+import { renderRoutes } from 'react-router-config';
+import routes from './routes';
 
 const RouterViewers = ({ history }) => (
     <div>
         <Router history={history}>
             <Switch>
-                <Route exact={true} path='/' component={Home}/>
-                <Route path='/hello' component={Hello}/>
+                {renderRoutes(routes)}
             </Switch>
         </Router>
     </div>

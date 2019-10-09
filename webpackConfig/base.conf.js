@@ -1,5 +1,4 @@
 const path = require('path');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = require('./config');
 
 const resolve = (dir) => path.resolve(__dirname, '..', dir);
@@ -16,21 +15,15 @@ module.exports = {
         ],
         extensions: ['.ts', '.tsx', '.js', '.json', '.css', '.scss'],
         alias: {
-            '@': resolve('src/'),
-            "pages": resolve('src/pages'),
-            "actions": resolve('src/actions'),
-            "reducers": resolve('src/reducers'),
-            "epics": resolve('src/epics'),
+            "views": resolve('src/views'),
             "services": resolve('src/services'),
-            "models": resolve('src/models'),
             "components": resolve('src/components'),
             "store": resolve('src/store'),
             "utils": resolve('src/utils'),
             "hooks": resolve('src/hooks'),
             "vendor": resolve('src/vendor'),
-            "routes": resolve('src/routes'),
+            "router": resolve('src/router'),
             "constant": resolve('src/constant'),
-            "middleware": resolve('src/middleware'),
             "layout": resolve('src/layout'),
         }
     },
@@ -63,26 +56,6 @@ module.exports = {
                 loader: ['awesome-typescript-loader'],
                 exclude: /node_modules/,
             },
-            // {
-            //     test: /\.scss$/,
-            //     use: [{
-            //         loader: "style-loader"
-            //     },
-            //         {
-            //             loader: "css-loader",
-            //             options: {
-            //                 camelcase: false,
-            //                 modules: false
-            //             }
-            //         },
-            //         {
-            //             loader: "postcss-loader"
-            //         },
-            //         {
-            //             loader: "sass-loader"
-            //         }
-            //     ]
-            // },
             {
                 test: /\.(png|jpe?g|gif)(\?.*)?$/,
                 loader: 'url-loader',

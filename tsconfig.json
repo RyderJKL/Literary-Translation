@@ -17,23 +17,8 @@
             "@/*": [
                 "*"
             ],
-            "pages/*": [
-                "pages/*"
-            ],
-            "actions/*": [
-                "actions/*"
-            ],
-            "reducers/*": [
-                "reducers/*"
-            ],
             "services/*": [
                 "services/*"
-            ],
-            "epics/*": [
-                "epics/*"
-            ],
-            "models/*": [
-                "models/*"
             ],
             "components/*": [
                 "components/*"
@@ -50,14 +35,11 @@
             "vendor/*": [
                 "vendor/*"
             ],
-            "routes/*": [
-                "routes/*"
+            "router/*": [
+                "router/*"
             ],
             "constant/*": [
                 "constant/*"
-            ],
-            "middleware/*": [
-                "middleware/*"
             ],
             "layout/*": [
                 "layout/*"

@@ -1,22 +1,22 @@
 import * as React from 'react';
 import * as styles from './style.scss';
 import { Scrollbars } from 'react-custom-scrollbars';
-import JsonData from './testData';
+import JsonData from './__mock__';
 import classnames from 'classnames';
 
 const Select = ({ onSelect }) => {
     return (
         <select onChange={(event) => onSelect(JsonData[event.currentTarget.selectedIndex])}>
-    {
-        JsonData.map((item) => (
-            <option onClick={() => onSelect(item)}  key={item.id} value={item.id}>{item.text}</option>
-    ))
-    }
-    </select>
-);
+            {
+                JsonData.map((item) => (
+                    <option onClick={() => onSelect(item)} key={item.id} value={item.id}>{item.text}</option>
+                ))
+            }
+        </select>
+    );
 };
 
-const Hello = () => {
+const ScrollCatalog = () => {
     const scrollbarsRef = React.useRef<Scrollbars>(null);
     const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -40,30 +40,30 @@ const Hello = () => {
 
     return (
         <div className={styles.helloContainer}>
-        <Select onSelect={onSelect}/>
-    <div
-    ref={containerRef}
-    className={styles.contextContainer}
-    >
-    <Scrollbars
-        ref={scrollbarsRef}
-        >
-        <ul>
-            {
-                JsonData.map((item, index) => (
-                    <li
-                        key={index}
-                className={classnames(styles.contextItem, `list_${index + 1}`)}
-    onClick={(ev) => listItemClick(ev.currentTarget)}
->
-    {item.text}
-    </li>))
-}
-    </ul>
-    </Scrollbars>
-    </div>
-    </div>
-);
+            <Select onSelect={onSelect}/>
+            <div
+                ref={containerRef}
+                className={styles.contextContainer}
+            >
+                <Scrollbars
+                    ref={scrollbarsRef}
+                >
+                    <ul>
+                        {
+                            JsonData.map((item, index) => (
+                                <li
+                                    key={index}
+                                    className={classnames(styles.contextItem, `list_${index + 1}`)}
+                                    onClick={(ev) => listItemClick(ev.currentTarget)}
+                                >
+                                    {item.text}
+                                </li>))
+                        }
+                    </ul>
+                </Scrollbars>
+            </div>
+        </div>
+    );
 };
 
-export default Hello;
+export default ScrollCatalog;
