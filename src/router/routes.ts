@@ -28,7 +28,7 @@ const dynamicRoutes = [
     }
 ];
 
-const routes = [
+const routes = () => [
     {
         path: '/',
         extra: true,
@@ -37,6 +37,4 @@ const routes = [
     },
 ];
 
-console.log(routes);
-
-export default routes;
+export default routes();
