@@ -1,8 +1,5 @@
 import * as React from 'react';
-import { renderRoutes } from 'react-router-config';
-// import routes from 'router/routes';
-import RouterViewers from 'router';
-import { history } from 'store/routerStore';
+import { RouterViewers } from 'router';
 
 const App: React.FC = () => {
     // const renderDevTool = () => {
@@ -16,8 +13,7 @@ const App: React.FC = () => {
 
     return (
         <div>
-            {/*{renderRoutes(routes, { history })}*/}
-            <RouterViewers history={history}/>
+            <RouterViewers />
             {/*{renderDevTool()}*/}
         </div>
     );

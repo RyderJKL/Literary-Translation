@@ -1,20 +1,19 @@
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
-
+import { RouteModelType } from 'store/router';
 import Layout from 'views/layout/Layout';
 
 import Home from 'views/Home';
 import Dashboard from 'views/dashboard/Dashboard';
 import NotFound from 'views/notFound/NotFound';
 
-const fixedRoutes = [
+const fixedRoutes: RouteModelType [] = [
     {
         path: '/404',
         component: NotFound,
-        roles: ['admin', 'user']
     }
 ];
 
-const dynamicRoutes = [
+const dynamicRoutes: RouteModelType [] = [
     {
         path: '/home',
         component: Home,
@@ -28,7 +27,7 @@ const dynamicRoutes = [
     }
 ];
 
-const routes = () => [
+const routes: RouteModelType [] = [
     {
         path: '/',
         extra: true,
@@ -37,4 +36,4 @@ const routes = () => [
     },
 ];
 
-export default routes();
+export default routes;
