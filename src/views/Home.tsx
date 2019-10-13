@@ -1,6 +1,6 @@
 import * as React from 'react';
-import useStore from 'hooks/use-store';
-import request$ from 'utils/request';
+import useStore from '@/hooks/use-store';
+import request$ from '@/utils/request';
 import { useEventCallback } from 'rxjs-hooks';
 import { Observable, EMPTY } from 'rxjs';
 import {
@@ -18,42 +18,43 @@ export interface GitHubProps {
 }
 
 const Home = () =>  {
-    const userStore = useStore((store) => store.user);
+    const { id, name, changeName } = useStore((store) => ({
+        id: store.common.id,
+        name: store.common.name,
+        changeName: store.common.changeName
+    }));
+
     const router = useStore((store) => store.router);
 
-    const [handleInputChange, [value]] = useEventCallback((event$: Observable<React.ChangeEvent<HTMLInputElement>>) =>
+    const [handleInputChange, [value]] = useEventCallback((
+        event$: Observable<React.ChangeEvent<HTMLInputElement>>
+    ) =>
         event$.pipe(
             map((event) => event.target.value),
             debounceTime(300),
             filter((inputValue: string) => !!inputValue),
             distinctUntilChanged(),
             switchMap((user) => request$.get(`/users/${user}`)),
-            map((response: GitHubProps) => [response.name]),
+            map((response: GitHubProps) => {
+                changeName(response.name);
+                return [response.name];
+            }),
             retry(),
             catchError((error) => {
+                console.log(error);
                 return EMPTY;
             })
         ), ['']
     );
 
-    // function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-    //    // const value = event.target.value;
-    //    // const request = useObservable(() => request$.get(`/users/${value}`));
-    //    // .subscribe((response) => {
-    //    //      console.log(response);
-    //    //  }, (error) => {
-    //    //     // console.error(error);
-    //    // });
-    // }
-
     return (<div>
         <h2>Home</h2>
         {
-            userStore.name
+           `${id}-${name}`
         }
-        <h2>{value}</h2>
-        <button onClick={() => router.push('/hello')} >go to hello</button>
+        <h2>value{value}</h2>
         <input type='text' onChange={handleInputChange} />
+        <button onClick={() => router.push('/dashboard')}>go to dashboard</button>
     </div>);
 };
 

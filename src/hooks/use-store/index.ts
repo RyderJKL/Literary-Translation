@@ -1,4 +1,4 @@
-import { StoreType } from 'store';
+import { StoreType } from '@/store';
 import { useStoreData } from './use-store-data';
 import { storeContext } from './use-store-context';
 

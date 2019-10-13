@@ -1,13 +1,21 @@
-import { types, Instance } from 'mobx-state-tree';
-import { UserModel } from './user';
-import { routerModel } from './router';
-import { RouterModel } from 'mst-react-router';
+import auth from './auth';
+import common from './common';
+import role from './role';
+import { syncRouter } from '@/router';
+import routesStore from './routes';
 
-export const StoreModel = types.model('StoreModel', {
-    user: types.optional(UserModel, {}),
-    router: RouterModel
-});
+export const createStore = () => {
+    return {
+        auth,
+        common,
+        role,
+        router: syncRouter,
+        routes: routesStore
+    };
+};
 
-export type StoreType = Instance<typeof StoreModel>;
+const rootStore = createStore();
 
-export const createStore = () => StoreModel.create({ router: routerModel });
+export type StoreType = typeof rootStore;
+
+export default rootStore;

@@ -1,8 +1,8 @@
-import { types, Instance } from 'mobx-state-tree';
+export class AuthStore {
+    public token = 'XXX_SSS_DD';
+}
 
-export const AuthModel = types.model('Auth', {
-    token: types.string
-});
+const auth = new AuthStore();
 
-export type AuthType = Instance<typeof AuthModel>;
+export default auth;
 

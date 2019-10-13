@@ -1,9 +1,15 @@
-import { types, Instance } from 'mobx-state-tree';
+import { observable, action } from 'mobx';
 
-export const CommonModel = types.model('CommonStore', {
-    id: types.string,
-    name: types.string
-});
+export class CommonStore {
+    @observable public id: string = '123';
+    @observable public name: string = 'jack';
 
-export type CommonType = Instance<typeof CommonModel>;
+    @action
+    public changeName = (value) => {
+        this.name = value;
+    }
+}
 
+const common = new CommonStore();
+
+export default common;

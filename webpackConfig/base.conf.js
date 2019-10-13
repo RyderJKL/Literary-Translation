@@ -15,16 +15,7 @@ module.exports = {
         ],
         extensions: ['.ts', '.tsx', '.js', '.json', '.css', '.scss'],
         alias: {
-            "views": resolve('src/views'),
-            "services": resolve('src/services'),
-            "components": resolve('src/components'),
-            "store": resolve('src/store'),
-            "utils": resolve('src/utils'),
-            "hooks": resolve('src/hooks'),
-            "vendor": resolve('src/vendor'),
-            "router": resolve('src/router'),
-            "constant": resolve('src/constant'),
-            "layout": resolve('src/layout'),
+            '@': resolve('src')
         }
     },
     output: {

@@ -1,5 +1,5 @@
 import { Observable ,  throwError as _throw } from 'rxjs';
-import { tap, mergeMap, finalize, catchError } from 'rxjs/operators';
+import { mergeMap, finalize, catchError } from 'rxjs/operators';
 import { Rjax, HttpResponse, HttpErrorResponse } from 'rjax';
 
 const baseURL = process.env.BASE_API;
@@ -42,11 +42,6 @@ class CustomInterceptor {
             )
         );
     }
-}
-
-interface ResponseError<D = any> extends HttpErrorResponse {
-    data: D;
-    response: Response;
 }
 
 const codeMessage = {

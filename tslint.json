@@ -36,23 +36,7 @@
         "quotemark": [true, "single", "avoid-escape", "avoid-template"],
         "no-implicit-dependencies": [
             true,
-            [
-                "react",
-                "react-dom",
-                "prop-types",
-                "src",
-                "services",
-                "models",
-                "views",
-                "components",
-                "store",
-                "utils",
-                "hooks",
-                "vendor",
-                "router",
-                "constant",
-                "layout"
-            ]
+            ["@"]
         ],
         "trailing-comma": false,
         "ordered-imports": false,

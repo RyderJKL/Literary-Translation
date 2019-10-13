@@ -5,45 +5,15 @@
 //        "esModuleInterop": true,
         // 用实验性的装饰器特性
         "experimentalDecorators": true,
-        // Module '"/Users/macbook/workSpace/lego-admin/node_modules/@types/react/index"' has no default export.
         "allowSyntheticDefaultImports": true,
         "target": "es5",
         "lib": [
             "dom",
             "es7"
         ],
-        "baseUrl": "src",
+        "baseUrl": ".",
         "paths": {
-            "@/*": [
-                "*"
-            ],
-            "services/*": [
-                "services/*"
-            ],
-            "components/*": [
-                "components/*"
-            ],
-            "store/*": [
-                "store/*"
-            ],
-            "utils/*": [
-                "utils/*"
-            ],
-            "hooks/*": [
-                "hooks/*"
-            ],
-            "vendor/*": [
-                "vendor/*"
-            ],
-            "router/*": [
-                "router/*"
-            ],
-            "constant/*": [
-                "constant/*"
-            ],
-            "layout/*": [
-                "layout/*"
-            ]
+            "@/*": ["./src/*"]
         },
         "skipLibCheck": true,
         "module": "commonjs",
@@ -63,7 +33,13 @@
     "skipLibCheck": true,
     "exclude": [
         "node_modules",
-        "typings"
+        "build",
+        "scripts",
+        "acceptance-tests",
+        "webpack",
+        "jest",
+        "tslint:latest",
+        "tslint-config-prettier"
     ],
     "allowSyntheticDefaultImports": true,
     "compileOnSave": false,

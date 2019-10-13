@@ -1,39 +1,81 @@
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
-import { RouteModelType } from 'store/router';
-import Layout from 'views/layout/Layout';
+import * as Loadable from 'react-loadable';
+import { EERoles } from '@/store/role';
 
-import Home from 'views/Home';
-import Dashboard from 'views/dashboard/Dashboard';
-import NotFound from 'views/notFound/NotFound';
+export interface IIRoute {
+    path: string;
+    name: string;
+    title: string;
+    exact?: boolean;
+    strict?: boolean;
+    meta?: IIRoutesMeta;
+    component?: () => any;
+    routes?: IIRoute [];
+}
 
-const fixedRoutes: RouteModelType [] = [
+export interface IIRoutesMeta {
+   roles: EERoles [];
+}
+
+export const fixedRoutes: IIRoute [] = [
     {
         path: '/404',
-        component: NotFound,
+        name: '404',
+        title: '404',
+        component: Loadable({
+            loader: () => import('@/views/notFound/NotFound'),
+            loading() {
+                return 'Loading';
+            }
+        }),
     }
 ];
 
-const dynamicRoutes: RouteModelType [] = [
+export const dynamicRoutes: IIRoute [] = [
     {
         path: '/home',
-        component: Home,
-        roles: ['admin', 'user']
+        name: 'home',
+        title: '首页',
+        component: Loadable({
+            loader: () => import('@/views/Home'),
+            loading() {
+                return 'Loading';
+            }
+        }),
     },
     {
         path: '/dashboard',
+        name: 'dashboard',
+        title: '仪表盘',
         exact: true,
-        component: Dashboard,
-        roles: ['admin', 'user']
+        component: Loadable({
+            loader: () => import('@/views/dashboard/Dashboard'),
+            loading() {
+                return 'loading';
+            }
+        }),
+        meta: {
+            roles: [EERoles.admin]
+        }
     }
 ];
 
-const routes: RouteModelType [] = [
-    {
-        path: '/',
-        extra: true,
-        component: Layout,
-        routes: [...fixedRoutes, ...dynamicRoutes]
-    },
-];
+export const rootRoute: IIRoute =  {
+    path: '/',
+    // exact: true,
+    name: 'root',
+    title: '根路径',
+    component: Loadable({
+        loader: () => import('@/views/layout/Layout'),
+        loading() {
+            return 'loading';
+        }
+    }),
+    routes: [
+        ...fixedRoutes
+    ]
+};
 
-export default routes;
+// export const routes = [
+//    rootRoute
+// ];
