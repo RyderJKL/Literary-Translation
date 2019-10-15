@@ -1,15 +1,17 @@
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
+import React from 'react';
 import * as Loadable from 'react-loadable';
 import { EERoles } from '@/store/role';
+import components from './modules/components';
 
 export interface IIRoute {
-    path: string;
-    name: string;
-    title: string;
+    path?: string;
+    name?: string;
+    title?: string;
     exact?: boolean;
     strict?: boolean;
     meta?: IIRoutesMeta;
-    component?: () => any;
+    component?: React.ReactNode | Promise<any> | (() => any);
     routes?: IIRoute [];
 }
 
@@ -17,21 +19,29 @@ export interface IIRoutesMeta {
    roles: EERoles [];
 }
 
-export const fixedRoutes: IIRoute [] = [
-    {
-        path: '/404',
-        name: '404',
-        title: '404',
-        component: Loadable({
-            loader: () => import('@/views/notFound/NotFound'),
-            loading() {
-                return 'Loading';
-            }
-        }),
-    }
+export const commonRoutes: IIRoute [] = [
+    // {
+      // component: import('@/layouts/UserLayout'),
+      // routes: [
+          {
+              path: '/404',
+              name: '404',
+              title: '404',
+              component: Loadable({
+                  loader: () => import('@/views/notFound/NotFound'),
+                  loading() {
+                      return 'Loading';
+                  }
+              }),
+          }
+      // ]
+    // },
 ];
 
-export const dynamicRoutes: IIRoute [] = [
+// function pickRoutesWithLayouts (topRoute: IIRoute) {
+// }
+
+export const authorityRoutes: IIRoute [] = [
     {
         path: '/home',
         name: 'home',
@@ -57,12 +67,12 @@ export const dynamicRoutes: IIRoute [] = [
         meta: {
             roles: [EERoles.admin]
         }
-    }
+    },
+    components
 ];
 
 export const rootRoute: IIRoute =  {
     path: '/',
-    // exact: true,
     name: 'root',
     title: '根路径',
     component: Loadable({
@@ -72,10 +82,7 @@ export const rootRoute: IIRoute =  {
         }
     }),
     routes: [
-        ...fixedRoutes
+        ...commonRoutes
     ]
 };
 
-// export const routes = [
-//    rootRoute
-// ];

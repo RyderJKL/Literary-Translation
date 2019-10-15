@@ -1,7 +1,7 @@
 import { observable, action, reaction } from 'mobx';
 import roleStore, { EERoles } from '@/store/role';
 // import { cloneDeep } from 'lodash';
-import { rootRoute, dynamicRoutes, fixedRoutes, IIRoute, } from '@/router/routes';
+import { rootRoute, authorityRoutes, commonRoutes, IIRoute, } from '@/router/routes';
 
 function checkPermission(role: EERoles, route: IIRoute): boolean {
     if (route.meta && route.meta.roles) {
@@ -46,9 +46,10 @@ export class RoutesInStore {
 
     @action
     public generateRoutes = (role: EERoles) => {
-       const accessRoutes: IIRoute [] = getAccessibleRoutes(role, dynamicRoutes);
+       const accessRoutes: IIRoute [] = getAccessibleRoutes(role, authorityRoutes);
+       console.log(accessRoutes, 'accessRoutes');
        // const shallowRootRoute = cloneDeep(rootRoute);
-       rootRoute.routes.concat(accessRoutes);
+       rootRoute.routes = rootRoute.routes.concat(accessRoutes);
        this.routes = [rootRoute];
     }
 }

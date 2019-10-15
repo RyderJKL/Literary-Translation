@@ -16,7 +16,7 @@ export const RouterViewers = () => {
         routes: store.routes.routes
     }));
 
-    console.log(toJS(routes));
+    console.log(toJS(routes), 'routes');
 
     return (
         <div>

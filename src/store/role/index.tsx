@@ -11,7 +11,7 @@ export class RoleStore {
     @observable public role: EERoles;
 
     constructor() {
-        this.role = EERoles.user;
+        this.role = EERoles.admin;
     }
 
     @action.bound
