@@ -1,9 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 
 const UserLayout: React.FC = ({ children }) => {
+
     return (
         <div>
-            userLayout
             {children}
         </div>
     );

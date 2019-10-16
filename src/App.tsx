@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { RouterViewers } from '@/router';
-// import useStore from 'hooks/use-store';
-// import { EERoles } from 'store/role';
+import { RouterViewers } from '@/router/router';
 
 const App: React.FC = () => {
     // const renderDevTool = () => {
@@ -12,14 +10,6 @@ const App: React.FC = () => {
     //     }
     //     return null;
     // };
-
-    // const { changeRole } = useStore((store) => ({
-    //     changeRole: store.role.changeRole
-    // }));
-    //
-    // React.useEffect(() => {
-    //     setTimeout(() => changeRole([EERoles.admin]), 1000);
-    // });
 
     return (
         <div>

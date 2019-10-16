@@ -1,41 +1,13 @@
 import { observable, action, reaction } from 'mobx';
 import roleStore, { EERoles } from '@/store/role';
-// import { cloneDeep } from 'lodash';
-import { rootRoute, authorityRoutes, commonRoutes, IIRoute, } from '@/router/routes';
-
-function checkPermission(role: EERoles, route: IIRoute): boolean {
-    if (route.meta && route.meta.roles) {
-        return route.meta.roles.includes(role);
-    }
-
-    return true;
-}
-
-function getAccessibleRoutes(role: EERoles, routes: IIRoute[]): IIRoute [] {
-    const res: IIRoute[] = [];
-
-    routes.forEach((route) => {
-        const hasPermission = checkPermission(role, route);
-
-        if (!hasPermission) {
-           return;
-        }
-
-        if (route.routes) {
-            route.routes = getAccessibleRoutes(role, route.routes);
-        }
-
-        res.push(route);
-    });
-
-    return res;
-}
+import routerRoutes, { IIRoute } from '@/router/routes';
+import { getAccessibleRoutes  } from './helper';
 
 export class RoutesInStore {
     @observable public routes: IIRoute [];
 
     constructor() {
-        this.routes = [rootRoute];
+        this.routes = [];
 
         reaction(() => roleStore.role, (role, isReaction) => {
             this.generateRoutes(role);
@@ -46,11 +18,8 @@ export class RoutesInStore {
 
     @action
     public generateRoutes = (role: EERoles) => {
-       const accessRoutes: IIRoute [] = getAccessibleRoutes(role, authorityRoutes);
-       console.log(accessRoutes, 'accessRoutes');
-       // const shallowRootRoute = cloneDeep(rootRoute);
-       rootRoute.routes = rootRoute.routes.concat(accessRoutes);
-       this.routes = [rootRoute];
+       const accessRoutes: IIRoute [] = getAccessibleRoutes(role, routerRoutes);
+       this.routes = accessRoutes;
     }
 }
 
