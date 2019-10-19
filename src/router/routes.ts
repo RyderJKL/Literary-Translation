@@ -5,10 +5,19 @@ import { EERoles } from '@/store/role';
 import components from './modules/components';
 import NotFound from '@/views/notFound/NotFound';
 
-export interface IIRoute {
+export interface IIMenuItem {
     path?: string;
     name?: string;
-    title?: string;
+    icon?: string;
+    hiddenChildrenInMenu?: boolean;
+    hiddenInMenu?: boolean;
+    children?: IIMenuItem [];
+    [index: string]: any;
+}
+
+export interface IIMenuItems extends Array<IIMenuItem> {}
+
+export interface IIRoute extends IIMenuItem {
     exact?: boolean;
     strict?: boolean;
     sensitive?: boolean;
@@ -18,6 +27,8 @@ export interface IIRoute {
     routes?: IIRoute [];
 }
 
+export interface IIRoutes extends Array<IIRoute> {}
+
 export interface IIRoutesMeta {
     roles: EERoles [];
 }
@@ -25,7 +36,6 @@ export interface IIRoutesMeta {
 export const commonRoute: IIRoute = {
     path: '/user',
     name: 'user',
-    title: '用户',
     component: Loadable({
         loader: () => import('@/layouts/UserLayout'),
         loading() {
@@ -36,7 +46,6 @@ export const commonRoute: IIRoute = {
         {
             path: '/user',
             name: '404',
-            title: '404',
             component: NotFound,
         },
         {
@@ -61,7 +70,6 @@ export const authorityRoute: IIRoute = {
         {
             path: '/home',
             name: 'home',
-            title: '首页',
             meta: {
                 roles: [EERoles.admin]
             },
@@ -75,7 +83,6 @@ export const authorityRoute: IIRoute = {
         {
             path: '/dashboard',
             name: 'dashboard',
-            title: '仪表盘',
             component: Loadable({
                 loader: () => import('@/views/dashboard/Dashboard'),
                 loading() {

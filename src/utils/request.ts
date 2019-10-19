@@ -2,7 +2,7 @@ import { Observable ,  throwError as _throw } from 'rxjs';
 import { mergeMap, finalize, catchError } from 'rxjs/operators';
 import { Rjax, HttpResponse, HttpErrorResponse } from 'rjax';
 
-const baseURL = process.env.BASE_API;
+// const baseURL = process.env.BASE_API;
 
 // 自定义拦截器
 class CustomInterceptor {
@@ -78,7 +78,7 @@ const errorHandler = (response: HttpErrorResponse) => {
 // 创建实例
 const request$ = new Rjax({
     // 设置请求基路径，可选
-    baseURL,
+    baseURL: '',
     // 设置请求超时时间，可选
     timeout: 0,
     // 是用作 xsrf token 的值的cookie的名称，默认'XSRF-TOKEN'，可选

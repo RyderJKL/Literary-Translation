@@ -1,8 +1,9 @@
 import * as React from 'react';
 import useStore from '@/hooks/use-store';
-import request$ from '@/utils/request';
+// import request$ from '@/utils/request';
 import { useEventCallback } from 'rxjs-hooks';
 import { Observable, EMPTY } from 'rxjs';
+import { getUser } from '@/services/user';
 
 import {
     map,
@@ -35,7 +36,7 @@ const Home = () =>  {
             debounceTime(300),
             filter((inputValue: string) => !!inputValue),
             distinctUntilChanged(),
-            switchMap((user) => request$.get(`/users/${user}`)),
+            switchMap((user) => getUser(`/users/${user}`)),
             map((response: GitHubProps) => {
                 changeName(response.name);
                 return [response.name];

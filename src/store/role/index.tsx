@@ -16,6 +16,7 @@ export class RoleStore {
 
     @action.bound
     public changeRole(role: EERoles) {
+        console.log('change role', role);
         this.role = role;
     }
 }

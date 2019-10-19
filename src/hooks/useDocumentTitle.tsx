@@ -5,7 +5,7 @@ export default function useDocumentTitle(title: string) {
         () => {
             document.title = title;
             return () => {
-                document.title = 'OJO React Demo';
+                document.title = 'lego-ui-admin-pro';
             };
         },
         [title]

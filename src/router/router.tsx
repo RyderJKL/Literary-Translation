@@ -1,7 +1,7 @@
 import * as React from 'react';
 import useStore from '@/hooks/use-store';
 import { Router } from 'react-router';
-import renderRoutes from '@/router/helper/render-routes';
+import { renderRoutes } from '@/router/helper';
 import { createBrowserHistory } from 'history';
 import { RouterStore as MoxReactRouterStore, syncHistoryWithStore } from 'mobx-react-router';
 

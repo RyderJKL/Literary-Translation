@@ -4,7 +4,6 @@ import * as Loadable from 'react-loadable';
 export const components: IIRoute =  {
     path: '/components',
     name: 'components',
-    title: '组件',
     component: Loadable({
         loader: () => import('@/views/components/Components'),
         loading() {
@@ -19,7 +18,6 @@ export const components: IIRoute =  {
         {
             path: '/components/progress',
             name: 'progress',
-            title: '进度条',
             component: Loadable({
                 loader: () => import('@/components/progress/Progress'),
                 loading() {

@@ -1,6 +1,12 @@
 import * as React from 'react';
+import { IIMenuItems } from '@/router/routes';
 
-const SideBar: React.FC = ({ children }) => {
+export interface IISideBarProps {
+    menusData: IIMenuItems;
+}
+
+const SideBar: React.FC<IISideBarProps> = ({ children, menusData }) => {
+    console.log(menusData, 'menusData');
     return <div>
         {children}
     </div>;

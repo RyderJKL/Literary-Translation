@@ -1,10 +1,10 @@
 import { observable, action, reaction } from 'mobx';
 import roleStore, { EERoles } from '@/store/role';
-import routerRoutes, { IIRoute } from '@/router/routes';
+import routerRoutes, { IIRoutes } from '@/router/routes';
 import { getAccessibleRoutes  } from './helper';
 
 export class RoutesInStore {
-    @observable public routes: IIRoute [];
+    @observable public routes: IIRoutes;
 
     constructor() {
         this.routes = [];
@@ -18,7 +18,7 @@ export class RoutesInStore {
 
     @action
     public generateRoutes = (role: EERoles) => {
-       const accessRoutes: IIRoute [] = getAccessibleRoutes(role, routerRoutes);
+       const accessRoutes: IIRoutes = getAccessibleRoutes(role, routerRoutes);
        this.routes = accessRoutes;
     }
 }
