@@ -31,7 +31,7 @@ const devWebpackConfig = merge(webpackBaseConfig, {
         port: PORT || config.dev.port,
         open: config.dev.autoOpenBrowser,
         overlay: config.dev.errorOverlay
-            ? { warnings: false, errors: true }
+            ? {warnings: false, errors: true}
             : false,
         publicPath: config.dev.assetsPublicPath,
         proxy: config.dev.proxyTable,
