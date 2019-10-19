@@ -25,12 +25,12 @@ exports.cssLoaders = function (options) {
 
     const cssLoader = {
         loader: 'css-loader',
-        options: {
-            sourceMap: options.sourceMap,
-            modules: true,
-            importLoaders: 2,
-            localIdentName: '[name]-[local]-[hash:base64:5]'
-        }
+        // options: {
+        //     sourceMap: options.sourceMap,
+        //     modules: true,
+        //     importLoaders: 2,
+        //     localIdentName: '[name]-[local]-[hash:base64:5]'
+        // }
     };
 
     const postcssLoader = {
@@ -75,9 +75,18 @@ exports.cssLoaders = function (options) {
         postcss: generateLoaders(),
         less: generateLoaders('less'),
         sass: generateLoaders('sass', {
-            indentedSyntax: true
+            indentedSyntax: true,
+            sourceMap: options.sourceMap,
+            modules: true,
+            importLoaders: 2,
+            localIdentName: '[name]-[local]-[hash:base64:5]'
         }),
-        scss: generateLoaders('sass'),
+        scss: generateLoaders('sass', {
+            sourceMap: options.sourceMap,
+            modules: true,
+            importLoaders: 2,
+            localIdentName: '[name]-[local]-[hash:base64:5]'
+        }),
         stylus: generateLoaders('stylus'),
         styl: generateLoaders('stylus')
     }
