@@ -1,6 +1,6 @@
-import { Observable ,  throwError as _throw } from 'rxjs';
-import { mergeMap, finalize, catchError } from 'rxjs/operators';
-import { Rjax, HttpResponse, HttpErrorResponse } from 'rjax';
+import {Observable, throwError as _throw} from 'rxjs';
+import {mergeMap, finalize, catchError} from 'rxjs/operators';
+import {Rjax, HttpResponse, HttpErrorResponse} from 'rjax';
 
 // const baseURL = process.env.BASE_API;
 
@@ -13,33 +13,29 @@ class CustomInterceptor {
             // 修改请求的url
             url: req.url.replace('http://', 'https://'),
             // 修改请求体
-            body: { ...req.body },
+            body: {...req.body}
             // 添加请求头
             // headers: req.headers.set('Authorization', 'authToken'),
         });
         // 拦截响应
         return next.handle(newReq).pipe(
             // tap((x) => console.log('拦截响应', x)),
-            mergeMap((event) => {
+            mergeMap(event => {
                 // 这里可根据后台接口约定自行判断
-                if (
-                    event instanceof HttpResponse &&
-                    (event.status !== 200)
-                ) {
-                    return new Observable((observer) => observer.error(event));
+                if (event instanceof HttpResponse && event.status !== 200) {
+                    return new Observable(observer => observer.error(event));
                 }
-                return new Observable((observer) => observer.next(event));
+                return new Observable(observer => observer.next(event));
             }),
-            catchError((res) => {
+            catchError(res => {
                 errorHandler(res);
                 // 将错误信息抛给下个拦截器或者请求调用方
                 return _throw(res);
             }),
             finalize(() => {
-                    // 无论成功或者失败都会执行
-                    // 可以记录日志等等
-                }
-            )
+                // 无论成功或者失败都会执行
+                // 可以记录日志等等
+            })
         );
     }
 }
@@ -59,7 +55,7 @@ const codeMessage = {
     500: '服务器发生错误，请检查服务器。',
     502: '网关错误。',
     503: '服务不可用，服务器暂时过载或维护。',
-    504: '网关超时。',
+    504: '网关超时。'
 };
 
 /**
@@ -67,7 +63,7 @@ const codeMessage = {
  */
 const errorHandler = (response: HttpErrorResponse) => {
     const errorText = codeMessage[response.status] || response.statusText;
-    const { status, url } = response;
+    const {status, url} = response;
     console.error(`请求错误: ${errorText}:: ${status}: ${url}`);
     // notification.error({
     //     message: `请求错误 ${status}: ${url}`,

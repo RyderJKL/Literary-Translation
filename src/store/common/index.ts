@@ -1,13 +1,13 @@
-import { observable, action } from 'mobx';
+import {observable, action} from 'mobx';
 
 export class CommonStore {
-    @observable public id: string = '123';
-    @observable public name: string = 'jack';
+    @observable public id = '123';
+    @observable public name = 'jack';
 
     @action
-    public changeName = (value) => {
+    public changeName = value => {
         this.name = value;
-    }
+    };
 }
 
 const common = new CommonStore();

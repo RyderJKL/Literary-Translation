@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { IIMenuItems } from '@/router/routes';
-import { Link } from 'react-router-dom';
+import {IIMenuItems} from '@/router/routes';
+import {Link} from 'react-router-dom';
 
 import Menu from 'lego-ui/dist/lib/menu';
 
-const { Submenu, Item } = Menu;
+const {Submenu, Item} = Menu;
 
 // import {map, multicast} from "rxjs/operators";
 
@@ -25,26 +25,30 @@ const Index: React.FC<IISideBarProps> = ({menusData}) => {
     // console.log(menusData);
     console.log(menusData);
 
-    const renderMenus = (menusData: IIMenuItems) => menusData.map((menuItem, index) => {
-       if (menuItem.children && menuItem.children.length) {
-           return <Submenu key={index} className={''} title={<span>{menuItem.name}</span>}>
-               {renderMenus(menuItem.children)}
-           </Submenu>;
-       }
+    const renderMenus = (menusData: IIMenuItems) =>
+        menusData.map((menuItem, index) => {
+            if (menuItem.children && menuItem.children.length) {
+                return (
+                    <Submenu key={index} className={''} title={<span>{menuItem.name}</span>}>
+                        {renderMenus(menuItem.children)}
+                    </Submenu>
+                );
+            }
 
-        return <Item index={menuItem.name} key={index}>
-            <Link to={menuItem.path} > {menuItem.name} </Link>
-       </Item>;
-    });
+            return (
+                <Item index={menuItem.name} key={index}>
+                    <Link to={menuItem.path}> {menuItem.name} </Link>
+                </Item>
+            );
+        });
 
-    return <div>
-        <Menu
-            mode='vertical'
-            theme='dark'
-        >
-            {renderMenus(menusData)}
-        </Menu>
-    </div>;
+    return (
+        <div>
+            <Menu mode="vertical" theme="dark">
+                {renderMenus(menusData)}
+            </Menu>
+        </div>
+    );
 };
 
 export default Index;

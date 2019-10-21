@@ -1,7 +1,7 @@
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 import React from 'react';
 import * as Loadable from 'react-loadable';
-import { EERoles } from '@/store/role';
+import {EERoles} from '@/store/role';
 import components from './modules/components';
 import NotFound from '@/views/notFound/NotFound';
 
@@ -11,7 +11,7 @@ export interface IIMenuItem {
     icon?: string;
     hiddenChildrenInMenu?: boolean;
     hiddenInMenu?: boolean;
-    children?: IIMenuItem [];
+    children?: IIMenuItem[];
     [index: string]: any;
 }
 
@@ -24,13 +24,13 @@ export interface IIRoute extends IIMenuItem {
     redirect?: string;
     meta?: IIRoutesMeta;
     component?: any;
-    routes?: IIRoute [];
+    routes?: IIRoute[];
 }
 
 export interface IIRoutes extends Array<IIRoute> {}
 
 export interface IIRoutesMeta {
-    roles: EERoles [];
+    roles: EERoles[];
 }
 
 export const commonRoute: IIRoute = {
@@ -46,7 +46,7 @@ export const commonRoute: IIRoute = {
         {
             path: '/user',
             name: '404',
-            component: NotFound,
+            component: NotFound
         },
         {
             component: NotFound
@@ -65,7 +65,7 @@ export const authorityRoute: IIRoute = {
     routes: [
         {
             path: '/',
-            redirect: '/home',
+            redirect: '/home'
         },
         {
             path: '/home',
@@ -78,7 +78,7 @@ export const authorityRoute: IIRoute = {
                 loading() {
                     return 'Loading';
                 }
-            }),
+            })
         },
         {
             path: '/dashboard',

@@ -1,9 +1,11 @@
-import { IIMenuItem, IIMenuItems, IIRoute, IIRoutes } from '@/router/routes';
-import { matchRoutes } from '@/router/helper';
+import {IIMenuItem, IIMenuItems, IIRoute, IIRoutes} from '@/router/routes';
+import {matchRoutes} from '@/router/helper';
 
 export function getSideBarMenusData(routes: IIRoutes, pathname: string) {
     const rootMatchRoute = matchRoutes(routes, location.pathname)[0];
-    if (!rootMatchRoute) { return []; }
+    if (!rootMatchRoute) {
+        return [];
+    }
 
     const basicLayoutRoute: IIRoute = rootMatchRoute.route as IIRoute;
     const routesData = basicLayoutRoute.routes;
@@ -12,12 +14,13 @@ export function getSideBarMenusData(routes: IIRoutes, pathname: string) {
 }
 
 export function getMenusData(routesData: IIRoutes): IIMenuItems {
-    const shouldShowMenuItem = (route: IIRoute) => (!(!route.path || !route.name || route.hiddenInMenu));
+    const shouldShowMenuItem = (route: IIRoute) => !(!route.path || !route.name || route.hiddenInMenu);
     const menuItems: IIMenuItems = [];
 
-    routesData.forEach((route) => {
-
-        if (!shouldShowMenuItem(route)) { return; }
+    routesData.forEach(route => {
+        if (!shouldShowMenuItem(route)) {
+            return;
+        }
 
         const tmpRoute: IIMenuItem = {
             name: route.name,
@@ -35,5 +38,3 @@ export function getMenusData(routesData: IIRoutes): IIMenuItems {
 
     return menuItems;
 }
-
-

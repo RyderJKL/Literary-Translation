@@ -1,7 +1,7 @@
-import { IIRoute } from '@/router/routes';
+import {IIRoute} from '@/router/routes';
 import * as Loadable from 'react-loadable';
 
-export const components: IIRoute =  {
+export const components: IIRoute = {
     path: '/components',
     name: 'components',
     component: Loadable({
@@ -23,7 +23,7 @@ export const components: IIRoute =  {
                 loading() {
                     return 'Loading';
                 }
-            }),
+            })
         }
     ]
 };

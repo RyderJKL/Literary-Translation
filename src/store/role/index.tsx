@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import {observable, action} from 'mobx';
 
 export enum EERoles {
     admin = 'admin',
@@ -24,4 +24,3 @@ export class RoleStore {
 const roleStore = new RoleStore();
 
 export default roleStore;
-

@@ -1,14 +1,14 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 
-import { configure as configureMobx } from 'mobx';
+import {configure as configureMobx} from 'mobx';
 
-import { StoreProvider } from '@/hooks/use-store/use-store-context';
+import {StoreProvider} from '@/hooks/use-store/use-store-context';
 import App from './App';
 
 import './styles/reset.scss';
 
-configureMobx({ enforceActions: 'always' });
+configureMobx({enforceActions: 'always'});
 
 const render = () => {
     ReactDom.render(
@@ -20,4 +20,3 @@ const render = () => {
 };
 
 render();
-

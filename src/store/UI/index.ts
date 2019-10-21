@@ -1,5 +1,4 @@
-export class UIStore {
-}
+export class UIStore {}
 
 const UI = new UIStore();
 

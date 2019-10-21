@@ -14,10 +14,10 @@ export enum ProgressStatus {
 }
 
 export enum ProgressTextPosition {
-   right = 'right',
-   left = 'left',
-   top = 'top',
-   bottom = 'bottom'
+    right = 'right',
+    left = 'left',
+    top = 'top',
+    bottom = 'bottom'
 }
 
 export type ProgressFormat = (percentage: number) => string;
@@ -47,41 +47,38 @@ const Progress = (props: ProgressProps) => {
         format,
         bgColor,
         barColor,
-        barRadius,
+        barRadius
     } = props;
 
-    const getPercentageText  = () => {
-        let formatText: string = `${percentage}%`;
+    const getPercentageText = () => {
+        let formatText = `${percentage}%`;
 
         if (format) {
             formatText = format(percentage);
         }
 
-        return <span style={{ color: barColor }}>{formatText}</span>;
+        return <span style={{color: barColor}}>{formatText}</span>;
     };
 
     return (
         <div className={styles.progressBar}>
-           <div
-               className={styles.progressBarOuter}
-               style={{
-                   backgroundColor: bgColor,
-                   borderRadius: barRadius
-               }} >
-               <div
-                   className={styles.progressBarInner}
+            <div
+                className={styles.progressBarOuter}
+                style={{
+                    backgroundColor: bgColor,
+                    borderRadius: barRadius
+                }}
+            >
+                <div
+                    className={styles.progressBarInner}
                     style={{
                         width: `${percentage}%`,
                         backgroundColor: barColor,
                         borderRadius: barRadius
                     }}
-               />
-           </div>
-            {
-                showText ? (
-                    <div className={styles.progressBarText}> {getPercentageText()} </div>
-                ) : null
-            }
+                />
+            </div>
+            {showText ? <div className={styles.progressBarText}> {getPercentageText()} </div> : null}
         </div>
     );
 };

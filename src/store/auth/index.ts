@@ -5,4 +5,3 @@ export class AuthStore {
 const auth = new AuthStore();
 
 export default auth;
-
