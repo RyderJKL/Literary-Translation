@@ -12,12 +12,8 @@ const App: React.FC = () => {
     //     return null;
     // };
 
-    return (
-        <div>
-            <RouterViewers />
-            {/*{renderDevTool()}*/}
-        </div>
-    );
+    return <RouterViewers />;
+    // {/*{renderDevTool()}*/}
 };
 
 export default App;

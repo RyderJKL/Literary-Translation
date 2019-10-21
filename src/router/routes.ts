@@ -37,7 +37,7 @@ export const commonRoute: IIRoute = {
     path: '/user',
     name: 'user',
     component: Loadable({
-        loader: () => import('@/layouts/UserLayout'),
+        loader: () => import('@/layouts/user-layout'),
         loading() {
             return 'Loading';
         }
@@ -57,7 +57,7 @@ export const commonRoute: IIRoute = {
 export const authorityRoute: IIRoute = {
     path: '/',
     component: Loadable({
-        loader: () => import('@/layouts/basic-layout/BasicLayout'),
+        loader: () => import('@/layouts/basic-layout/index'),
         loading() {
             return 'loading';
         }

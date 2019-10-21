@@ -15,11 +15,9 @@ export const RouterViewers = () => {
     }));
 
     return (
-        <div>
             <Router history={history}>
                 {renderRoutes(routes)}
             </Router>
-        </div>
     );
 };
 
