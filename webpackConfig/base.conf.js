@@ -31,19 +31,6 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                enforce: 'pre',
-                use: [
-                    {
-                        loader: 'tslint-loader',
-                        options: {
-                            formattersDirectory: 'node_modules/tslint-formatter-beauty',
-                            formatter: 'beauty'
-                        }
-                    }
-                ]
-            },
-            {
-                test: /\.tsx?$/,
                 loader: ['awesome-typescript-loader'],
                 exclude: /node_modules/,
             },
