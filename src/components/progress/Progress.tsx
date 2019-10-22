@@ -39,10 +39,10 @@ export interface ProgressProps {
 const Progress = (props: ProgressProps) => {
     const {
         percentage,
-        type = ProgressType.line,
-        status = ProgressStatus.success,
+        // type = ProgressType.line,
+        // status = ProgressStatus.success,
         showText = true,
-        strokeWidth,
+        // strokeWidth,
         textInside,
         format,
         bgColor,
