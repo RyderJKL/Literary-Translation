@@ -1,5 +1,6 @@
 const chalk = require('chalk'); // eslint-disable-line
 const msgPath = process.env.GIT_PARAMS;
+console.log(msgPath, 'msgPath');
 const msg = require('fs')
     .readFileSync(msgPath, 'utf-8')
     .trim();
