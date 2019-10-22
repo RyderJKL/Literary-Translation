@@ -38,9 +38,8 @@ export function renderRoutes(routes: IIRoutes, extraProps?: {}, switchProps?: {}
                                         {childRoutes}
                                     </Component>
                                 );
-                            } else {
-                                return childRoutes;
                             }
+                            return childRoutes;
                         }}
                     />
                 );

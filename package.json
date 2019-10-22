@@ -15,8 +15,8 @@
       "commit-msg": "node scripts/verifyCommitMsg.js"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
+    "./src/**/*.{ts,tsx}": [
+      "eslint --fix --color",
       "git add"
     ]
   },
