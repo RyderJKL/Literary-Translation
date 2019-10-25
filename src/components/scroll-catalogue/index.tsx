@@ -1,3 +1,4 @@
+/* tslint:disable */
 import * as React from 'react';
 import * as styles from './style.scss';
 import {Scrollbars} from 'react-custom-scrollbars';
@@ -5,7 +6,7 @@ import JsonData from './__mock__';
 import classnames from 'classnames';
 
 export interface ISelectProps {
-    onSelect: () => void;
+    onSelect: (jsonDatum: { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string } | { id: string; text: string }) => void;
 }
 
 const Select = ({onSelect}: ISelectProps): JSX.Element => {

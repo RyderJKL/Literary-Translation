@@ -1,0 +1,65 @@
+{
+    "extends": [
+        "tslint:latest",
+        "tslint-react",
+        "tslint-react-hooks",
+        "tslint-config-prettier"
+    ],
+    "linterOptions": {
+        "exclude": ["node_modules"]
+    },
+    "rules": {
+        "no-namespace": false,
+        "max-classes-per-file": false,
+        // https://eslint.org/docs/rules/object-curly-spacing
+        "object-curly-spacing":[true, "always"],
+        "no-submodule-imports": false,
+        "no-trailing-whitespace": [false],
+        "array-type":[false, "array-simple"],
+        // react-hooks
+        "react-hooks-nesting": "error",
+        // for Lambdas are forbidden in JSX attributes due to their rendering performance impact
+        "jsx-no-lambda": false,
+        "max-line-length": {
+            "options": [120]
+        },
+        "new-parens": true,
+        "no-arg": true,
+        "no-bitwise": true,
+        "no-conditional-assignment": true,
+        "no-consecutive-blank-lines": false,
+        "no-console": [false, "debug", "info", "log", "time", "timeEnd", "trace"],
+        //        "no-console": {
+        //            "severity": "warning",
+        //            "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
+        //        },
+        "jsx-wrap-multiline": false,
+        "indent": [true, "spaces", 4],
+        "interface-name": [true, "never-prefix"],
+        "label-position": true,
+        "linebreak-style": [true, "LF" ],
+        "quotemark": [true, "single", "avoid-escape", "avoid-template"],
+        "no-implicit-dependencies": [
+            true,
+            ["@"]
+        ],
+        "trailing-comma": false,
+        "ordered-imports": false,
+        "one-line": [true, "check-catch", "check-finally"],
+        "object-literal-sort-keys": false,
+        "member-ordering": false,
+        "prefer-object-spread": false,
+        "jsx-no-multiline-js": false,
+        "jsx-curly-spacing": [2, {"when": "never", "allowMultiline": false}],
+        "jsx-alignment": false,
+        "no-unused-expression": [true, "allow-new"]
+    },
+    "rulesDirectory": [
+        "node_modules/tslint-eslint-rules/dist/rules"
+    ],
+    "jsRules": {
+        "max-line-length": {
+            "options": [120]
+        }
+    }
+}
