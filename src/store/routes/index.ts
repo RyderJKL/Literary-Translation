@@ -1,11 +1,11 @@
-import {observable, action, reaction} from 'mobx';
-import roleStore, {EERoles} from '@/store/role';
+import { observable, action, reaction } from 'mobx';
+import roleStore, { Roles } from '@/store/role';
 import routerRoutes from '@/router/routes';
-import {IIRoute} from '@/typings';
-import {getAccessibleRoutes} from './helper';
+import { IRoute } from '@/typings';
+import { getAccessibleRoutes } from './helper';
 
 export class RoutesInStore {
-    @observable public routes: IIRoute[];
+    @observable public routes: IRoute[];
 
     constructor() {
         this.routes = [];
@@ -17,13 +17,13 @@ export class RoutesInStore {
                 isReaction.dispose();
                 // fireImmediately 系统初始化时立即生成路由表
             },
-            {fireImmediately: true}
+            { fireImmediately: true }
         );
     }
 
     @action
-    public generateRoutes = (role: EERoles) => {
-        const accessRoutes: IIRoute[] = getAccessibleRoutes(role, routerRoutes);
+    public generateRoutes = (role: Roles) => {
+        const accessRoutes: IRoute[] = getAccessibleRoutes(role, routerRoutes);
         this.routes = accessRoutes;
     };
 }

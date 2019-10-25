@@ -1,16 +1,16 @@
 import * as React from 'react';
-import {IIMenuItem} from '@/typings';
-import {matchRoutes} from '@/router/helper';
-import {Link, withRouter, RouteComponentProps, matchPath} from 'react-router-dom';
+import { IMenuItem } from '@/typings';
+import { matchRoutes } from '@/router/helper';
+import { Link, withRouter, RouteComponentProps, matchPath } from 'react-router-dom';
 
 import Menu from 'lego-ui/dist/lib/menu';
 
-const {Submenu, Item} = Menu;
+const { Submenu, Item } = Menu;
 
 // import {map, multicast} from "rxjs/operators";
 
-export interface IISideBarProps extends RouteComponentProps {
-    menusData: IIMenuItem[];
+export interface ISideBarProps extends RouteComponentProps {
+    menusData: IMenuItem[];
 }
 
 // export declare type Index = React.ReactText;
@@ -20,12 +20,12 @@ export interface IISideBarProps extends RouteComponentProps {
 //     setMenuActiveIndex: (activeIndex: Index) => any
 // }
 
-const Sidebar: React.FC<IISideBarProps> = ({menusData, history}) => {
+const Sidebar: React.FC<ISideBarProps> = ({ menusData, history }) => {
     // const [menuActiveIndex, setMenuActiveIndex] = React.useState<IIMenuAtiveState>('home');
     // const [menuCollapse, setMenuCollapse] = React.useState(false);
     // console.log(menusData);
-    function findMenuAccordingPathFromMenusData(menusData: IIMenuItem[], pathname: string) {
-        const mathRoute = matchRoutes(menusData, pathname);
+    function findMenuAccordingPathFromMenusData(data: IMenuItem[], pathname: string) {
+        const mathRoute = matchRoutes(data, pathname);
         // console.log(mathRoute);
         // let tmpPath: string = '';
         // menusData.forEach((item) => {
@@ -35,21 +35,21 @@ const Sidebar: React.FC<IISideBarProps> = ({menusData, history}) => {
         // })
     }
 
-    function handleHighlightCurrentPath(menusData: IIMenuItem[], pathname) {
-        findMenuAccordingPathFromMenusData(menusData, pathname);
+    function handleHighlightCurrentPath(menuItems: IMenuItem[], pathname) {
+        findMenuAccordingPathFromMenusData(menuItems, pathname);
     }
 
     React.useEffect(() => {
-        const {location} = history;
-        handleHighlightCurrentPath(menusData, location.pathname);
+        const { location: historyLocation } = history;
+        handleHighlightCurrentPath(menusData, historyLocation.pathname);
 
         history.listen(location => {
             handleHighlightCurrentPath(menusData, location.pathname);
         });
     });
 
-    const renderMenus = (menusData: IIMenuItem[]) =>
-        menusData.map((menuItem, index) => {
+    const renderMenus = (menuData: IMenuItem[]) =>
+        menuData.map((menuItem, index) => {
             if (menuItem.children && menuItem.children.length) {
                 return (
                     <Submenu key={index} className={''} title={<span>{menuItem.name}</span>}>
@@ -67,7 +67,7 @@ const Sidebar: React.FC<IISideBarProps> = ({menusData, history}) => {
 
     return (
         <div>
-            <Menu mode="vertical" theme="dark" activeIndex="home">
+            <Menu mode='vertical' theme='dark' activeIndex='home'>
                 {renderMenus(menusData)}
             </Menu>
         </div>

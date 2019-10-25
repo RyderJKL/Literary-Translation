@@ -1,31 +1,31 @@
 import * as React from 'react';
-import {RouteComponentProps, match, RouteProps} from 'react-router-dom';
-import {EERoles} from '@/store/role';
+import { RouteComponentProps, match, RouteProps } from 'react-router-dom';
+import { Roles } from '@/store/role';
 
-export interface IIRouteMeta {
-    roles: EERoles[];
+export interface IRouteMeta {
+    roles: Roles[];
 }
 
-export interface IIMenuItem {
+export interface IMenuItem {
     icon?: string;
-    meta?: IIRouteMeta;
+    meta?: IRouteMeta;
     name?: string;
     hiddenChildrenInMenu?: boolean;
     hiddenInMenu?: boolean;
-    children?: IIMenuItem[];
+    children?: IMenuItem[];
     path?: string;
     [index: string]: any;
 }
 
-export interface IIRoute extends Omit<RouteProps, 'path' | 'children' | 'component'>, IIMenuItem {
-    routes?: IIRoute[];
+export interface IRoute extends Omit<RouteProps, 'path' | 'children' | 'component'>, IMenuItem {
+    routes?: IRoute[];
     component?: RouteProps['component'] | any;
 }
 
 export type WithFalse<T> = T | false;
 
-export interface IIRouter<P> extends Omit<RouteComponentProps, 'location'> {
+export interface IRouter<P> extends Omit<RouteComponentProps, 'location'> {
     computedMatch?: match<P>;
-    route?: IIRoute;
-    location: RouteComponentProps['location'] | {pathname?: string};
+    route?: IRoute;
+    location: RouteComponentProps['location'] | { pathname?: string };
 }

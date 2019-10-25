@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const BreadCrumbs: React.FC = ({children}) => {
+const BreadCrumbs: React.FC = ({ children }) => {
     return <div>{children}</div>;
 };
 

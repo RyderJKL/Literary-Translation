@@ -1,7 +1,7 @@
 import auth from './auth';
 import common from './common';
 import role from './role';
-import {syncRouter} from '@/router/router';
+import { syncRouter } from '@/router/router';
 import routesStore from './routes';
 
 export const createStore = () => {

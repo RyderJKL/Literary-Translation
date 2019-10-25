@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {Switch, Route, Redirect, matchPath} from 'react-router-dom';
-import {IIRoute} from '@/typings';
+import { Switch, Route, Redirect, matchPath } from 'react-router-dom';
+import { IRoute } from '@/typings';
 
-export function renderRoutes(routes: IIRoute[], extraProps?: {}, switchProps?: {}) {
+export function renderRoutes(routes: IRoute[], extraProps?: {}, switchProps?: {}) {
     return routes ? (
         <Switch {...switchProps}>
             {routes.map((route, index) => {
@@ -31,8 +31,8 @@ export function renderRoutes(routes: IIRoute[], extraProps?: {}, switchProps?: {
                             });
 
                             if (route.component) {
-                                const {component: Component} = route;
-                                const newProps = {...props, ...extraProps};
+                                const { component: Component } = route;
+                                const newProps = { ...props, ...extraProps };
                                 return (
                                     <Component {...newProps} route={route}>
                                         {childRoutes}
@@ -49,10 +49,10 @@ export function renderRoutes(routes: IIRoute[], extraProps?: {}, switchProps?: {
 }
 
 const computeRootMatch = pathname => {
-    return {path: '/', url: '/', params: {}, isExact: pathname === '/'};
+    return { path: '/', url: '/', params: {}, isExact: pathname === '/' };
 };
 
-export function matchRoutes(routes: IIRoute[], pathname, /*not public API*/ branch = []) {
+export function matchRoutes(routes: IRoute[], pathname, /*not public API*/ branch = []) {
     routes.some(route => {
         const match = route.path
             ? matchPath(pathname, route)
@@ -61,7 +61,7 @@ export function matchRoutes(routes: IIRoute[], pathname, /*not public API*/ bran
             : computeRootMatch; // use default "root" match
 
         if (match) {
-            branch.push({route, match});
+            branch.push({ route, match });
 
             if (route.routes) {
                 matchRoutes(route.routes, pathname, branch);

@@ -1,6 +1,6 @@
-import {Observable, throwError as _throw} from 'rxjs';
-import {mergeMap, finalize, catchError} from 'rxjs/operators';
-import {Rjax, HttpResponse, HttpErrorResponse} from 'rjax';
+import { Observable, throwError as _throw } from 'rxjs';
+import { mergeMap, finalize, catchError } from 'rxjs/operators';
+import { Rjax, HttpResponse, HttpErrorResponse } from 'rjax';
 
 // const baseURL = process.env.BASE_API;
 
@@ -13,7 +13,7 @@ class CustomInterceptor {
             // 修改请求的url
             url: req.url.replace('http://', 'https://'),
             // 修改请求体
-            body: {...req.body}
+            body: { ...req.body }
             // 添加请求头
             // headers: req.headers.set('Authorization', 'authToken'),
         });
@@ -63,7 +63,7 @@ const codeMessage = {
  */
 const errorHandler = (response: HttpErrorResponse) => {
     const errorText = codeMessage[response.status] || response.statusText;
-    const {status, url} = response;
+    const { status, url } = response;
     console.error(`请求错误: ${errorText}:: ${status}: ${url}`);
     // notification.error({
     //     message: `请求错误 ${status}: ${url}`,

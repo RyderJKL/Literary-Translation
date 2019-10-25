@@ -1,21 +1,21 @@
 import * as React from 'react';
-import {RouteComponentProps} from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 // import useStore from '@/hooks/use-store';
-import {getMenusData} from './utils';
+import { getMenusData } from './utils';
 import SideBar from './components/side-bar';
 
 import Container from 'lego-ui/dist/lib/container';
 import Layout from 'lego-ui/dist/lib/layout';
 
-import {IIRoute} from '@/typings';
+import { IRoute } from '@/typings';
 
-import {toJS} from 'mobx';
+import { toJS } from 'mobx';
 
-export interface BasicLayoutProps extends RouteComponentProps {
-    route: IIRoute;
+export interface IBasicLayoutProps extends RouteComponentProps {
+    route: IRoute;
 }
 
-const BasicLayout: React.FC<BasicLayoutProps> = ({children, route}) => {
+const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route }) => {
     // const {routes} = useStore(store => ({
     //     routes: store.routes.routes,
     //     currentRole: store.role.role,

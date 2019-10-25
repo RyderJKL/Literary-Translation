@@ -1,12 +1,12 @@
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 import React from 'react';
 import * as Loadable from 'react-loadable';
-import {EERoles} from '@/store/role';
+import { Roles } from '@/store/role';
 import components from './modules/components';
 import NotFound from '@/views/notFound/NotFound';
-import {IIRoute} from '@/typings';
+import { IRoute } from '@/typings';
 
-export const commonRoute: IIRoute = {
+export const commonRoute: IRoute = {
     path: '/user',
     name: 'user',
     component: Loadable({
@@ -27,7 +27,7 @@ export const commonRoute: IIRoute = {
     ]
 };
 
-export const authorityRoute: IIRoute = {
+export const authorityRoute: IRoute = {
     path: '/',
     component: Loadable({
         loader: () => import('@/layouts/basic-layout/index'),
@@ -44,7 +44,7 @@ export const authorityRoute: IIRoute = {
             path: '/home',
             name: 'home',
             meta: {
-                roles: [EERoles.admin]
+                roles: [Roles.admin]
             },
             component: Loadable({
                 loader: () => import('@/views/Home'),
@@ -63,7 +63,7 @@ export const authorityRoute: IIRoute = {
                 }
             }),
             meta: {
-                roles: [EERoles.admin]
+                roles: [Roles.admin]
             }
         },
         components,

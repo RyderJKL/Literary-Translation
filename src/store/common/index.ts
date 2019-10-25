@@ -1,4 +1,4 @@
-import {observable, action} from 'mobx';
+import { observable, action } from 'mobx';
 
 export class CommonStore {
     @observable public id = '123';

@@ -1,7 +1,7 @@
-import {IIRoute} from '@/typings';
+import { IRoute } from '@/typings';
 import * as Loadable from 'react-loadable';
 
-export const components: IIRoute = {
+export const components: IRoute = {
     path: '/components',
     name: 'components',
     component: Loadable({

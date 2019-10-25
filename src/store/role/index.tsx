@@ -1,21 +1,21 @@
-import {observable, action} from 'mobx';
+import { observable, action } from 'mobx';
 
-export enum EERoles {
+export enum Roles {
     admin = 'admin',
     user = 'user'
 }
 
-export type EERolesArrType = Array<keyof typeof EERoles>;
+export type EERolesArrType = Array<keyof typeof Roles>;
 
 export class RoleStore {
-    @observable public role: EERoles;
+    @observable public role: Roles;
 
     constructor() {
-        this.role = EERoles.admin;
+        this.role = Roles.admin;
     }
 
     @action.bound
-    public changeRole(role: EERoles) {
+    public changeRole(role: Roles) {
         console.log('change role', role);
         this.role = role;
     }
