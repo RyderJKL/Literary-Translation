@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {Switch, Route, Redirect, matchPath} from 'react-router-dom';
-import {IIRoutes} from '@/router/routes';
+import {IIRoute} from '@/typings';
 
-export function renderRoutes(routes: IIRoutes, extraProps?: {}, switchProps?: {}) {
+export function renderRoutes(routes: IIRoute[], extraProps?: {}, switchProps?: {}) {
     return routes ? (
         <Switch {...switchProps}>
             {routes.map((route, index) => {
@@ -52,7 +52,7 @@ const computeRootMatch = pathname => {
     return {path: '/', url: '/', params: {}, isExact: pathname === '/'};
 };
 
-export function matchRoutes(routes: IIRoutes, pathname, /*not public API*/ branch = []) {
+export function matchRoutes(routes: IIRoute[], pathname, /*not public API*/ branch = []) {
     routes.some(route => {
         const match = route.path
             ? matchPath(pathname, route)

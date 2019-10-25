@@ -4,34 +4,7 @@ import * as Loadable from 'react-loadable';
 import {EERoles} from '@/store/role';
 import components from './modules/components';
 import NotFound from '@/views/notFound/NotFound';
-
-export interface IIMenuItem {
-    path?: string;
-    name?: string;
-    icon?: string;
-    hiddenChildrenInMenu?: boolean;
-    hiddenInMenu?: boolean;
-    children?: IIMenuItem[];
-    [index: string]: any;
-}
-
-export interface IIMenuItems extends Array<IIMenuItem> {}
-
-export interface IIRoute extends IIMenuItem {
-    exact?: boolean;
-    strict?: boolean;
-    sensitive?: boolean;
-    redirect?: string;
-    meta?: IIRoutesMeta;
-    component?: any;
-    routes?: IIRoute[];
-}
-
-export interface IIRoutes extends Array<IIRoute> {}
-
-export interface IIRoutesMeta {
-    roles: EERoles[];
-}
+import {IIRoute} from '@/typings';
 
 export const commonRoute: IIRoute = {
     path: '/user',

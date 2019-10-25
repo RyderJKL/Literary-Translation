@@ -1,40 +1,25 @@
-import {IIMenuItem, IIMenuItems, IIRoute, IIRoutes} from '@/router/routes';
-import {matchRoutes} from '@/router/helper';
+import {IIRoute, IIMenuItem} from '@/typings';
+import isEqual from 'lodash/isEqual';
+import memoizeOne from 'memoize-one';
 
-export function getSideBarMenusData(routes: IIRoutes, pathname: string) {
-    const rootMatchRoute = matchRoutes(routes, location.pathname)[0];
-    if (!rootMatchRoute) {
-        return [];
-    }
+// formatter routes to menus
+function formatter(routesData: IIRoute[]): IIMenuItem[] {
+    return routesData
+        .filter(item => item.path)
+        .filter(item => item.name)
+        .filter(item => !item.hiddenInMenu)
+        .map(routeItem => {
+            if (routeItem.routes && !routeItem.hiddenChildrenInMenu) {
+                routeItem['children'] = formatter(routeItem.routes);
+            }
 
-    const basicLayoutRoute: IIRoute = rootMatchRoute.route as IIRoute;
-    const routesData = basicLayoutRoute.routes;
-
-    return getMenusData(routesData);
+            return routeItem;
+        });
 }
 
-export function getMenusData(routesData: IIRoutes): IIMenuItems {
-    const shouldShowMenuItem = (route: IIRoute) => !(!route.path || !route.name || route.hiddenInMenu);
-    const menuItems: IIMenuItems = [];
+const memoizeFormatter = memoizeOne(formatter, isEqual);
 
-    routesData.forEach(route => {
-        if (!shouldShowMenuItem(route)) {
-            return;
-        }
-
-        const tmpRoute: IIMenuItem = {
-            name: route.name,
-            icon: route.icon || '',
-            path: route.path,
-            children: []
-        };
-
-        if (route.routes) {
-            tmpRoute.children = getMenusData(route.routes);
-        }
-
-        menuItems.push(tmpRoute);
-    });
-
-    return menuItems;
+export function getMenusData(routesData: IIRoute[]): IIMenuItem[] {
+    const originMenusData = memoizeFormatter(routesData);
+    return originMenusData;
 }

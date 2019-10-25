@@ -1,4 +1,4 @@
-import {IIRoute} from '@/router/routes';
+import {IIRoute} from '@/typings';
 import * as Loadable from 'react-loadable';
 
 export const components: IIRoute = {
@@ -18,6 +18,7 @@ export const components: IIRoute = {
         {
             path: '/components/progress',
             name: 'progress',
+            exact: true,
             component: Loadable({
                 loader: () => import('@/components/progress/Progress'),
                 loading() {

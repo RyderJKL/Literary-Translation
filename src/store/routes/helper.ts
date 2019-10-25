@@ -1,5 +1,5 @@
 import {EERoles} from '@/store/role';
-import {IIRoutes, IIRoute} from '@/router/routes';
+import {IIRoute} from '@/typings';
 
 export function checkPermission(role: EERoles, route: IIRoute): boolean {
     if (route.meta && route.meta.roles) {
@@ -9,8 +9,8 @@ export function checkPermission(role: EERoles, route: IIRoute): boolean {
     return true;
 }
 
-export function getAccessibleRoutes(role: EERoles, routes: IIRoutes): IIRoutes {
-    const res: IIRoutes = [];
+export function getAccessibleRoutes(role: EERoles, routes: IIRoute[]): IIRoute[] {
+    const res: IIRoute[] = [];
 
     routes.forEach(route => {
         const hasPermission = checkPermission(role, route);

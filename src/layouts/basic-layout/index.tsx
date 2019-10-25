@@ -1,22 +1,28 @@
 import * as React from 'react';
 import {RouteComponentProps} from 'react-router-dom';
-import useStore from '@/hooks/use-store';
-import {getSideBarMenusData} from './utils';
+// import useStore from '@/hooks/use-store';
+import {getMenusData} from './utils';
 import SideBar from './components/side-bar';
 
 import Container from 'lego-ui/dist/lib/container';
 import Layout from 'lego-ui/dist/lib/layout';
 
-const BasicLayout: React.FC<RouteComponentProps> = ({children, history}) => {
-    const {location} = history;
+import {IIRoute} from '@/typings';
 
-    const {routes} = useStore(store => ({
-        routes: store.routes.routes,
-        currentRole: store.role.role,
-        changeRole: store.role.changeRole
-    }));
+import {toJS} from 'mobx';
 
-    const sideBarMenusData = getSideBarMenusData(routes, location.pathname);
+export interface BasicLayoutProps extends RouteComponentProps {
+    route: IIRoute;
+}
+
+const BasicLayout: React.FC<BasicLayoutProps> = ({children, route}) => {
+    // const {routes} = useStore(store => ({
+    //     routes: store.routes.routes,
+    //     currentRole: store.role.role,
+    //     changeRole: store.role.changeRole
+    // }));
+
+    const sideBarMenusData = getMenusData(toJS(route.routes));
 
     return (
         <Container>

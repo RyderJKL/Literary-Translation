@@ -102,20 +102,6 @@ module.exports = {
         "no-var": "error", // 要求使用 let 或 const 而不是 var
         "no-lone-blocks": "warn",
 
-
-        //ECMAScript 6
-        //"constructor-super": "off", //要求在构造函数中有 super() 的调用
-        "no-class-assign": "off", //禁止修改类声明的变量, 智子中这样的代码会报错MapPlaceholder = DragSource(DndTypes.MAPWRAPPER, mapWrapperSource, dragCollect)(MapPlaceholder);
-        // https://cn.eslint.org/docs/rules/prefer-destructuring,强制对象解构，不强制数组
-        "prefer-destructuring": ["error", {"object": true, "array": false}],
-        "prefer-rest-params": "error", //建议使用剩余参数代替 arguments
-        "prefer-template": "error",
-        //"no-const-assign": "off", //禁止修改 const 声明的变量
-        //"no-dupe-class-members": "off", //禁止类成员中出现重复的名称
-        //"no-new-symbol": "off", //禁止 Symbolnew 操作符和 new 一起使用
-        //"no-this-before-super": "off", 禁止在构造函数中，在调用 super() 之前使用 this 或 super
-        //"require-yield": "off", //要求 generator 函数内有 yield
-
         //react
         "react/jsx-uses-react": "error", // 防止react被错误地标记为未使用
         "react/jsx-uses-vars": "error",//防止在JSX中使用的变量被错误地标记为未使用
@@ -139,5 +125,7 @@ module.exports = {
         // "react/no-direct-mutation-state": "off", //防止this.state的直接变异
         // "react/no-multi-comp": "off", //防止每个文件有多个组件定义
         // "react/no-unknown-property": 2, //防止使用未知的DOM属性
+
+        "interface-name": "off",
     }
 };

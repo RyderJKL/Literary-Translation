@@ -4,7 +4,11 @@ import {Scrollbars} from 'react-custom-scrollbars';
 import JsonData from './__mock__';
 import classnames from 'classnames';
 
-const Select = ({onSelect}) => {
+export interface ISelectProps {
+    onSelect: () => void;
+}
+
+const Select = ({onSelect}: ISelectProps): JSX.Element => {
     return (
         <select onChange={event => onSelect(JsonData[event.currentTarget.selectedIndex])}>
             {JsonData.map(item => (
@@ -16,7 +20,7 @@ const Select = ({onSelect}) => {
     );
 };
 
-const ScrollCatalog = () => {
+const ScrollCatalog: React.FC = () => {
     const scrollbarsRef = React.useRef<Scrollbars>(null);
     const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -25,7 +29,7 @@ const ScrollCatalog = () => {
         scrollEle.scrollToBottom();
     });
 
-    const onSelect = currentItem => {
+    const onSelect = (currentItem): void => {
         const containerEle = containerRef.current;
         const currentNavItem: HTMLLIElement = containerEle.getElementsByClassName(
             `list_${currentItem.id}`
@@ -35,8 +39,8 @@ const ScrollCatalog = () => {
         scrollEle.scrollTop(currentNavItemOffsetTop);
     };
 
-    const listItemClick = (target: HTMLLIElement) => {
-        console.log(target.offsetTop);
+    const listItemClick = (target: HTMLLIElement): void => {
+        // console.log(target.offsetTop);
     };
 
     return (
