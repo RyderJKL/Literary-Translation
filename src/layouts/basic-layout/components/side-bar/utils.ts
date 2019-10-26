@@ -61,20 +61,46 @@ export function getFlatMenuKeys(menusData: IMenuItem[], menuItemPropertyProps?: 
  * @param pathname
  * '/user/settings/111' => ['/user', '/user/settings', '/user/settings/111']
  */
-export function pathnameToList(pathname: string): string [] {
-
+export function pathnameToList(pathname: string): string[] {
     const pathSplitArr: string[] = pathname.split('/').filter(item => item);
 
     const tmp = [''];
     pathSplitArr.forEach((item, index) => {
-        tmp.push(`${tmp[index]}/${item}`)
+        tmp.push(`${tmp[index]}/${item}`);
     });
 
     return tmp.filter(item => item);
 }
 
-export function getSelectedMenusKey(flatMenuKeys: string[], pathname: string): string[] {
-    return pathnameToList(pathname).map(path => flatMenuKeys.filter((menuKey) =>
-        menuKey && pathToRegexp(menuKey).test(path)).pop()
-    ).filter(item => item);
+export function _getFlatMenus(menusData: IMenuItem[]): IMenuItem[] {
+    let menusMap = [];
+
+    menusData.forEach(item => {
+        if (item.hiddenInMenu) {
+            return;
+        }
+
+        if (item.children && item.children.length && !item.hiddenChildrenInMenu) {
+            menusMap = [...menusMap, ..._getFlatMenus(item.children)];
+        }
+
+        menusMap.push(item);
+    });
+
+    return menusMap;
+}
+export const getFlatMenus = memoizeOne(_getFlatMenus, isEqual);
+
+export function _matchMenusWithPathname(menusDta: IMenuItem[], pathname: string): IMenuItem[] {
+    const flatMenus = getFlatMenus(menusDta);
+    return pathnameToList(pathname)
+        .map(path => flatMenus.filter(menuItem => menuItem.path && pathToRegexp(menuItem.path).test(path)).pop())
+        .filter(item => item);
+}
+
+export const matchMenusWithPathname = memoizeOne(_matchMenusWithPathname, isEqual);
+
+export function getSelectedMenusKey(menusDta: IMenuItem[], pathname: string): string[] {
+    const matchMenus = matchMenusWithPathname(menusDta, pathname);
+    return matchMenus.map(menuItem => menuItem.path).filter(item => item);
 }

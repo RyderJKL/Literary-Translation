@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { RouteComponentProps, match, RouteProps } from 'react-router-dom';
 import { Roles } from '@/store/role';
 
@@ -22,16 +21,6 @@ export type PickKeyToString<T> = {
 }
 
 export type MenuItemPropertyProps = PickKeyToString<IMenuItem>
-
-// export interface IMenuItemPropertyProps {
-//     icon?: string;
-//     meta?: string;
-//     name?: string;
-//     hiddenChildrenInMenu?: string;
-//     hiddenInMenu?: string;
-//     children?: string;
-//     path?: string;
-// }
 
 export interface IRoute extends Omit<RouteProps, 'path' | 'children' | 'component'>, IMenuItem {
     routes?: IRoute[];

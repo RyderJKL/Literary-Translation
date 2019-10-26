@@ -1,5 +1,6 @@
 import { IRoute } from '@/typings';
 import * as Loadable from 'react-loadable';
+import NotFound from '@/views/notFound/NotFound';
 
 export const components: IRoute = {
     path: '/components',
@@ -36,6 +37,9 @@ export const components: IRoute = {
                     return 'Loading';
                 }
             })
+        },
+        {
+            component: NotFound
         }
     ]
 };
