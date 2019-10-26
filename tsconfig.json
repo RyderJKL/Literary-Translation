@@ -2,11 +2,11 @@
     "compilerOptions": {
         // 支持 import .json 文件
         "resolveJsonModule": true,
-//        "esModuleInterop": true,
+        // esModuleInterop": true,
         // 用实验性的装饰器特性
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
-        "target": "es5",
+        "target": "es6",
         "lib": [
             "dom",
             "es7"

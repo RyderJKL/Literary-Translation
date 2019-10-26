@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 // import useStore from '@/hooks/use-store';
-import { getMenusData } from './utils';
+import { getMenusData } from './components/side-bar/utils';
 import SideBar from './components/side-bar';
 
 import Container from 'lego-ui/dist/lib/container';
@@ -26,13 +26,15 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route }) => {
 
     return (
         <Container>
-            <Layout className={''}>
+            <Layout>
                 <Layout.Aside>
                     <SideBar menusData={sideBarMenusData} />
                 </Layout.Aside>
-                <Layout.Header className={''}>header</Layout.Header>
-                <Layout.Content className={''}>{children}</Layout.Content>
-                <Layout.Footer className={''}>footer</Layout.Footer>
+                <Layout.Content>
+                    <Layout.Header>header</Layout.Header>
+                    <Layout.Content>{children}</Layout.Content>
+                    <Layout.Footer>footer</Layout.Footer>
+                </Layout.Content>
             </Layout>
         </Container>
     );

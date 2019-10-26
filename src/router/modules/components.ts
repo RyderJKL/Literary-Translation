@@ -25,6 +25,17 @@ export const components: IRoute = {
                     return 'Loading';
                 }
             })
+        },
+        {
+            path: '/components/dynamic/:id',
+            name: 'dynamicProgress',
+            exact: true,
+            component: Loadable({
+                loader: () => import('@/components/progress/Progress'),
+                loading() {
+                    return 'Loading';
+                }
+            })
         }
     ]
 };

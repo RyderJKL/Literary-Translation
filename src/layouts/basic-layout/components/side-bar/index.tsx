@@ -2,6 +2,8 @@ import * as React from 'react';
 import { IMenuItem } from '@/typings';
 import { matchRoutes } from '@/router/helper';
 import { Link, withRouter, RouteComponentProps, matchPath } from 'react-router-dom';
+import { getFlatMenuKeys, getSelectedMenusKey } from './utils';
+// import * as pathToRegexp from 'path-to-regexp';
 
 import Menu from 'lego-ui/dist/lib/menu';
 
@@ -23,20 +25,10 @@ export interface ISideBarProps extends RouteComponentProps {
 const Sidebar: React.FC<ISideBarProps> = ({ menusData, history }) => {
     // const [menuActiveIndex, setMenuActiveIndex] = React.useState<IIMenuAtiveState>('home');
     // const [menuCollapse, setMenuCollapse] = React.useState(false);
-    // console.log(menusData);
-    function findMenuAccordingPathFromMenusData(data: IMenuItem[], pathname: string) {
-        const mathRoute = matchRoutes(data, pathname);
-        // console.log(mathRoute);
-        // let tmpPath: string = '';
-        // menusData.forEach((item) => {
-        //     if (item.path === pathname) {
-        //         tmpPath = pathname;
-        //     }
-        // })
-    }
-
     function handleHighlightCurrentPath(menuItems: IMenuItem[], pathname) {
-        findMenuAccordingPathFromMenusData(menuItems, pathname);
+        const flatMenuKeys = getFlatMenuKeys(menuItems);
+        const selectedMenuKeys = getSelectedMenusKey(flatMenuKeys, pathname);
+        console.log(selectedMenuKeys);
     }
 
     React.useEffect(() => {

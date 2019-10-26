@@ -17,6 +17,22 @@ export interface IMenuItem {
     [index: string]: any;
 }
 
+export type PickKeyToString<T> = {
+    [P in keyof T]: string;
+}
+
+export type MenuItemPropertyProps = PickKeyToString<IMenuItem>
+
+// export interface IMenuItemPropertyProps {
+//     icon?: string;
+//     meta?: string;
+//     name?: string;
+//     hiddenChildrenInMenu?: string;
+//     hiddenInMenu?: string;
+//     children?: string;
+//     path?: string;
+// }
+
 export interface IRoute extends Omit<RouteProps, 'path' | 'children' | 'component'>, IMenuItem {
     routes?: IRoute[];
     component?: RouteProps['component'] | any;

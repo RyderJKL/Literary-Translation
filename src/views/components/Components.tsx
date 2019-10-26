@@ -3,7 +3,6 @@ import * as React from 'react';
 // import renderRoutes from '@/router/utils/renderRoutes';
 
 const Components: React.FC<{route}> = ({ route, children }) => {
-    console.log('route props');
     return (
         <div>
             Components
