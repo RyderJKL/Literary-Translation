@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Switch, Route, Redirect, matchPath } from 'react-router-dom';
 import { IRoute } from '@/typings';
 
-export function renderRoutes(routes: IRoute[], extraProps?: {}, switchProps?: {}) {
+export function renderRoutes(routes: IRoute[], extraProps?: {}, switchProps?: {}, Exception?) {
     return routes ? (
         <Switch {...switchProps}>
             {routes.map((route, index) => {
@@ -26,9 +26,14 @@ export function renderRoutes(routes: IRoute[], extraProps?: {}, switchProps?: {}
                         strict={route.strict}
                         sensitive={route.sensitive}
                         render={props => {
-                            const childRoutes = renderRoutes(route.routes, extraProps, {
-                                location: props.location
-                            });
+                            const childRoutes = renderRoutes(
+                                route.routes,
+                                extraProps,
+                                {
+                                    location: props.location
+                                },
+                                Exception
+                            );
 
                             if (route.component) {
                                 const { component: Component } = route;
@@ -44,6 +49,7 @@ export function renderRoutes(routes: IRoute[], extraProps?: {}, switchProps?: {}
                     />
                 );
             })}
+            <Route component={Exception} />
         </Switch>
     ) : null;
 }

@@ -1,6 +1,6 @@
 import { IRoute } from '@/typings';
 import * as Loadable from 'react-loadable';
-import NotFound from '@/views/notFound/NotFound';
+import NotFound from '@/components/not-found/NotFound';
 
 export const components: IRoute = {
     path: '/components',
@@ -30,6 +30,7 @@ export const components: IRoute = {
         {
             path: '/components/dynamic/:id',
             name: 'dynamicProgress',
+            hiddenInMenu: true,
             exact: true,
             component: Loadable({
                 loader: () => import('@/components/progress/Progress'),
@@ -37,9 +38,6 @@ export const components: IRoute = {
                     return 'Loading';
                 }
             })
-        },
-        {
-            component: NotFound
         }
     ]
 };

@@ -3,9 +3,11 @@ import { RouteComponentProps } from 'react-router-dom';
 import useStore from '@/hooks/use-store';
 import { getMenusData } from './components/side-bar/utils';
 import SideBar from './components/side-bar';
-import BreadCrumbs from './components/bread-crumbs'
+import BreadCrumbs from './components/bread-crumbs';
 import Container from 'lego-ui/dist/lib/container';
 import Layout from 'lego-ui/dist/lib/layout';
+
+import Exception from '@/components/exception';
 
 import { IRoute } from '@/typings';
 
@@ -16,9 +18,14 @@ export interface IBasicLayoutProps extends RouteComponentProps {
 }
 
 const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route }) => {
-    const { changeMenuCollapse } = useStore(store => ({
-        changeMenuCollapse: store.UI.toggleMenuCollapse
+    const { changeMenuCollapse, isLogin } = useStore(store => ({
+        changeMenuCollapse: store.UI.toggleMenuCollapse,
+        isLogin: store.auth.isLogin
     }));
+
+    if (!isLogin) {
+        return <Exception />;
+    }
 
     const menusData = getMenusData(route.routes);
 
@@ -30,9 +37,7 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route }) => {
                 </Layout.Aside>
                 <Layout.Content>
                     <Layout.Header>
-                        <BreadCrumbs
-                            menusData={menusData}
-                        />
+                        <BreadCrumbs menusData={menusData} />
                         <button onClick={changeMenuCollapse}>toggle menu collapse</button>
                     </Layout.Header>
                     <Layout.Content>{children}</Layout.Content>

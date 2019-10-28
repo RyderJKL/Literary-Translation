@@ -1,5 +1,16 @@
+import { computed } from 'mobx';
+
 export class AuthStore {
-    public token = 'XXX_SSS_DD';
+    public token: string;
+    public userName: string;
+
+    constructor () {
+       this.userName = '';
+    }
+
+    @computed get isLogin () {
+        return this.userName;
+    }
 }
 
 const auth = new AuthStore();

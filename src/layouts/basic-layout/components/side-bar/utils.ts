@@ -8,9 +8,9 @@ function formatter(routesData: IRoute[]): IMenuItem[] {
     return routesData
         .filter(item => item.path)
         .filter(item => item.name)
-        .filter(item => !item.hiddenInMenu)
+        // .filter(item => !item.hiddenInMenu)
         .map(routeItem => {
-            if (routeItem.routes && !routeItem.hiddenChildrenInMenu) {
+            if (routeItem.routes && routeItem.routes.length) {
                 routeItem.children = formatter(routeItem.routes);
             }
 
@@ -76,11 +76,7 @@ export function _getFlatMenus(menusData: IMenuItem[]): IMenuItem[] {
     let menusMap = [];
 
     menusData.forEach(item => {
-        if (item.hiddenInMenu) {
-            return;
-        }
-
-        if (item.children && item.children.length && !item.hiddenChildrenInMenu) {
+        if (item.children && item.children.length) {
             menusMap = [...menusMap, ..._getFlatMenus(item.children)];
         }
 

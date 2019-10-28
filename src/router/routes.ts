@@ -3,7 +3,7 @@ import React from 'react';
 import * as Loadable from 'react-loadable';
 import { Roles } from '@/store/role';
 import components from './modules/components';
-import NotFound from '@/views/notFound/NotFound';
+import NotFound from '@/components/not-found/NotFound';
 import { IRoute } from '@/typings';
 
 export const commonRoute: IRoute = {
@@ -66,10 +66,7 @@ export const authorityRoute: IRoute = {
                 roles: [Roles.admin]
             }
         },
-        components,
-        {
-            component: NotFound
-        }
+        components
     ]
 };
 
