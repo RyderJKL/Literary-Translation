@@ -10,7 +10,7 @@ const Login: React.FC = () => {
             $event.pipe(
                 debounceTime(500),
                 switchMap(() =>
-                    $request.post('/mock-api/users/login', { username: 'jack' }, { params: { useMock: 'true' } })
+                    $request.post('/mock-api/user/login', { username: 'jack' }, { params: { useMock: 'true' } })
                 ),
                 map(res => {
                     console.log(res);

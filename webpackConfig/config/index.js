@@ -10,7 +10,7 @@ module.exports = {
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {
-            '/mock-api': {
+            '/api': {
                 target: `http://localhost:${mock_port}/`
             },
         },
