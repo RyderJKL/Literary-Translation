@@ -1,11 +1,11 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import compression from 'compression';
-import morgan from 'morgan';
-import cors from 'cors';
-import http from 'http';
-import path from 'path';
-import yaml from 'yamljs';
+import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import * as compression from 'compression';
+import * as morgan from 'morgan';
+import * as cors from 'cors';
+import * as http from 'http';
+import * as path from 'path';
+import * as yaml from 'yamljs';
 import * as api from './api';
 import { accessTokenAuth } from './security';
 

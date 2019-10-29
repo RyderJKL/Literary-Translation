@@ -1,14 +1,9 @@
 import { Observable, throwError as _throw } from 'rxjs';
 import { mergeMap, finalize, catchError } from 'rxjs/operators';
-import { Rjax, HttpResponse, HttpParams, HttpErrorResponse } from 'rjax';
+import { Rjax, HttpResponse, HttpErrorResponse } from 'rjax';
 
 const baseURL = process.env.BASE_API;
 const isDevelopment = process.env.NODE_ENV === 'development';
-// const isProduction = process.env.NODE_ENV === 'production';
-//
-// const getBaseURL = () => {
-//
-// };
 
 const fabricationRequest = req => {
     const {
