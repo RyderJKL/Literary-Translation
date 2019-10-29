@@ -1,5 +1,9 @@
 import { RouteComponentProps, match, RouteProps } from 'react-router-dom';
-import { Roles } from '@/store/role';
+
+export enum Roles {
+    admin = 'admin',
+    user = 'user'
+}
 
 export interface IRouteMeta {
     roles: Roles[];

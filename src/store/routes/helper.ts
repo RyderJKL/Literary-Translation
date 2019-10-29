@@ -1,5 +1,4 @@
-import { Roles } from '@/store/role';
-import { IRoute } from '@/typings';
+import { IRoute, Roles } from '@/typings';
 
 export function checkPermission(role: Roles, route: IRoute): boolean {
     if (route.meta && route.meta.roles) {

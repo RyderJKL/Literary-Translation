@@ -10,7 +10,7 @@ import './styles/reset.scss';
 
 configureMobx({ enforceActions: 'always' });
 
-const render = () => {
+const render = () =>{
     ReactDom.render(
         <StoreProvider>
             <App />

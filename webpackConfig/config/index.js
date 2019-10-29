@@ -2,12 +2,18 @@
 
 const path = require('path');
 
+const mock_port = 1998;
+
 module.exports = {
     dev: {
         // Paths
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
-        proxyTable: {},
+        proxyTable: {
+            '/mock-api': {
+                target: `http://localhost:${mock_port}/`
+            },
+        },
 
         // Various Dev Server settings
 

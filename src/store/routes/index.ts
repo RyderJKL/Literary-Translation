@@ -1,7 +1,7 @@
 import { observable, action, reaction } from 'mobx';
-import roleStore, { Roles } from '@/store/role';
+import roleStore from '@/store/role';
 import routerRoutes from '@/router/routes';
-import { IRoute } from '@/typings';
+import { IRoute, Roles } from '@/typings';
 import { getAccessibleRoutes } from './helper';
 
 export class RoutesInStore {
@@ -21,7 +21,7 @@ export class RoutesInStore {
         );
     }
 
-    @action
+    @action.bound
     public generateRoutes = (role: Roles) => {
         const accessRoutes: IRoute[] = getAccessibleRoutes(role, routerRoutes);
         this.routes = accessRoutes;

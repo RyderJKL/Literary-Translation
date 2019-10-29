@@ -1,22 +1,55 @@
 import { Observable, throwError as _throw } from 'rxjs';
 import { mergeMap, finalize, catchError } from 'rxjs/operators';
-import { Rjax, HttpResponse, HttpErrorResponse } from 'rjax';
+import { Rjax, HttpResponse, HttpParams, HttpErrorResponse } from 'rjax';
 
-// const baseURL = process.env.BASE_API;
+const baseURL = process.env.BASE_API;
+const isDevelopment = process.env.NODE_ENV === 'development';
+// const isProduction = process.env.NODE_ENV === 'production';
+//
+// const getBaseURL = () => {
+//
+// };
+
+const fabricationRequest = req => {
+    const {
+        params: { map: paramsMap }
+    } = req;
+
+    let useMockApi = false;
+    let url = req.url;
+
+    // 任何环境下，只有检测到 useMock，都要过滤掉
+    if (paramsMap.get('useMock')) {
+        if (paramsMap.get('useMock')[0] === 'true') {
+            useMockApi = true;
+        }
+
+        paramsMap.delete('useMock');
+    }
+
+    // 如果是在开发环境，并且该请求开启了 mock，则将该次请求处理成 mock-api
+    if (isDevelopment && useMockApi) {
+        url = url.replace(`${baseURL}`, `${process.env.MOCK_API}`);
+    }
+
+    // 一定要用clone的方法进行拦截修改，为了保持请求的不可变性！！！！
+    const newReq = req.clone({
+        // 修改请求的url
+        url,
+        // 修改请求体
+        body: { ...req.body }
+        // 添加请求头
+        // headers: req.headers.set('Authorization', 'authToken'),
+    });
+
+    return newReq;
+};
 
 // 自定义拦截器
 class CustomInterceptor {
     public intercept(req, next) {
         // 拦截请求
-        // 一定要用clone的方法进行拦截修改，为了保持请求的不可变性！！！！
-        const newReq = req.clone({
-            // 修改请求的url
-            url: req.url.replace('http://', 'https://'),
-            // 修改请求体
-            body: { ...req.body }
-            // 添加请求头
-            // headers: req.headers.set('Authorization', 'authToken'),
-        });
+        const newReq = fabricationRequest(req);
         // 拦截响应
         return next.handle(newReq).pipe(
             // tap((x) => console.log('拦截响应', x)),

@@ -1,11 +1,5 @@
 import { observable, action } from 'mobx';
-
-export enum Roles {
-    admin = 'admin',
-    user = 'user'
-}
-
-export type EERolesArrType = Array<keyof typeof Roles>;
+import { Roles } from '@/typings';
 
 export class RoleStore {
     @observable public role: Roles;

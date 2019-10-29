@@ -1,10 +1,9 @@
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 import React from 'react';
 import * as Loadable from 'react-loadable';
-import { Roles } from '@/store/role';
 import components from './modules/components';
 import NotFound from '@/components/not-found/NotFound';
-import { IRoute } from '@/typings';
+import { IRoute, Roles } from '@/typings';
 
 export const commonRoute: IRoute = {
     path: '/user',
@@ -16,6 +15,16 @@ export const commonRoute: IRoute = {
         }
     }),
     routes: [
+        {
+            path: '/user/login',
+            name: '登录',
+            component: Loadable({
+                loader: () => import('@/views/login'),
+                loading() {
+                    return 'Loading';
+                }
+            })
+        },
         {
             path: '/user',
             name: '404',
