@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env webpack-dev-server --inline --progress --config webpackConfig/dev.conf.js",
-    "build:prod": "cross-env NODE_ENV=production && npm run check-env && env_config=prod node webpackConfig/build.js",
-    "build:sit": "cross-env NODE_ENV=production && npm run check-env && env_config=sit node webpackConfig/build.js",
+    "dev": "cross-env webpack-dev-server --inline --progress --config webpack-config/dev.conf.js",
+    "build:prod": "cross-env NODE_ENV=production && npm run check-env && env_config=prod node webpack-config/build.js",
+    "build:sit": "cross-env NODE_ENV=production && npm run check-env && env_config=sit node webpack-config/build.js",
     "check-env": "sh scripts/check-env.sh",
     "lint-fix": "tslint --fix 'src/**/*.ts' 'src/**/*.tsx'"
   },
