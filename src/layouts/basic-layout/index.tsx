@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { Redirect, RouteComponentProps } from 'react-router-dom';
 import useStore from '@/hooks/use-store';
 import { getMenusData } from './components/side-bar/utils';
 import SideBar from './components/side-bar';
@@ -7,7 +7,7 @@ import BreadCrumbs from './components/bread-crumbs';
 import Container from 'lego-ui/dist/lib/container';
 import Layout from 'lego-ui/dist/lib/layout';
 
-import Exception from '@/components/exception';
+// import Exception from '@/components/exception';
 
 import { IRoute } from '@/typings';
 
@@ -24,7 +24,7 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route }) => {
     }));
 
     if (!isLogin) {
-        return <Exception />;
+        return <Redirect to={'/user/login'} />;
     }
 
     const menusData = getMenusData(route.routes);

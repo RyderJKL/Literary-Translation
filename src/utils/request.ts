@@ -1,9 +1,22 @@
 import { Observable, throwError as _throw } from 'rxjs';
-import { mergeMap, finalize, catchError } from 'rxjs/operators';
+import { mergeMap, finalize, catchError, delay } from 'rxjs/operators';
 import { Rjax, HttpResponse, HttpErrorResponse } from 'rjax';
 
 const baseURL = process.env.BASE_API;
 const isDevelopment = process.env.NODE_ENV === 'development';
+
+/**
+ * 异常处理程序
+ */
+const errorHandler = (response: HttpErrorResponse) => {
+    const errorText = codeMessage[response.status] || response.statusText;
+    const { status, url } = response;
+    console.error(`请求错误: ${errorText}:: ${status}: ${url}`);
+    // notification.error({
+    //     message: `请求错误 ${status}: ${url}`,
+    //     description: errorText,
+    // });
+};
 
 const fabricationRequest = req => {
     const {
@@ -47,6 +60,7 @@ class CustomInterceptor {
         const newReq = fabricationRequest(req);
         // 拦截响应
         return next.handle(newReq).pipe(
+            delay(30000),
             // tap((x) => console.log('拦截响应', x)),
             mergeMap(event => {
                 // 这里可根据后台接口约定自行判断
@@ -56,9 +70,11 @@ class CustomInterceptor {
                 return new Observable(observer => observer.next(event));
             }),
             catchError(res => {
+                console.log('errror at request')
                 errorHandler(res);
                 // 将错误信息抛给下个拦截器或者请求调用方
-                return _throw(res);
+                return new Observable(observer => observer.error(res));
+                // return _throw(res);
             }),
             finalize(() => {
                 // 无论成功或者失败都会执行
@@ -84,19 +100,6 @@ const codeMessage = {
     502: '网关错误。',
     503: '服务不可用，服务器暂时过载或维护。',
     504: '网关超时。'
-};
-
-/**
- * 异常处理程序
- */
-const errorHandler = (response: HttpErrorResponse) => {
-    const errorText = codeMessage[response.status] || response.statusText;
-    const { status, url } = response;
-    console.error(`请求错误: ${errorText}:: ${status}: ${url}`);
-    // notification.error({
-    //     message: `请求错误 ${status}: ${url}`,
-    //     description: errorText,
-    // });
 };
 
 // 创建实例

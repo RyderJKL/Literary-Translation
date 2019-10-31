@@ -35,7 +35,7 @@
         //        },
         "jsx-wrap-multiline": false,
         "indent": [true, "spaces", 4],
-        "interface-name": [true, "always-prefix"],
+        "interface-name": [false],
         "label-position": true,
         "linebreak-style": [true, "LF" ],
         "quotemark": [true, "single", "avoid-escape", "avoid-template"],

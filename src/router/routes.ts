@@ -9,7 +9,7 @@ export const commonRoute: IRoute = {
     path: '/user',
     name: 'user',
     component: Loadable({
-        loader: () => import('@/layouts/user-layout'),
+        loader: () => import('@/layouts/user-layout/index'),
         loading() {
             return 'Loading';
         }
@@ -17,7 +17,7 @@ export const commonRoute: IRoute = {
     routes: [
         {
             path: '/user/login',
-            name: '登录',
+            name: '登录页',
             component: Loadable({
                 loader: () => import('@/views/login'),
                 loading() {
