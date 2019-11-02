@@ -2,13 +2,17 @@
 
 // for style loader
 declare module '*.css' {
-  const styles: any;
-  export = styles;
+    const content: any;
+    export default content;
+  // const styles: any;
+  // export = styles;
 }
 
 declare module '*.scss' {
-    const styles: any;
-    export = styles;
+    const content: any;
+    export default content;
+    // const styles: any;
+    // export = styles;
 }
 
 declare module 'googlemaps';

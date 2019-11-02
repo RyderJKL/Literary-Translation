@@ -13,7 +13,7 @@ exports.assetsPath = function (_path) {
     return path.posix.join(assetsSubDirectory, _path);
 };
 
-exports.cssLoaders = function (options, useCssModule) {
+exports.cssLoaders = function (options, useCssModule = true) {
     options = options || {};
 
     const styleLoader = {
@@ -25,18 +25,18 @@ exports.cssLoaders = function (options, useCssModule) {
 
     const cssLoader = () => {
         if (useCssModule) {
-           return {
-               loader: 'css-loader',
-               options: {
-                   sourceMap: options.sourceMap,
-                   modules: true,
-                   importLoaders: 2,
-                   localIdentName: '[name]-[local]-[hash:base64:5]'
-               }
-           }
+            return {
+                loader: 'css-loader',
+                options: {
+                    sourceMap: options.sourceMap,
+                    modules: true,
+                    importLoaders: 2,
+                    localIdentName: '[name]-[local]-[hash:base64:5]'
+                }
+            }
         }
 
-        return  {
+        return {
             loader: 'css-loader',
             options: {
                 sourceMap: options.sourceMap,
@@ -84,8 +84,12 @@ exports.cssLoaders = function (options, useCssModule) {
     return {
         css: generateLoaders(),
         postcss: generateLoaders(),
-        less: generateLoaders('less'),
-        sass: generateLoaders('sass'),
+        less: generateLoaders('less', {
+            javascriptEnabled: true
+        }),
+        sass: generateLoaders('sass', {
+            indentedSyntax: true
+        }),
         scss: generateLoaders('sass'),
         stylus: generateLoaders('stylus'),
         styl: generateLoaders('stylus')
@@ -94,11 +98,11 @@ exports.cssLoaders = function (options, useCssModule) {
 
 exports.styleLoaders = function (options) {
     const output = [];
-    const cssModuleLoaders = exports.cssLoaders(options);
-    const noCssModuleLoaders = exports.cssLoaders(options, false);
+    const cssModulesLoaders = exports.cssLoaders(options);
+    const noCssModulesloaders = exports.cssLoaders(options, false);
 
-    for (const extension in cssModuleLoaders) {
-        const loader = cssModuleLoaders[extension];
+    for (const extension in cssModulesLoaders) {
+        const loader = cssModulesLoaders[extension];
         output.push({
             test: new RegExp('\\.' + extension + '$'),
             use: loader,
@@ -106,15 +110,14 @@ exports.styleLoaders = function (options) {
         })
     }
 
-    for (const extension in noCssModuleLoaders) {
-        const loader = noCssModuleLoaders[extension];
+    for (const extension in noCssModulesloaders) {
+        const loader = noCssModulesloaders[extension];
         output.push({
             test: new RegExp('\\.' + extension + '$'),
             use: loader,
             include: /node_modules/
         })
     }
-
 
     return output
 };

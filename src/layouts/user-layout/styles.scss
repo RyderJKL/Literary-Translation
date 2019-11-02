@@ -4,15 +4,16 @@
     height: 100vh;
     overflow: auto;
     border: 1px solid red;
+
+    .header {
+        height: 44px;
+        line-height: 44px;
+    }
+
+    .content {
+        flex: 1;
+        padding: 32px 0;
+    }
 }
 
-.header {
-    height: 44px;
-    line-height: 44px;
-}
-
-.content {
-    flex: 1;
-    padding: 32px 0;
-}
 

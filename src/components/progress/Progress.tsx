@@ -1,6 +1,6 @@
 /* tslint:disable */
 import * as React from 'react';
-import * as styles from './style.scss';
+import styles from './style.scss';
 
 // export enum ProgressType {
 //     line = 'line',

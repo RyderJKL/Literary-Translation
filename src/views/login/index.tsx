@@ -18,7 +18,7 @@ import { useEventCallback } from 'rxjs-hooks';
 import UserLogin from './components';
 import { fetchLogin } from './services';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
-import * as styles from './styles.scss';
+import styles from './styles.scss';
 
 const Login: React.FC = () => {
     useDocumentTitle('登录页-Lego-Pro');
