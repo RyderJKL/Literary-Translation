@@ -1,12 +1,12 @@
 import * as React from 'react';
 import useStore from '@/hooks/use-store';
-// import request$ from '@/utils/request';
+import { getUser } from '@/services/user';
+
 import { useEventCallback } from 'rxjs-hooks';
 import { Observable, EMPTY } from 'rxjs';
-import { getUser } from '@/services/user';
-import Button from 'lego-ui/dist/lib/button';
-
 import { map, filter, switchMap, debounceTime, distinctUntilChanged, catchError, retry } from 'rxjs/operators';
+
+import { Button } from 'lego-ui';
 
 export interface IGitHubProps {
     name: string;

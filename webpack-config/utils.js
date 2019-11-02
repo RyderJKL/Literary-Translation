@@ -13,7 +13,7 @@ exports.assetsPath = function (_path) {
     return path.posix.join(assetsSubDirectory, _path);
 };
 
-exports.cssLoaders = function (options) {
+exports.cssLoaders = function (options, useCssModule) {
     options = options || {};
 
     const styleLoader = {
@@ -23,14 +23,25 @@ exports.cssLoaders = function (options) {
         }
     };
 
-    const cssLoader = {
-        loader: 'css-loader',
-        // options: {
-        //     sourceMap: options.sourceMap,
-        //     modules: true,
-        //     importLoaders: 2,
-        //     localIdentName: '[name]-[local]-[hash:base64:5]'
-        // }
+    const cssLoader = () => {
+        if (useCssModule) {
+           return {
+               loader: 'css-loader',
+               options: {
+                   sourceMap: options.sourceMap,
+                   modules: true,
+                   importLoaders: 2,
+                   localIdentName: '[name]-[local]-[hash:base64:5]'
+               }
+           }
+        }
+
+        return  {
+            loader: 'css-loader',
+            options: {
+                sourceMap: options.sourceMap,
+            }
+        }
     };
 
     const postcssLoader = {
@@ -52,7 +63,7 @@ exports.cssLoaders = function (options) {
             loaders.push(styleLoader)
         }
 
-        loaders.push(cssLoader);
+        loaders.push(cssLoader());
 
         if (options.usePostCSS) {
             loaders.push(postcssLoader)
@@ -74,19 +85,8 @@ exports.cssLoaders = function (options) {
         css: generateLoaders(),
         postcss: generateLoaders(),
         less: generateLoaders('less'),
-        sass: generateLoaders('sass', {
-            indentedSyntax: true,
-            sourceMap: options.sourceMap,
-            modules: true,
-            importLoaders: 2,
-            localIdentName: '[name]-[local]-[hash:base64:5]'
-        }),
-        scss: generateLoaders('sass', {
-            sourceMap: options.sourceMap,
-            modules: true,
-            importLoaders: 2,
-            localIdentName: '[name]-[local]-[hash:base64:5]'
-        }),
+        sass: generateLoaders('sass'),
+        scss: generateLoaders('sass'),
         stylus: generateLoaders('stylus'),
         styl: generateLoaders('stylus')
     }
@@ -94,15 +94,27 @@ exports.cssLoaders = function (options) {
 
 exports.styleLoaders = function (options) {
     const output = [];
-    const loaders = exports.cssLoaders(options);
+    const cssModuleLoaders = exports.cssLoaders(options);
+    const noCssModuleLoaders = exports.cssLoaders(options, false);
 
-    for (const extension in loaders) {
-        const loader = loaders[extension];
+    for (const extension in cssModuleLoaders) {
+        const loader = cssModuleLoaders[extension];
         output.push({
             test: new RegExp('\\.' + extension + '$'),
-            use: loader
+            use: loader,
+            exclude: /node_modules/
         })
     }
+
+    for (const extension in noCssModuleLoaders) {
+        const loader = noCssModuleLoaders[extension];
+        output.push({
+            test: new RegExp('\\.' + extension + '$'),
+            use: loader,
+            include: /node_modules/
+        })
+    }
+
 
     return output
 };

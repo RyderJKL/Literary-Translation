@@ -2,10 +2,12 @@ import * as React from 'react';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
 import useStore from '@/hooks/use-store';
 import { getMenusData } from './components/side-bar/utils';
-import SideBar from './components/side-bar';
-import BreadCrumbs from './components/bread-crumbs';
+
 import Container from 'lego-ui/dist/lib/container';
 import Layout from 'lego-ui/dist/lib/layout';
+
+import SideBar from './components/side-bar';
+import BreadCrumbs from './components/bread-crumbs';
 
 // import Exception from '@/components/exception';
 
@@ -23,9 +25,9 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route }) => {
         isLogin: store.auth.isLogin
     }));
 
-    if (!isLogin) {
-        return <Redirect to={'/user/login'} />;
-    }
+    // if (!isLogin) {
+    //     return <Redirect to={'/user/login'} />;
+    // }
 
     const menusData = getMenusData(route.routes);
 

@@ -1,8 +1,7 @@
 import * as React from 'react';
 
-import Form, { CreateFormProps } from 'lego-ui/dist/lib/form';
-import Input from 'lego-ui/dist/lib/Input';
-import Button from 'lego-ui/dist/lib/Button';
+import { Form, Input, Button } from 'lego-ui';
+import { CreateFormProps } from 'lego-ui/dist/lib/form'
 
 export interface LoginProps {
     defaultActiveKey?: string;
@@ -27,7 +26,7 @@ const UserLogin: React.FC<LoginProps> = (props: LoginProps) => {
     return (
         <Form>
             <Form.Item required={true} label='账号'>
-                <Validator name='name' rule={[{ min: 3, message: '姓名最少3个字' }]}>
+                <Validator name='name' rules={[{ min: 3, message: '姓名最少3个字' }]}>
                     <Input type='text' />
                 </Validator>
             </Form.Item>

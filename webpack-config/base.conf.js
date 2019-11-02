@@ -1,6 +1,6 @@
 const path = require('path');
 const config = require('./config');
-
+// const tsImportPluginFactory = require('ts-import-plugin');
 const resolve = (dir) => path.resolve(__dirname, '..', dir);
 
 module.exports = {
@@ -31,7 +31,31 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: ['awesome-typescript-loader'],
+                loader: 'awesome-typescript-loader',
+                // options: {
+                //     getCustomTransformers: () => ({
+                //         before: [
+                //             tsImportPluginFactory([
+                //                 // {
+                //                 //     libraryName: 'lego',
+                //                 //     libraryDirectory: 'lib',
+                //                 //     style: true
+                //                 // },
+                //                 {
+                //                     libraryDirectory: '../_esm5/internal/operators',
+                //                     libraryName: 'rxjs/operators',
+                //                     camel2DashComponentName: false,
+                //                     transformToDefaultImport: false
+                //                 },
+                //                 {
+                //                     libraryDirectory: '../_esm5/internal/observable',
+                //                     libraryName: 'rxjs',
+                //                     camel2DashComponentName: false,
+                //                     transformToDefaultImport: false,
+                //                 }
+                //             ])]
+                //     }),
+                // },
                 exclude: /node_modules/,
             },
             {
