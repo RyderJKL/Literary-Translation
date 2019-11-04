@@ -1,6 +1,7 @@
-import { Observable, throwError as _throw } from 'rxjs';
+import { Observable } from 'rxjs';
 import { mergeMap, finalize, catchError, delay } from 'rxjs/operators';
 import { Rjax, HttpResponse, HttpErrorResponse } from 'rjax';
+import { $message } from 'lego-ui';
 
 const baseURL = process.env.BASE_API;
 const isDevelopment = process.env.NODE_ENV === 'development';
@@ -12,10 +13,11 @@ const errorHandler = (response: HttpErrorResponse) => {
     const errorText = codeMessage[response.status] || response.statusText;
     const { status, url } = response;
     console.error(`请求错误: ${errorText}:: ${status}: ${url}`);
-    // notification.error({
-    //     message: `请求错误 ${status}: ${url}`,
-    //     description: errorText,
-    // });
+
+    $message({
+        content: errorText,
+        type: 'error'
+    });
 };
 
 const fabricationRequest = req => {
@@ -70,7 +72,7 @@ class CustomInterceptor {
                 return new Observable(observer => observer.next(event));
             }),
             catchError(res => {
-                console.log('errror at request')
+                console.log('errror at request');
                 errorHandler(res);
                 // 将错误信息抛给下个拦截器或者请求调用方
                 return new Observable(observer => observer.error(res));

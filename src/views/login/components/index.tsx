@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { Form, Input, Button } from 'lego-ui';
 import { CreateFormProps } from 'lego-ui/dist/lib/form'
+import style from './style.scss';
 
 export interface LoginProps {
     defaultActiveKey?: string;
@@ -19,18 +20,26 @@ const UserLogin: React.FC<LoginProps> = (props: LoginProps) => {
 
     const verifyForm = () => {
         verify((error, values) => {
-            console.log(error, values);
+            if (error) {
+                console.log(error, values);
+                return;
+            }
         });
     };
 
     return (
         <Form>
-            <Form.Item required={true} label='账号'>
-                <Validator name='name' rules={[{ min: 3, message: '姓名最少3个字' }]}>
+            <Form.Item required={true} label={'用户名'}>
+                <Validator name='name' rules={[{ required: true, message: '请输入用户名' }]}>
                     <Input type='text' />
                 </Validator>
             </Form.Item>
-            <Button onClick={verifyForm}>登录</Button>
+            <Form.Item required={true} label={'密码'}>
+                <Validator name='password' rules={[{ min: 3, message: '请输入密码' }]}>
+                    <Input type='text' />
+                </Validator>
+            </Form.Item>
+            <Button className={style.loginSubmitButton} onClick={verifyForm} type={'primary'}>登录</Button>
         </Form>
     );
 };

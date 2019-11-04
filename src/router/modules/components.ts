@@ -4,7 +4,7 @@ import NotFound from '@/components/not-found/NotFound';
 
 export const components: IRoute = {
     path: '/components',
-    name: 'components',
+    name: '组件',
     component: Loadable({
         loader: () => import('@/views/components/Components'),
         loading() {
@@ -18,7 +18,7 @@ export const components: IRoute = {
         },
         {
             path: '/components/progress',
-            name: 'progress',
+            name: '进度条',
             exact: true,
             component: Loadable({
                 loader: () => import('@/components/progress/Progress'),
@@ -29,7 +29,7 @@ export const components: IRoute = {
         },
         {
             path: '/components/dynamic/:id',
-            name: 'dynamicProgress',
+            name: '动态进度条',
             hiddenInMenu: true,
             exact: true,
             component: Loadable({

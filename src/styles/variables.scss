@@ -1,25 +1,4 @@
-/**
- *  Define scss global variables here.
- *  //自定义变量 供组件scss文件复用变量
- *  Available options for Bootstrap:
- *  http://getbootstrap.com/customize/
- * https://github.com/twbs/bootstrap-sass/blob/master/assets/stylesheets/bootstrap/_variables.scss
- */
+// import lego-ui themes variables
+@import '~lego-ui/dist/lib/styles/variables';
 
-/**
- * Color
- */
-$gray-base: #d9d9d9;
-$danger-info: #be4439;
-$gray-light: #c2c2c2;
-$text-base: #333;
-$text-light: #666;
-$text-lighter: #999;
-$text-base-link: #3A84AA;
-$text-key: #ee5f3b;
 
-/**
- * 2017-4-14 统一icon颜色
- */
- $icon-color: #666;
- $icon-color-black: #999;

@@ -2,28 +2,35 @@ import * as React from 'react';
 import { IMenuItem } from '@/typings';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { getSelectedMenusKey } from './utils';
-import userStore from '@/hooks/use-store';
-import Menu from 'lego-ui/dist/lib/menu';
 
-// import { toJS } from 'mobx';
+import classNames from 'classnames';
+
+// import userStore from '@/hooks/use-store';
+
+import { Layout, Menu } from 'lego-ui';
+import { preClass } from 'lego-ui/dist/lib/utils/namespace';
+
+import { MenuProps } from 'lego-ui/dist/lib/menu';
+
+import styles from './side-bar.scss';
 
 const { Submenu, Item } = Menu;
 
 export interface ISideBarProps extends RouteComponentProps {
+    collapse: boolean;
+    theme: MenuProps['theme'];
     menusData: IMenuItem[];
     defaultSelectedMenuKeys?: string;
     defaultOpenMenuKeys?: string;
 }
 
-const Sidebar: React.FC<ISideBarProps> = ({ menusData, history }) => {
+const Sidebar: React.FC<ISideBarProps> = ({ menusData, history, collapse, theme }) => {
     const [activeMenuIndex, setActiveMenuIndex] = React.useState<string>('home');
 
-    const { menuCollapse } = userStore(store => ({
-        menuCollapse: store.UI.menuCollapse
-    }));
-
     function handleHighlightCurrentPath() {
-        const { location: { pathname } } = history;
+        const {
+            location: { pathname }
+        } = history;
 
         const menuKeys = getSelectedMenusKey(menusData, pathname);
         const currentActive = menuKeys.pop();
@@ -50,19 +57,23 @@ const Sidebar: React.FC<ISideBarProps> = ({ menusData, history }) => {
 
             return (
                 <Item index={menuItem.path} key={index}>
-                    <Link to={menuItem.path}>
-                        {menuItem.name}
-                    </Link>
+                    <Link to={menuItem.path}>{menuItem.name}</Link>
                 </Item>
             );
         });
 
+    const sidebarCls = classNames({
+        [styles[preClass(`pro-side-${theme}`)]]: true,
+        [styles.sidebarContainer]: true
+    });
+
     return (
-        <div>
-            <Menu collapse={menuCollapse} mode='vertical' theme='dark' activeIndex={activeMenuIndex}>
+        <Layout.Aside collapse={collapse} className={sidebarCls}>
+            <header className={styles.sideBarHeader}>header</header>
+            <Menu collapse={collapse} mode='vertical' theme={theme} accordion={false} activeIndex={activeMenuIndex}>
                 {renderMenus(menusData)}
             </Menu>
-        </div>
+        </Layout.Aside>
     );
 };
 

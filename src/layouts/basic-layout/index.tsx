@@ -3,15 +3,15 @@ import { Redirect, RouteComponentProps } from 'react-router-dom';
 import useStore from '@/hooks/use-store';
 import { getMenusData } from './components/side-bar/utils';
 
-import Container from 'lego-ui/dist/lib/container';
-import Layout from 'lego-ui/dist/lib/layout';
+import { Layout, Button, Icon } from 'lego-ui';
 
 import SideBar from './components/side-bar';
 import BreadCrumbs from './components/bread-crumbs';
 
-// import Exception from '@/components/exception';
-
 import { IRoute } from '@/typings';
+import themeDefaultSettings from '@/theme/default-settings';
+
+// import Exception from '@/components/exception';
 
 // import { toJS } from 'mobx';
 
@@ -20,11 +20,13 @@ export interface IBasicLayoutProps extends RouteComponentProps {
 }
 
 const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route }) => {
-    const { changeMenuCollapse, isLogin } = useStore(store => ({
-        changeMenuCollapse: store.UI.toggleMenuCollapse,
-        isLogin: store.auth.isLogin
+    const { sidebarCollapse, changeSidebarCollapse, isLogin } = useStore(store => ({
+        changeSidebarCollapse: store.UI.toggleSidebarCollapse,
+        isLogin: store.auth.isLogin,
+        sidebarCollapse: store.UI.sidebarCollapse
     }));
 
+    const settings = themeDefaultSettings;
     // if (!isLogin) {
     //     return <Redirect to={'/user/login'} />;
     // }
@@ -32,21 +34,25 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route }) => {
     const menusData = getMenusData(route.routes);
 
     return (
-        <Container>
+        <Layout withAside={true}>
+            <SideBar
+                menusData={menusData}
+                collapse={sidebarCollapse}
+                theme={settings.navTheme}
+            />
             <Layout>
-                <Layout.Aside>
-                    <SideBar menusData={menusData} />
-                </Layout.Aside>
+                <Layout.Header>
+                    <Button onClick={changeSidebarCollapse}>
+                        <Icon key={'arrow-left-double'} />
+                    </Button>
+                </Layout.Header>
                 <Layout.Content>
-                    <Layout.Header>
-                        <BreadCrumbs menusData={menusData} />
-                        <button onClick={changeMenuCollapse}>toggle menu collapse</button>
-                    </Layout.Header>
-                    <Layout.Content>{children}</Layout.Content>
-                    <Layout.Footer>footer</Layout.Footer>
+                    <BreadCrumbs menusData={menusData} />
+                    {children}
                 </Layout.Content>
+                <Layout.Footer>footer</Layout.Footer>
             </Layout>
-        </Container>
+        </Layout>
     );
 };
 

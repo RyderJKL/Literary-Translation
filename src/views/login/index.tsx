@@ -59,11 +59,9 @@ const Login: React.FC = () => {
     );
 
     return (
-        <div className={styles.container}>
+        <div className={styles.loginContainer}>
             {/*{loading && 'loading'}*/}
-            fuck denglu
-            <button onClick={handleLogin}>登录</button>
-            <span>result {result}</span>
+            {/*<button onClick={handleLogin}>登录</button>*/}
             <UserLogin />
         </div>
     );

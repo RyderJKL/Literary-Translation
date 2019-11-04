@@ -1,0 +1,43 @@
+@import '~lego-ui/dist/lib/styles/variables';
+
+$navHeaderHeight: 64px;
+
+$side-prefix-cls: #{$prefix}pro-side;
+
+@mixin sidebar-theme-light ($bg-color) {
+    background-color: $bg-color;
+}
+
+@mixin sidebar-theme-dark ($bg-color) {
+    background-color: $bg-color;
+}
+
+@mixin sidebar-theme-primary ($bg-color) {
+    background-color: $bg-color;
+}
+
+.#{$side-prefix-cls}-light {
+    @include sidebar-theme-light($background-color-light)
+}
+
+.#{$side-prefix-cls}-dark {
+    @include sidebar-theme-dark($dark-background-color)
+}
+
+.#{$side-prefix-cls}-primary {
+    @include sidebar-theme-primary($primary-color)
+}
+
+.sidebarContainer {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.sideBarHeader {
+    height: $navHeaderHeight;
+}
+
+.sidebarMenuContainer {
+    height: 100vh;
+}
+

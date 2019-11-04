@@ -17,7 +17,7 @@ export const commonRoute: IRoute = {
     routes: [
         {
             path: '/user/login',
-            name: '登录页',
+            name: '登录',
             component: Loadable({
                 loader: () => import('@/views/login'),
                 loading() {
@@ -51,7 +51,7 @@ export const authorityRoute: IRoute = {
         },
         {
             path: '/home',
-            name: 'home',
+            name: '首页',
             meta: {
                 roles: [Roles.admin]
             },
@@ -64,7 +64,7 @@ export const authorityRoute: IRoute = {
         },
         {
             path: '/dashboard',
-            name: 'dashboard',
+            name: '监控页',
             component: Loadable({
                 loader: () => import('@/views/dashboard/Dashboard'),
                 loading() {

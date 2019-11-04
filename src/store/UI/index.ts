@@ -1,15 +1,15 @@
 import { observable, action } from 'mobx';
 
 export class UIStore {
-    @observable public menuCollapse: boolean;
+    @observable public sidebarCollapse: boolean;
 
     constructor () {
-        this.menuCollapse = false;
+        this.sidebarCollapse = false;
     }
 
     @action.bound
-    public toggleMenuCollapse () {
-        this.menuCollapse = !this.menuCollapse;
+    public toggleSidebarCollapse () {
+        this.sidebarCollapse = !this.sidebarCollapse;
     }
 }
 
