@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { RouterViewers } from '@/router/router';
-import 'lego-ui/dist/lego-ui.css';
+
+import useDocumentTitle from '@/hooks/useDocumentTitle'
 
 const App: React.FC = () => {
+    useDocumentTitle('');
     // const renderDevTool = () => {
     //     if (process.env.NODE_ENV !== 'production') {
     //         // tslint:disable-next-line:no-implicit-dependencies

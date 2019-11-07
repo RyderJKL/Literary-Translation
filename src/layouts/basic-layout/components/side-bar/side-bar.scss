@@ -4,40 +4,51 @@ $navHeaderHeight: 64px;
 
 $side-prefix-cls: #{$prefix}pro-side;
 
-@mixin sidebar-theme-light ($bg-color) {
+@mixin sidebarThemeLight ($bg-color) {
     background-color: $bg-color;
 }
 
-@mixin sidebar-theme-dark ($bg-color) {
+@mixin sidebarThemeDark ($bg-color) {
     background-color: $bg-color;
 }
 
-@mixin sidebar-theme-primary ($bg-color) {
+@mixin sidebarThemePrimary ($bg-color) {
     background-color: $bg-color;
 }
 
-.#{$side-prefix-cls}-light {
-    @include sidebar-theme-light($background-color-light)
+.legoProSidebarLight {
+    @include sidebarThemeLight($background-color-light)
 }
 
-.#{$side-prefix-cls}-dark {
-    @include sidebar-theme-dark($dark-background-color)
+.legoProSidebarDark {
+    @include sidebarThemeDark($dark-background-color)
 }
 
-.#{$side-prefix-cls}-primary {
-    @include sidebar-theme-primary($primary-color)
+.legoProSidebarPrimary {
+    @include sidebarThemePrimary($primary-color)
 }
 
-.sidebarContainer {
-    height: 100vh;
+.legoProSidebarContainer {
+    min-height: 100vh;
+}
+
+.legoProSidebarLogo {
+    position: relative;
     overflow: hidden;
-}
-
-.sideBarHeader {
+    color: $text-color-base;
     height: $navHeaderHeight;
+    line-height: 40px;
+    padding-left: 20px;
 }
 
-.sidebarMenuContainer {
-    height: 100vh;
+.legoProSidebarLogoIcon {
+    max-width: 32px;
+    vertical-align: middle
 }
+
+.legoProSidebarLogoTitle {
+    display: inline-block;
+    margin: 0 0 0 12px;
+}
+
 

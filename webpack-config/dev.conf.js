@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge')
 const config = require('./config');
 const webpackBaseConfig = require('./base.conf');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const portfinder = require('portfinder');
@@ -50,12 +51,19 @@ const devWebpackConfig = merge(webpackBaseConfig, {
             filename: 'index.html',
             template: 'src/index.html',
             inject: true,
-            // favicon: resolve('favicon.ico'),
-            title: 'lego-ui-admin-pro',
+            favicon: resolve(config.siteSettings.favicon),
+            title: config.siteSettings.title,
             templateParameters: {
                 BASE_URL: config.dev.assetsPublicPath + config.dev.assetsSubDirectory,
             },
-        })
+        }),
+        new CopyWebpackPlugin([
+            {
+                from: path.resolve(__dirname, '../static'),
+                to: config.dev.assetsSubDirectory,
+                ignore: ['.*']
+            }
+        ])
     ]
 });
 

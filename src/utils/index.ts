@@ -10,18 +10,22 @@ export function omit<T extends object, K extends keyof T>(target: T, ...omitKeys
     );
 }
 
-export function param2Obj (url: string) {
+export function param2Obj(url: string) {
     const search = url.split('?')[1];
     if (!search) {
-    return {}
+        return {};
     }
-return JSON.parse(
-    '{"' +
-    decodeURIComponent(search)
-        .replace(/"/g, '\\"')
-        .replace(/&/g, '","')
-        .replace(/=/g, '":"')
-        .replace(/\+/g, ' ') +
-    '"}'
-)
+    return JSON.parse(
+        '{"' +
+            decodeURIComponent(search)
+                .replace(/"/g, '\\"')
+                .replace(/&/g, '","')
+                .replace(/=/g, '":"')
+                .replace(/\+/g, ' ') +
+            '"}'
+    );
+}
+
+export function capitalizeFirstLetter(word: string): string {
+    return `${word.substr(0, 1).toUpperCase()}${word.substr(1, word.length)}`
 }

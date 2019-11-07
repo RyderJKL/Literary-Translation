@@ -1,30 +1,36 @@
 import * as React from 'react';
 import { IMenuItem } from '@/typings';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import { getSelectedMenusKey } from './utils';
-
-import classNames from 'classnames';
-
-// import userStore from '@/hooks/use-store';
-
-import { Layout, Menu } from 'lego-ui';
-import { preClass } from 'lego-ui/dist/lib/utils/namespace';
-
 import { MenuProps } from 'lego-ui/dist/lib/menu';
 
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { getSelectedMenusKey } from './utils';
+import { capitalizeFirstLetter } from '@/utils';
+
+import { Layout, Menu } from 'lego-ui';
+
+import classNames from 'classnames';
 import styles from './side-bar.scss';
 
 const { Submenu, Item } = Menu;
 
-export interface ISideBarProps extends RouteComponentProps {
+export interface SideBarProps extends RouteComponentProps {
     collapse: boolean;
     theme: MenuProps['theme'];
     menusData: IMenuItem[];
     defaultSelectedMenuKeys?: string;
     defaultOpenMenuKeys?: string;
+    logo?: string;
+    title?: string;
 }
 
-const Sidebar: React.FC<ISideBarProps> = ({ menusData, history, collapse, theme }) => {
+const Sidebar: React.FC<SideBarProps> = ({
+    menusData,
+    history,
+    collapse,
+    theme,
+    logo = '/static/icons-svg/logo.svg',
+    title = 'lego-pro'
+}) => {
     const [activeMenuIndex, setActiveMenuIndex] = React.useState<string>('home');
 
     function handleHighlightCurrentPath() {
@@ -63,13 +69,18 @@ const Sidebar: React.FC<ISideBarProps> = ({ menusData, history, collapse, theme 
         });
 
     const sidebarCls = classNames({
-        [styles[preClass(`pro-side-${theme}`)]]: true,
-        [styles.sidebarContainer]: true
+        [styles[`legoProSidebar${capitalizeFirstLetter(theme)}`]]: true,
+        [styles.legoProSidebarContainer]: true
     });
 
     return (
         <Layout.Aside collapse={collapse} className={sidebarCls}>
-            <header className={styles.sideBarHeader}>header</header>
+            <div className={styles.legoProSidebarLogo}>
+                <a href='/'>
+                    <img className={styles.legoProSidebarLogoIcon} src={logo} alt='logo' />
+                    {/*<h1 className={styles.legoProSidebarLogoTitle}>{title}</h1>*/}
+                </a>
+            </div>
             <Menu collapse={collapse} mode='vertical' theme={theme} accordion={false} activeIndex={activeMenuIndex}>
                 {renderMenus(menusData)}
             </Menu>

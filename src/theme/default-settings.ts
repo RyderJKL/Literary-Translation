@@ -12,7 +12,6 @@ export interface DefaultSettings {
     fixedHeader: boolean;
     autoHideHeader: boolean;
     fixSidebar: boolean;
-    title: string;
 }
 
 const theme: DefaultSettings = {
@@ -23,7 +22,6 @@ const theme: DefaultSettings = {
     fixedHeader: false,
     autoHideHeader: false,
     fixSidebar: false,
-    title: 'lego Pro'
 };
 
 export default theme;

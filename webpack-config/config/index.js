@@ -2,16 +2,19 @@
 
 const path = require('path');
 
-const mock_port = 9528;
-
 module.exports = {
+    siteSettings: {
+        title: 'lego-pro',
+        // 相对于项目根目录
+        favicon: 'favicon.ico'
+    },
     dev: {
         // Paths
-        assetsSubDirectory: 'static',
         assetsPublicPath: '/',
+        assetsSubDirectory: 'static',
         proxyTable: {
             '/api': {
-                target: `http://localhost:${mock_port}/`
+                target: `http://localhost/`
             },
         },
 

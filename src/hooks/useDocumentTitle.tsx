@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 
 export default function useDocumentTitle(title: string) {
     useEffect(() => {
-        document.title = title;
+        document.title = title ? title : process.env.APP_TITLE;
+
         return () => {
-            document.title = 'lego-ui-admin-pro';
+            document.title = process.env.APP_TITLE;
         };
     }, [title]);
 }
