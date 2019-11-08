@@ -62,7 +62,7 @@ const Login: React.FC = () => {
         <div className={styles.loginContainer}>
             {/*{loading && 'loading'}*/}
             {/*<button onClick={handleLogin}>登录</button>*/}
-            <UserLogin />
+            <UserLogin onSubmit={handleLogin} />
         </div>
     );
 };

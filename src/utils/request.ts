@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { mergeMap, finalize, catchError, delay } from 'rxjs/operators';
 import { Rjax, HttpResponse, HttpErrorResponse } from 'rjax';
-import { $message } from 'lego-ui';
+import { Message } from 'lego-ui';
 
 const baseURL = process.env.BASE_API;
 const isDevelopment = process.env.NODE_ENV === 'development';
@@ -14,7 +14,7 @@ const errorHandler = (response: HttpErrorResponse) => {
     const { status, url } = response;
     console.error(`请求错误: ${errorText}:: ${status}: ${url}`);
 
-    $message({
+    Message.$message({
         content: errorText,
         type: 'error'
     });

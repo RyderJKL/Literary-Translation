@@ -9,7 +9,7 @@
 clone 项目：
 
 ```bash
-git clone
+git clone git@172.22.1.88:fe/lego-ui-admin-pro.git
 
 cd lego-ui-admin-pro
 
@@ -36,30 +36,3 @@ yarn dev
 * "rxjs-hooks": "0.4.3"
 * "webpack": "4.31.0"
 * "typescript": "3.4.5"
-
-## Roadmap
-
-### 技术栈选型
-
-### 鉴权
-
-#### 登录鉴权
-
-#### 路由鉴权
-
-[] 根据 `role` 信息动态生成路由；
-
-### 系统级别页眉
-
-[] 系统设置
-[] 个人设置
-[] 通知机制
-
-### 页面级别页眉
-
-[] 面包屑
-[] 页面 Title
-
-### Dashboard 模块
-
-### 主题配置
