@@ -4,7 +4,7 @@ import { MenuProps } from 'lego-ui/dist/lib/menu';
 
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { getSelectedMenusKey } from './utils';
-import { capitalizeFirstLetter } from '@/utils';
+import upperFirst from '@/utils/string/upper-first';
 
 import { Layout, Menu } from 'lego-ui';
 
@@ -69,7 +69,7 @@ const Sidebar: React.FC<SideBarProps> = ({
         });
 
     const sidebarCls = classNames({
-        [styles[`legoProSidebar${capitalizeFirstLetter(theme)}`]]: true,
+        [styles[`legoProSidebar${upperFirst(theme)}`]]: true,
         [styles.legoProSidebarContainer]: true
     });
 
