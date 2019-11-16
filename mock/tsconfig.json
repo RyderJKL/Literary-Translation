@@ -2,7 +2,8 @@
     "compilerOptions": {
         // 支持 import .json 文件
         "resolveJsonModule": true,
-        // esModuleInterop": true,
+        // 允许在 common.js 模块中使用 es6 模块的导入规则
+        "esModuleInterop": true,
         // 用实验性的装饰器特性
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
@@ -11,24 +12,23 @@
             "dom",
             "es7"
         ],
-        "baseUrl": ".",
+        "baseUrl": "../",
         "paths": {
             "@/*": ["./src/*"]
         },
         "skipLibCheck": true,
-        "module": "ESNext",
+        "module": "commonjs",
         "moduleResolution": "node",
         "noResolve": false,
         "noImplicitAny": false,
         "removeComments": true,
         "sourceMap": true,
         "allowJs": false,
-        "jsx": "react",
         "declaration": true,
         // 编译后的 types 目录
         "declarationDir": "./dist/typings",
         // 自定义的 types 目录
-        "typeRoots": ["./types", "./node_modules/@types"]
+        "typeRoots": ["../node_modules/@types"]
     },
     "skipLibCheck": true,
     "exclude": [

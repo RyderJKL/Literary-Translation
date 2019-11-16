@@ -12,7 +12,7 @@ if (!commitRE.test(msg)) {
             chalk.red(`  Proper commit message format is required for automated changelog generation. Examples:\n\n`) +
             `    ${chalk.green(`feat(user): add 'comments' option`)}\n` +
             `    ${chalk.green(`fix(auth): handle events on blur `)}\n\n` +
-            chalk.red(`  See .github/COMMIT_CONVENTION.md for more details.\n`) +
+            chalk.red(`  See .git-doc/COMMIT_CONVENTION.md for more details.\n`) +
             chalk.red(
                 `  You can also use ${chalk.cyan(`npm run commit`)} to interactively generate a commit message.\n`
             )

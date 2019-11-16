@@ -20,6 +20,17 @@ const tokens: IToken = {
     }
 };
 
+export const useInfo = {
+    url: '/user/info',
+    type: 'get',
+    response: () => {
+        return {
+            code: 60204,
+            message: 'Account and password are incorrect.'
+        }
+    }
+};
+
 export const userLogin = {
     url: '/user/login',
     type: 'post',
@@ -42,4 +53,7 @@ export const userLogin = {
     }
 };
 
-export default  [userLogin];
+export default  [
+    userLogin,
+    useInfo
+];

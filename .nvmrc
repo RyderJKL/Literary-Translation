@@ -1,5 +1,1 @@
-script
-src/lib
-static
-build
-src/versions-info/feature
+v9.6.0
