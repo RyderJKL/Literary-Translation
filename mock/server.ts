@@ -24,7 +24,7 @@ const spinner = Ora(chalkInfo('稍安勿躁，mock 服务正在启动中\n')).st
 spinner.color = 'yellow';
 spinner.spinner = 'dots';
 
-const apiPrefix = '/api';
+const apiPrefix = '/mock-api/v1';
 const mockSeverPort = 8123;
 const mockURL = terminalLink('访问地址是：', `http://localhost:${mockSeverPort}`);
 

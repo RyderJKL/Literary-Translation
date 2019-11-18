@@ -1,6 +1,8 @@
 'use strict';
-
 const path = require('path');
+// const devConfig = require('./dev.env');
+
+const MOCK_PORT = 8123;
 
 module.exports = {
     siteSettings: {
@@ -16,6 +18,9 @@ module.exports = {
             '/api': {
                 target: `http://localhost/`
             },
+            '/mock-api/v1': {
+                target: `http://localhost:${MOCK_PORT}`,
+            }
         },
 
         // Various Dev Server settings

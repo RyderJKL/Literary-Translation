@@ -1,6 +1,6 @@
 # Mock
 
-目前支持 [mockjs](https://github.com/nuysoft/Mock/wiki/Getting-Started)
+支持 [mockjs](https://github.com/nuysoft/Mock/wiki/Getting-Started)
 
 # Mock
 

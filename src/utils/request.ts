@@ -3,20 +3,35 @@ import { mergeMap, finalize, catchError, delay } from 'rxjs/operators';
 import { Rjax, HttpResponse, HttpErrorResponse } from 'rjax';
 import { Message } from 'lego-ui';
 
-const baseURL = process.env.BASE_API;
+const baseAPI = process.env.BASE_API;
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 /**
- * 异常处理程序
+ * network 异常处理程序
  */
-const errorHandler = (response: HttpErrorResponse) => {
-    const errorText = codeMessage[response.status] || response.statusText;
-    const { status, url } = response;
-    console.error(`请求错误: ${errorText}:: ${status}: ${url}`);
+const networkErrorHandler = (networkResponse: HttpErrorResponse): void => {
+    const errorText = codeMessage[networkResponse.status] || networkResponse.statusText;
+    const { status, url } = networkResponse;
+    console.error(`网络错误: ${errorText}:: ${status}: ${url}`);
 
     Message.$message({
         content: errorText,
-        type: 'error'
+        type: 'error',
+        key: -1
+    });
+};
+
+const businessErrorHandler = (response): void => {
+    const {
+        body: { message },
+        url
+    } = response;
+
+    console.error(`服务错误: ${message}:: ${url}`);
+    Message.$message({
+        content: message,
+        type: 'error',
+        key: -1
     });
 };
 
@@ -39,7 +54,8 @@ const fabricationRequest = req => {
 
     // 如果是在开发环境，并且该请求开启了 mock，则将该次请求处理成 mock-api
     if (isDevelopment && useMockApi) {
-        url = url.replace(`${baseURL}`, `${process.env.MOCK_API}`);
+        // "/api/user/login" => "/mock-api/v1/user/login"
+        url = url.replace(`${baseAPI}`, `${process.env.MOCK_API}`);
     }
 
     // 一定要用clone的方法进行拦截修改，为了保持请求的不可变性！！！！
@@ -62,21 +78,40 @@ class CustomInterceptor {
         const newReq = fabricationRequest(req);
         // 拦截响应
         return next.handle(newReq).pipe(
-            delay(30000),
             // tap((x) => console.log('拦截响应', x)),
             mergeMap(event => {
                 // 这里可根据后台接口约定自行判断
-                if (event instanceof HttpResponse && event.status !== 200) {
+                console.log(event, 'event');
+
+                // for network error
+                if (event instanceof HttpResponse && (event.status !== 200 || event.body.errorCode)) {
                     return new Observable(observer => observer.error(event));
                 }
+
+                // for business error
+                if (event instanceof HttpResponse) {
+                    const { body: { errorCode } } = event;
+                    if (errorCode) {
+                        return new Observable(observer => observer.error(event));
+                    }
+                }
+
                 return new Observable(observer => observer.next(event));
             }),
             catchError(res => {
-                console.log('errror at request');
-                errorHandler(res);
-                // 将错误信息抛给下个拦截器或者请求调用方
+                if (res.status !== 200) {
+                    networkErrorHandler(res);
+
+                    // 将错误信息抛给下个拦截器或者请求调用方
+                    return new Observable(observer => observer.error(res));
+                }
+
+                if (res.body.errorCode) {
+                    businessErrorHandler(res);
+                    return new Observable(observer => observer.error(res));
+                }
+
                 return new Observable(observer => observer.error(res));
-                // return _throw(res);
             }),
             finalize(() => {
                 // 无论成功或者失败都会执行
@@ -107,7 +142,7 @@ const codeMessage = {
 // 创建实例
 const request$ = new Rjax({
     // 设置请求基路径，可选
-    baseURL: '',
+    baseURL: baseAPI,
     // 设置请求超时时间，可选
     timeout: 0,
     // 是用作 xsrf token 的值的cookie的名称，默认'XSRF-TOKEN'，可选

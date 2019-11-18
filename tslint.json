@@ -4,7 +4,8 @@
         "exclude": ["node_modules", "mock"]
     },
     "rules": {
-        "no-implicit-dependencies": [true, "dev"],
+//        "no-implicit-dependencies": [true, "dev"],
+        "no-implicit-dependencies": false,
         "no-namespace": false,
         "max-classes-per-file": false,
         // https://eslint.org/docs/rules/object-curly-spacing

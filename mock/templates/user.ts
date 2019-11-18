@@ -35,16 +35,17 @@ export const userLogin = {
     url: '/user/login',
     type: 'post',
     response: (config) => {
-        const { username } = config.body;
-        const token = tokens[username];
+        const { username, password } = config.body;
 
         // mock error
-        if (!token) {
+        if (username !== 'lego' || password !== 'admin') {
             return {
-                code: 60204,
-                message: 'Account and password are incorrect.'
+                errorCode: 80001,
+                message: '用户名或者密码不正确'
             }
         }
+
+        const token = tokens[username];
 
         return {
             code: 20000,
