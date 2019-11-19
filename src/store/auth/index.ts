@@ -1,18 +1,30 @@
-import { computed } from 'mobx';
+import { action, computed, observable } from 'mobx';
+import { checkIsLogin } from './utils';
+import { AuthModel, AuthStore } from './interface';
 
-export class AuthStore {
-    public token: string;
-    public userName: string;
+export * from './interface';
 
-    constructor () {
-       this.userName = '';
+export class Auth implements AuthStore {
+    @observable public token = '';
+    @observable public username = '';
+
+    constructor() {
+        this.username = '';
+        this.token = '';
     }
 
-    @computed get isLogin () {
-        return this.userName;
+    @computed
+    public get isLogin(): boolean {
+        return checkIsLogin(this.token);
+    }
+
+    @action.bound
+    public setAuth({ username, token }: AuthModel) {
+        this.token = token;
+        this.username = username;
     }
 }
 
-const auth = new AuthStore();
+const auth = new Auth();
 
 export default auth;

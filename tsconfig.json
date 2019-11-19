@@ -16,7 +16,7 @@
             "@/*": ["./src/*"]
         },
         // 未使用的变量
-        "noUnusedLocals": true,
+//        "noUnusedLocals": true,
         "skipLibCheck": true,
         "module": "ESNext",
         "moduleResolution": "node",

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { Redirect, RouteComponentProps } from 'react-router-dom';
 import useStore from '@/hooks/use-store';
 import { getMenusData } from './components/side-bar/utils';
 
@@ -28,10 +28,9 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route }) => {
 
     const settings = themeDefaultSettings;
 
-    console.log(isLogin, 'isLogin');
-    // if (!isLogin) {
-    //     return <Redirect to={'/user/login'} />;
-    // }
+    if (!isLogin) {
+        return <Redirect to={'/user/login'} />;
+    }
 
     const menusData = getMenusData(route.routes);
 

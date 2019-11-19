@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { finalize, catchError, mergeMap } from 'rxjs/operators';
 import { Rjax, HttpResponse } from 'rjax';
 import { networkErrorHandler, businessErrorHandler } from './error-handler';
-import { requestInterceptor, extractDataFromRequest } from './utils';
+import { requestInterceptor } from './utils';
 
 // 自定义拦截器
 class CustomInterceptor {
@@ -21,8 +21,10 @@ class CustomInterceptor {
                     return new Observable(observer => observer.error(event));
                 }
 
-                return new Observable(observer =>
-                    observer.next(() => extractDataFromRequest(event as HttpResponse<any>))
+                return new Observable(
+                    observer => observer.next(event)
+                    // observer.next(extractDataFromRequest(event as HttpResponse<any>))
+                    // observer.next(extractDataFromRequest(event as HttpResponse<any>))
                 );
             }),
             catchError(res => {

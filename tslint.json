@@ -4,7 +4,8 @@
         "exclude": ["node_modules", "mock"]
     },
     "rules": {
-//        "no-implicit-dependencies": [true, "dev"],
+        // "no-implicit-dependencies": [true, "dev"],
+        "no-unused-variable": true,
         "no-implicit-dependencies": false,
         "no-namespace": false,
         "max-classes-per-file": false,

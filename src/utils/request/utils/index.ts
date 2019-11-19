@@ -41,9 +41,7 @@ export const requestInterceptor = req => {
 // 对 response 中的 data 进行提取，解压
 export const extractDataFromRequest = (response: HttpResponse<any>, rawResponse = false) => {
     if (rawResponse) { return response; }
-    console.log(response, 'response');
     const { body: data } = response;
     // todo: extract data or do something
-    console.log(data);
     return data;
 };

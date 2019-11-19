@@ -1,74 +1,89 @@
 import * as React from 'react';
-import { Observable, throwError as _throw } from 'rxjs';
-import {
-    switchMap,
-    // take,
-    map,
-    tap,
-    debounceTime,
-    // delay,
-    retry,
-    // retryWhen,
-    // finalize,
-    catchError,
-    // delayWhen
-} from 'rxjs/operators';
-import { useEventCallback } from 'rxjs-hooks';
-
+import { Redirect } from 'react-router-dom';
 import UserLogin, { ILoginState } from './components';
 import { fetchLogin } from './services';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
+import useStore from '@/hooks/use-store';
 import styles from './styles.scss';
 
-const Login: React.FC = () => {
+import { Observable, throwError as _throw, timer } from 'rxjs';
+import { switchMap, tap, debounceTime, retry, retryWhen, finalize, catchError, delayWhen } from 'rxjs/operators';
+
+import { useEventCallback } from 'rxjs-hooks';
+import { AuthModel } from '@/store/auth';
+
+import { Message } from 'lego-ui';
+
+export interface ResponseData {
+    code?: number;
+    data?: any;
+}
+
+export interface LoginSettings {
+    retryCount?: number;
+    retryDelayTime?: number;
+}
+
+const Login: React.FC<LoginSettings> = ({ retryCount = 2, retryDelayTime = 5 }: LoginSettings) => {
     useDocumentTitle('登录-Lego-Pro');
     const [loading, setLoading] = React.useState<boolean>(false);
-    // const [submitButtonDisabled, setSubmitButtonDisabled] = React.useState<boolean>(false);
+    const [submitButtonDisabled, setSubmitButtonDisabled] = React.useState<boolean>(false);
 
-    const [handleLogin, [result]] = useEventCallback(
+    const { isLogin, setAuth } = useStore(store => ({
+        isLogin: store.auth.isLogin,
+        setAuth: store.auth.setAuth
+    }));
+
+    const handleSetAuth = (authData: AuthModel) => {
+        setAuth(authData);
+    };
+
+    const [handleLogin] = useEventCallback(
         ($event: Observable<ILoginState>) =>
             $event.pipe(
                 debounceTime(500),
                 tap(() => setLoading(true)),
-                tap(value => console.log(value)),
-                switchMap((submitData) => fetchLogin(submitData)),
-                map(res => {
-                    console.log(res);
-                    return ['jack'];
+                switchMap(submitData => fetchLogin(submitData)),
+                tap((repData: ResponseData) => handleSetAuth(repData.data)),
+                finalize(() => {
+                    setLoading(false);
                 }),
-                // finalize(() => {
-                //     setLoading(false);
-                //     return [];
-                // }),
-                retry(2),
+                retry(retryCount),
                 catchError(error => {
-                    console.log('你您重试次数已经超过两次，请稍后再试');
-                    // setSubmitButtonDisabled(true);
-                    return _throw([]);
-                })
-                // retryWhen(errors =>
-                //     errors.pipe(
-                //         tap(value => console.log(`你您重试次数已经超过${value}次，请${value * 5}秒再试`)),
-                //         delayWhen(value =>
-                //             interval(1000).pipe(
-                //                 tap(spaceTime => console.log(spaceTime)),
-                //                 take(value * 5)
-                //             )
-                //         ),
-                //         tap(() => setSubmitButtonDisabled(false))
-                //     )
-                // )
+                    Message.$message({
+                        key: 1,
+                        type: 'warning',
+                        content: `您重试次数已经超过${retryCount}，请稍后再试`
+                    });
+                    setSubmitButtonDisabled(true);
+                    return _throw('错误次数超限');
+                }),
+                retryWhen(errors =>
+                    errors.pipe(
+                        tap(() => {
+                            Message.$message({
+                                key: 2,
+                                type: 'warning',
+                                content: `重试次数已经超过${retryCount}次，${retryDelayTime}后秒再试`
+                            });
+                        }),
+                        delayWhen(value => timer(1000 * retryDelayTime).pipe(tap(() => setSubmitButtonDisabled(false))))
+                    )
+                )
             ),
-        ['']
+        {}
     );
+
+    if (isLogin) {
+        return <Redirect to={'/home'} />;
+    }
 
     return (
         <div className={styles.loginContainer}>
-            <span>{result}</span>
             <UserLogin
                 onSubmit={value => handleLogin(value)}
                 submitLoading={loading}
-                // submitButtonDisabled={submitButtonDisabled}
+                submitButtonDisabled={submitButtonDisabled}
             />
         </div>
     );

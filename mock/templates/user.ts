@@ -4,6 +4,7 @@ import { postUserLogin } from '@/views/login/services/url';
 export interface IToken {
     [index: string]: {
         token: string;
+        username: string;
     };
 }
 
@@ -17,7 +18,8 @@ export interface IUser {
 
 const tokens: IToken = {
     lego: {
-        token: 'admin-token'
+        token: 'admin-token',
+        username: 'lego'
     }
 };
 
