@@ -16,7 +16,7 @@ export interface IUser {
 }
 
 const tokens: IToken = {
-    admin: {
+    lego: {
         token: 'admin-token'
     }
 };

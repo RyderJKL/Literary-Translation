@@ -1,5 +1,4 @@
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
-import React from 'react';
 import * as Loadable from 'react-loadable';
 import components from './modules/components';
 import NotFound from '@/components/not-found/NotFound';

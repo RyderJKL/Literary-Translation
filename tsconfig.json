@@ -41,7 +41,8 @@
         "webpack",
         "jest",
         "tslint:latest",
-        "tslint-config-prettier"
+        "tslint-config-prettier",
+        "mock"
     ],
     "compileOnSave": false,
     "awesomeTypescriptLoaderOptions": {

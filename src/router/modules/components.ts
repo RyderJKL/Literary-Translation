@@ -1,6 +1,6 @@
 import { IRoute } from '@/typings';
 import * as Loadable from 'react-loadable';
-import NotFound from '@/components/not-found/NotFound';
+// import NotFound from '@/components/not-found/NotFound';
 
 export const components: IRoute = {
     path: '/components',

@@ -1,68 +1,75 @@
 import * as React from 'react';
-import { Observable, interval, throwError as _throw } from 'rxjs';
+import { Observable, throwError as _throw } from 'rxjs';
 import {
     switchMap,
-    take,
+    // take,
     map,
     tap,
     debounceTime,
-    delay,
+    // delay,
     retry,
-    retryWhen,
-    finalize,
+    // retryWhen,
+    // finalize,
     catchError,
-    delayWhen
+    // delayWhen
 } from 'rxjs/operators';
 import { useEventCallback } from 'rxjs-hooks';
 
-import UserLogin from './components';
+import UserLogin, { ILoginState } from './components';
 import { fetchLogin } from './services';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import styles from './styles.scss';
 
 const Login: React.FC = () => {
-    useDocumentTitle('登录页-Lego-Pro');
+    useDocumentTitle('登录-Lego-Pro');
     const [loading, setLoading] = React.useState<boolean>(false);
+    // const [submitButtonDisabled, setSubmitButtonDisabled] = React.useState<boolean>(false);
 
     const [handleLogin, [result]] = useEventCallback(
-        ($event: Observable<React.MouseEvent<HTMLButtonElement>>) =>
+        ($event: Observable<ILoginState>) =>
             $event.pipe(
                 debounceTime(500),
                 tap(() => setLoading(true)),
-                delay(500),
-                switchMap(() => fetchLogin({ username: 'jack', password: '123' })),
+                tap(value => console.log(value)),
+                switchMap((submitData) => fetchLogin(submitData)),
                 map(res => {
                     console.log(res);
                     return ['jack'];
                 }),
-                finalize(() => {
-                    setLoading(false);
-                }),
+                // finalize(() => {
+                //     setLoading(false);
+                //     return [];
+                // }),
                 retry(2),
                 catchError(error => {
                     console.log('你您重试次数已经超过两次，请稍后再试');
-                    return _throw(2);
-                }),
-                retryWhen(errors =>
-                    errors.pipe(
-                        tap(value => console.log(`你您重试次数已经超过${value}次，请${value}秒再试`)),
-                        delayWhen(value =>
-                            interval(1000).pipe(
-                                tap(spaceTime => console.log(spaceTime)),
-                                take(value)
-                            )
-                        )
-                    )
-                )
+                    // setSubmitButtonDisabled(true);
+                    return _throw([]);
+                })
+                // retryWhen(errors =>
+                //     errors.pipe(
+                //         tap(value => console.log(`你您重试次数已经超过${value}次，请${value * 5}秒再试`)),
+                //         delayWhen(value =>
+                //             interval(1000).pipe(
+                //                 tap(spaceTime => console.log(spaceTime)),
+                //                 take(value * 5)
+                //             )
+                //         ),
+                //         tap(() => setSubmitButtonDisabled(false))
+                //     )
+                // )
             ),
-        []
+        ['']
     );
 
     return (
         <div className={styles.loginContainer}>
-            {/*{loading && 'loading'}*/}
-            {/*<button onClick={handleLogin}>登录</button>*/}
-            <UserLogin onSubmit={handleLogin} />
+            <span>{result}</span>
+            <UserLogin
+                onSubmit={value => handleLogin(value)}
+                submitLoading={loading}
+                // submitButtonDisabled={submitButtonDisabled}
+            />
         </div>
     );
 };
