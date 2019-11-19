@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
-import { mergeMap, finalize, catchError, delay } from 'rxjs/operators';
+import { mergeMap, finalize, catchError } from 'rxjs/operators';
 import { Rjax, HttpResponse, HttpErrorResponse } from 'rjax';
 import { Message } from 'lego-ui';
+import { API_PREFIX } from '@/config';
 
-const baseAPI = process.env.BASE_API;
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 /**
@@ -55,7 +55,7 @@ const fabricationRequest = req => {
     // 如果是在开发环境，并且该请求开启了 mock，则将该次请求处理成 mock-api
     if (isDevelopment && useMockApi) {
         // "/api/user/login" => "/mock-api/v1/user/login"
-        url = url.replace(`${baseAPI}`, `${process.env.MOCK_API}`);
+        url = url.replace(`${API_PREFIX}`, `${process.env.MOCK_API}`);
     }
 
     // 一定要用clone的方法进行拦截修改，为了保持请求的不可变性！！！！
@@ -81,7 +81,6 @@ class CustomInterceptor {
             // tap((x) => console.log('拦截响应', x)),
             mergeMap(event => {
                 // 这里可根据后台接口约定自行判断
-                console.log(event, 'event');
 
                 // for network error
                 if (event instanceof HttpResponse && (event.status !== 200 || event.body.errorCode)) {
@@ -142,9 +141,9 @@ const codeMessage = {
 // 创建实例
 const request$ = new Rjax({
     // 设置请求基路径，可选
-    baseURL: baseAPI,
+    baseURL: '',
     // 设置请求超时时间，可选
-    timeout: 0,
+    timeout: 100000,
     // 是用作 xsrf token 的值的cookie的名称，默认'XSRF-TOKEN'，可选
     // xsrfCookieName: 'XSRF-TOKEN',
     xsrfCookieName: '',

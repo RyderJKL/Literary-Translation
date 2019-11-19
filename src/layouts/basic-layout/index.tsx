@@ -9,7 +9,7 @@ import SideBar from './components/side-bar';
 import BreadCrumbs from './components/bread-crumbs';
 
 import { IRoute } from '@/typings';
-import themeDefaultSettings from '@/theme/default-settings';
+import themeDefaultSettings from '@/config/default-settings';
 
 // import Exception from '@/components/exception';
 

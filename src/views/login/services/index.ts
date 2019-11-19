@@ -1,4 +1,5 @@
 import $request from '@/utils/request';
+import * as urls from './url';
 
 export interface ILoginState {
     username: string;
@@ -6,5 +7,5 @@ export interface ILoginState {
 }
 
 export const fetchLogin = ({ username, password }: ILoginState) => {
-    return $request.post('/user/login', { username, password }, { params: { useMock: 'true' } });
+    return $request.post(urls.postUserLogin, { username, password }, { params: { useMock: 'true' } });
 };

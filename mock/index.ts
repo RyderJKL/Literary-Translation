@@ -10,12 +10,12 @@ import Ora from 'ora';
 
 import templates from './templates/index';
 
-const chalkError = chalk.bold.red;
+// const chalkError = chalk.bold.red;
 const chalkWarning = chalk.keyword('orange');
 const chalkSuccess = chalk.bold.green;
 const chalkInfo = chalk.bold.yellow;
 
-const stdError = msg => console.log(chalkError(msg), '\n');
+// const stdError = msg => console.log(chalkError(msg), '\n');
 const stdWarning = msg => console.log(chalkWarning(msg), '\n');
 const stdSuccess = msg => console.log(chalkSuccess(msg), '\n');
 const stdInfo = msg => console.log(chalkInfo(msg), '\n');
