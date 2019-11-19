@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import UserLogin, { ILoginState } from './components';
 import { fetchLogin } from './services';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
@@ -12,7 +12,7 @@ import { switchMap, tap, debounceTime, retry, retryWhen, finalize, catchError, d
 import { useEventCallback } from 'rxjs-hooks';
 import { AuthModel } from '@/store/auth';
 
-import { Message } from 'lego-ui';
+import { Message, Card } from 'lego-ui';
 
 export interface ResponseData {
     code?: number;
@@ -25,7 +25,7 @@ export interface LoginSettings {
 }
 
 const Login: React.FC<LoginSettings> = ({ retryCount = 2, retryDelayTime = 5 }: LoginSettings) => {
-    useDocumentTitle('登录-Lego-Pro');
+    useDocumentTitle('登录 | lego-ui AdminPro');
     const [loading, setLoading] = React.useState<boolean>(false);
     const [submitButtonDisabled, setSubmitButtonDisabled] = React.useState<boolean>(false);
 
@@ -80,11 +80,24 @@ const Login: React.FC<LoginSettings> = ({ retryCount = 2, retryDelayTime = 5 }: 
 
     return (
         <div className={styles.loginContainer}>
-            <UserLogin
-                onSubmit={value => handleLogin(value)}
-                submitLoading={loading}
-                submitButtonDisabled={submitButtonDisabled}
-            />
+            <div className={styles.loginCardWrapper}>
+                <Card className={styles.loginCard}>
+                    <div className={styles.loginHeader}>
+                        <div className={styles.logo}>
+                            <img  src={require('@/static/logo.svg')}/>
+                        </div>
+                        <h1>lego-ui AdminPro</h1>
+                    </div>
+                    <UserLogin
+                        onSubmit={value => handleLogin(value)}
+                        submitLoading={loading}
+                        submitButtonDisabled={submitButtonDisabled}
+                    />
+                    <div className={styles.loginFooter}>
+                        尚未拥有账号？<Link to='/user/register'>注册</Link>
+                    </div>
+                </Card>
+            </div>
         </div>
     );
 };

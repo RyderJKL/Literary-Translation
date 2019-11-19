@@ -13,7 +13,7 @@ module.exports = {
     dev: {
         // Paths
         assetsPublicPath: '/',
-        assetsSubDirectory: 'static',
+        // assetsSubDirectory: 'static',
         proxyTable: {
             '/api': {
                 target: `http://localhost/`

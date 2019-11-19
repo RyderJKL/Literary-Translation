@@ -1,6 +1,83 @@
+@import '~lego-ui/dist/lib/styles/variables';
+@import '~lego-ui/dist/lib/styles/mixin';
+
 .loginContainer {
-    width: 380px;
-    margin: 0 auto;
-    padding: 0 4px;
+   width: 100%;
+   height: 100vh;
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   background-color: #ebebeb;
+   background-image: url('~@/static/images/login-bg.jpg');
+   background-repeat: no-repeat;
+   background-position: left bottom;
+   background-size: 40% auto;
 }
 
+.loginCardWrapper {
+    margin: 0 0 0 40%;
+    padding: 0;
+    box-sizing: border-box;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginCard {
+    width: 420px;
+    box-shadow: 0 3px 6px 8px rgba(0, 0, 0, 0.017);
+    padding: ($base-padding * 3.2) ($base-padding * 2.6) !important;
+    margin-top: -60px !important;
+}
+
+.loginHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0 0 ($base-padding * 1.6) 0;
+    box-sizing: border-box;
+
+    .logo {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        height: 52px;
+
+        img {
+            height: 100%;
+            display: block;
+        }
+    }
+
+    h1 {
+        font-weight: 600;
+        font-size: $font-size-base + 8px;
+        color: $text-color-gray;
+        margin: 0;
+        padding: 0;
+        flex: auto;
+        text-align: center;
+        font-family: Georgia;
+        color: $text-color-base;
+        letter-spacing: 1px;
+    }
+}
+
+.loginFooter {
+    margin: 0;
+    padding: ($base-padding * 1.2) 0 0 0;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: $font-size-base;
+    color: $text-color-light;
+    text-align: center;
+
+    a {
+        @include link();
+    }
+}

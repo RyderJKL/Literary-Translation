@@ -1,4 +1,20 @@
-.loginSubmitButton {
-    display: block;
-    width: 100%;
+@import '~lego-ui/dist/lib/styles/variables';
+@import '~lego-ui/dist/lib/styles/mixin';
+
+.forgetPassword {
+    text-decoration: none;
+    @include link();
+    line-height: $io-height-base;
+    float: right;
+}
+
+.pwdVisbleBtn {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: $font-size-large;
+    color: $text-color-gray;
+    cursor: pointer;
 }

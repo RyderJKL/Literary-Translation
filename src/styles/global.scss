@@ -1,0 +1,17 @@
+@import '~lego-ui/dist/lib/styles/variables';
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: $global-font-family;
+    font-size: $font-size-base;
+    color: $text-color-gray;
+}
+
+:global(#root) {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+}

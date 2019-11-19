@@ -4,6 +4,10 @@ const config = require('./config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const packageConfig = require('../package.json');
 
+function windows2posix(themeFilePath) {
+    return path.resolve(__dirname, '../src', themeFilePath).replace(/\\/g, '/');
+}
+
 exports.assetsPath = function (_path) {
     const assetsSubDirectory =
         process.env.NODE_ENV === 'production'
@@ -88,9 +92,12 @@ exports.cssLoaders = function (options, useCssModule = true) {
             javascriptEnabled: true
         }),
         sass: generateLoaders('sass', {
-            indentedSyntax: true
+            indentedSyntax: true,
+            prependData:  `@import "${windows2posix('styles/lego-ui-theme.scss')}";`
         }),
-        scss: generateLoaders('sass'),
+        scss: generateLoaders('sass', {
+            prependData:  `@import "${windows2posix('styles/lego-ui-theme.scss')}";`
+        }),
         stylus: generateLoaders('stylus'),
         styl: generateLoaders('stylus')
     }

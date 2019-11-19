@@ -26,36 +26,15 @@ module.exports = {
                 ? config.build.assetsPublicPath
                 : config.dev.assetsPublicPath
     },
-
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
                 loader: 'awesome-typescript-loader',
-                // options: {
-                //     getCustomTransformers: () => ({
-                //         before: [
-                //             tsImportPluginFactory([
-                //                 // {
-                //                 //     libraryName: 'lego',
-                //                 //     libraryDirectory: 'lib',
-                //                 //     style: true
-                //                 // },
-                //                 {
-                //                     libraryDirectory: '../_esm5/internal/operators',
-                //                     libraryName: 'rxjs/operators',
-                //                     camel2DashComponentName: false,
-                //                     transformToDefaultImport: false
-                //                 },
-                //                 {
-                //                     libraryDirectory: '../_esm5/internal/observable',
-                //                     libraryName: 'rxjs',
-                //                     camel2DashComponentName: false,
-                //                     transformToDefaultImport: false,
-                //                 }
-                //             ])]
-                //     }),
-                // },
+                options: {
+                    useBabel: true,
+                    babelCore: '@babel/core'
+                },
                 exclude: /node_modules/,
             },
             {

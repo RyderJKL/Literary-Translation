@@ -1,18 +1,10 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: auto;
-
-    .header {
-        height: 44px;
-        line-height: 44px;
-    }
-
-    .content {
-        flex: 1;
-        padding: 32px 0;
-    }
+.userContainer {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 

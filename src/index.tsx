@@ -6,8 +6,8 @@ import { configure as configureMobx } from 'mobx';
 import { StoreProvider } from '@/hooks/use-store/use-store-context';
 import App from './App';
 
-import 'lego-ui/dist/lib/styles/reset.scss';
-import 'lego-ui/dist/lego-ui.css';
+import '@/styles/global.scss';
+import '@/styles/admin-pro-icons.scss';
 
 configureMobx({ enforceActions: 'always' });
 
