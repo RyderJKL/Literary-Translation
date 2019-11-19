@@ -1,4 +1,5 @@
-import { Roles } from '@/typings'
+import { Roles } from '@/typings';
+import { postUserLogin } from '@/views/login/services/url';
 
 export interface IToken {
     [index: string]: {
@@ -8,15 +9,15 @@ export interface IToken {
 
 export interface IUser {
     [index: string]: {
-        roles: Roles,
-        avatar: '',
-        name: 'Super Admin'
-    }
+        roles: Roles;
+        avatar: '';
+        name: 'Super Admin';
+    };
 }
 
 const tokens: IToken = {
     admin: {
-       token: 'admin-token'
+        token: 'admin-token'
     }
 };
 
@@ -27,14 +28,14 @@ export const useInfo = {
         return {
             code: 60204,
             message: 'Account and password are incorrect.'
-        }
+        };
     }
 };
 
 export const userLogin = {
-    url: '/user/login',
+    url: postUserLogin,
     type: 'post',
-    response: (config) => {
+    response: config => {
         const { username, password } = config.body;
 
         // mock error
@@ -42,7 +43,7 @@ export const userLogin = {
             return {
                 errorCode: 80001,
                 message: '用户名或者密码不正确'
-            }
+            };
         }
 
         const token = tokens[username];
@@ -50,11 +51,8 @@ export const userLogin = {
         return {
             code: 20000,
             data: token
-        }
+        };
     }
 };
 
-export default  [
-    userLogin,
-    useInfo
-];
+export default [userLogin, useInfo];
