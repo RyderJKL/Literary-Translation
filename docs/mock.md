@@ -55,7 +55,6 @@ mock 接口返回的格式分为两种:
 
 ```json 
 {
-    errorCode: number,
     message: string 
 }
 ```
