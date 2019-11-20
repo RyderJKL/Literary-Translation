@@ -3,6 +3,7 @@ import { finalize, catchError, mergeMap } from 'rxjs/operators';
 import { Rjax, HttpResponse } from 'rjax';
 import { networkErrorHandler, businessErrorHandler } from './error-handler';
 import { requestInterceptor } from './utils';
+import { API_PREFIX } from '@/config'
 
 // 自定义拦截器
 class CustomInterceptor {
@@ -52,7 +53,7 @@ class CustomInterceptor {
 // 创建实例
 const request$ = new Rjax({
     // 设置请求基路径，可选
-    baseURL: '',
+    baseURL: API_PREFIX,
     // 设置请求超时时间，可选
     timeout: 100000,
     // 是用作 xsrf token 的值的cookie的名称，默认'XSRF-TOKEN'，可选

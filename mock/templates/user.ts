@@ -1,18 +1,7 @@
-import { Roles } from '@/typings';
-import { postUserLogin } from '@/views/login/services/url';
-
 export interface IToken {
     [index: string]: {
         token: string;
         username: string;
-    };
-}
-
-export interface IUser {
-    [index: string]: {
-        roles: Roles;
-        avatar: '';
-        name: 'Super Admin';
     };
 }
 
@@ -35,7 +24,7 @@ export const useInfo = {
 };
 
 export const userLogin = {
-    url: postUserLogin,
+    url: '/user/login',
     type: 'post',
     response: config => {
         const { username, password } = config.body;
