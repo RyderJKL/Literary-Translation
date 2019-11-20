@@ -5,12 +5,12 @@ const webpack = require('webpack');
 const config = require('./config');
 const merge = require('webpack-merge');
 const baseWebpackConfig = require('./base.conf');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TersePlugin = require('terser-webpack-plugin');
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir);
@@ -84,13 +84,13 @@ const webpackConfig = merge(baseWebpackConfig, {
             }
         }),
         new webpack.HashedModuleIdsPlugin(),
-        new CopyWebpackPlugin([
-            {
-                from: path.resolve(__dirname, '../static'),
-                to: config.build.assetsSubDirectory,
-                ignore: ['.*']
-            }
-        ])
+        // new CopyWebpackPlugin([
+        //     {
+        //         from: path.resolve(__dirname, '../static'),
+        //         to: config.build.assetsSubDirectory,
+        //         ignore: ['.*']
+        //     }
+        // ])
     ],
     optimization: {
         splitChunks: {
@@ -102,11 +102,11 @@ const webpackConfig = merge(baseWebpackConfig, {
                     priority: 10,
                     chunks: 'initial' // 只打包初始时依赖的第三方
                 },
-                // legoUI: {
-                //     name: 'chunk-legoUI', // 单独将 legoUI 拆包
-                //     priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
-                //     test: /[\\/]node_modules[\\/]element-ui[\\/]/
-                // },
+                legoUI: {
+                    name: 'chunk-legoUI', // 单独将 legoUI 拆包
+                    priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
+                    test: /[\\/]node_modules[\\/]lego-ui[\\/]/
+                },
                 commons: {
                     name: 'chunk-commons',
                     test: resolve('src/components'), // 可自定义拓展规则
@@ -118,15 +118,22 @@ const webpackConfig = merge(baseWebpackConfig, {
         },
         runtimeChunk: 'single',
         minimizer: [
-            new UglifyJsPlugin({
-                uglifyOptions: {
-                    mangle: {
-                        // safari10: true
+            new TersePlugin({
+                chunkFilter: chunk => {
+                    // Exclude uglification for the `vendor` chunk
+                    // todo: use dll
+                    if (chunk.name === 'vendor') {
+                        return false;
                     }
+
+                    return true;
                 },
                 sourceMap: config.build.productionSourceMap,
-                cache: true,
-                parallel: true
+                terserOptions: {
+                    output: {
+                        comments: false,
+                    },
+                }
             }),
             new OptimizeCSSAssetsPlugin()
         ]
