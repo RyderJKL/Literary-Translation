@@ -53,7 +53,6 @@ const Login: React.FC<LoginSettings> = ({ retryCount = 2, retryDelayTime = 5 }: 
                 retry(retryCount),
                 catchError(error => {
                     Message.$message({
-                        key: 1,
                         type: 'warning',
                         content: `您重试次数已经超过${retryCount}，请稍后再试`
                     });
@@ -64,7 +63,6 @@ const Login: React.FC<LoginSettings> = ({ retryCount = 2, retryDelayTime = 5 }: 
                     errors.pipe(
                         tap(() => {
                             Message.$message({
-                                key: 2,
                                 type: 'warning',
                                 content: `重试次数已经超过${retryCount}次，${retryDelayTime}后秒再试`
                             });

@@ -9,8 +9,7 @@ function formatter(routesData: IRoute[]): IMenuItem[] {
     return routesData
         .filter(item => item.path)
         .filter(item => item.name)
-        // .filter(item => !item.hiddenInMenu)
-        .map(routeItem => {
+       .map(routeItem => {
             if (routeItem.routes && routeItem.routes.length) {
                 routeItem.children = formatter(routeItem.routes);
             }

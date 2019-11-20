@@ -3,10 +3,11 @@ import { Redirect, RouteComponentProps } from 'react-router-dom';
 import useStore from '@/hooks/use-store';
 import { getMenusData } from '@/layouts/utils';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
-import { Layout, Button, Icon } from 'lego-ui';
+import { Layout } from 'lego-ui';
 
 import SideBar from './components/side-bar';
 import BasicLayoutFooter from './components/footer';
+import BasicLayoutHeader from './components/header';
 import BreadCrumbs from './components/bread-crumbs';
 import Styles from './styles.scss';
 
@@ -41,10 +42,11 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route, history }) 
         <Layout withAside={true} className={Styles.basicLayoutContainer}>
             <SideBar menusData={menusData} collapse={sidebarCollapse} theme={settings.navTheme} />
             <Layout>
-                <Layout.Header className={Styles.basicLayoutHeader}>
-                    <Button size={'small'} onClick={changeSidebarCollapse}>
-                        <Icon type={sidebarCollapse ? 'arrow-right-double' : 'arrow-left-double'} />
-                    </Button>
+                <Layout.Header>
+                    <BasicLayoutHeader
+                        sidebarCollapse={sidebarCollapse}
+                        onChangeSidebarCollapse={changeSidebarCollapse}
+                    />
                 </Layout.Header>
                 <Layout.Content className={Styles.basicLayoutContent}>
                     <BreadCrumbs menusData={menusData} />
