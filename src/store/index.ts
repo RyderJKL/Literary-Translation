@@ -1,4 +1,4 @@
-import auth from './auth';
+import auth from './login';
 import common from './common';
 import UI from './ui';
 import role from './role';

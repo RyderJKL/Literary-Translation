@@ -96,6 +96,12 @@ export function _matchMenusWithPathname(menusDta: IMenuItem[], pathname: string)
 
 export const matchMenusWithPathname = memoizeOne(_matchMenusWithPathname, isEqual);
 
+export function getCurrentMenuItemWitPathname (route: IRoute, pathname?: string) {
+    const menusData = getMenusData(route.routes);
+    const matchMenus = matchMenusWithPathname(menusData, pathname).filter(item => item.path);
+    return matchMenus.pop();
+}
+
 export function getSelectedMenusKey(menusDta: IMenuItem[], pathname: string): string[] {
     const matchMenus = matchMenusWithPathname(menusDta, pathname);
     return matchMenus.map(menuItem => menuItem.path).filter(item => item);

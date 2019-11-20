@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
 import useStore from '@/hooks/use-store';
-import { getMenusData } from './components/side-bar/utils';
+import { getMenusData } from '../utils';
 
 import { Layout, Button, Icon } from 'lego-ui';
 

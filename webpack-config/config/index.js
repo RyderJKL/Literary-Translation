@@ -6,7 +6,7 @@ const MOCK_PORT = 8123;
 
 module.exports = {
     siteSettings: {
-        title: 'lego-pro',
+        title: 'lego-ui AdminPro',
         // 相对于项目根目录
         favicon: 'favicon.ico'
     },

@@ -31,8 +31,6 @@ export interface IRoute extends Omit<RouteProps, 'path' | 'children' | 'componen
     component?: RouteProps['component'] | any;
 }
 
-export type WithFalse<T> = T | false;
-
 export interface IRouter<P> extends Omit<RouteComponentProps, 'location'> {
     computedMatch?: match<P>;
     route?: IRoute;

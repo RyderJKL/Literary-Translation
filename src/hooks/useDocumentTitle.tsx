@@ -1,11 +1,17 @@
 import { useEffect } from 'react';
+import { IRoute } from '@/typings';
+import { getCurrentMenuItemWitPathname } from '@/layouts/utils';
 
-export default function useDocumentTitle(title: string) {
+export default function useDocumentTitle(route?: IRoute, pathname?) {
     useEffect(() => {
-        document.title = title ? title : process.env.APP_TITLE;
+        const currentMenu = getCurrentMenuItemWitPathname(route, pathname);
+        const currentTitle = currentMenu.name;
+        const appTitle  =  process.env.APP_TITLE;
+
+        document.title = currentTitle ? `${currentTitle} | ${appTitle}` : appTitle;
 
         return () => {
-            document.title = process.env.APP_TITLE;
+            document.title = appTitle;
         };
-    }, [title]);
+    }, [pathname]);
 }

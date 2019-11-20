@@ -39,6 +39,12 @@ const UserLogin: React.FC<LoginProps> = (props: LoginProps) => {
         });
     };
 
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.keyCode === 13) {
+            verifyForm();
+        }
+    };
+
     return (
         <Form labelPosition='top'>
             <Form.Item required={true} label='账号'>
@@ -47,8 +53,9 @@ const UserLogin: React.FC<LoginProps> = (props: LoginProps) => {
                         value={username}
                         size='large'
                         placeholder=''
-                        prefix={<Icon type='account'/>}
-                        onChange={e => setUsername(e.target.value)} />
+                        prefix={<Icon type='account' />}
+                        onChange={e => setUsername(e.target.value)}
+                    />
                 </Validator>
             </Form.Item>
             <Form.Item required={true} label='密码'>
@@ -58,21 +65,23 @@ const UserLogin: React.FC<LoginProps> = (props: LoginProps) => {
                         value={password}
                         size='large'
                         placeholder=''
-                        prefix={<Icon type='password'/>}
+                        prefix={<Icon type='password' />}
                         suffix={
-                            <button
-                                onClick={e => setPasswordVisible(!passwordVisible)}
-                                className={styles.pwdVisbleBtn}>
-                                <Icon type={passwordVisible ? 'eye-close' : 'eye'}/>
+                            <button onClick={e => setPasswordVisible(!passwordVisible)} className={styles.pwdVisbleBtn}>
+                                <Icon type={passwordVisible ? 'eye-close' : 'eye'} />
                             </button>
                         }
-                        onChange={e => setPassword(e.target.value)}/>
+                        onChange={e => setPassword(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                    />
                 </Validator>
             </Form.Item>
             <Form.Item className={preClass('mb-22')}>
-                <Link to='/user/forget' className={styles.forgetPassword}>忘记密码？</Link>
+                <Link to='/user/forget' className={styles.forgetPassword}>
+                    忘记密码？
+                </Link>
                 <Validator name='auto_login' rules={[{ required: true, message: '请输入密码' }]}>
-                    <Checkbox label='自动登录'/>
+                    <Checkbox label='自动登录' />
                 </Validator>
             </Form.Item>
             <Button
@@ -81,7 +90,8 @@ const UserLogin: React.FC<LoginProps> = (props: LoginProps) => {
                 size='large'
                 disabled={submitButtonDisabled}
                 loading={submitLoading}
-                type='primary'>
+                type='primary'
+            >
                 登录
             </Button>
         </Form>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import UserLogin, { ILoginState } from './components';
 import { fetchLogin } from './services';
-import useDocumentTitle from '@/hooks/useDocumentTitle';
+// import useDocumentTitle from '@/hooks/useDocumentTitle';
 import useStore from '@/hooks/use-store';
 import styles from './styles.scss';
 
@@ -10,7 +10,8 @@ import { Observable, throwError as _throw, timer } from 'rxjs';
 import { switchMap, tap, debounceTime, retry, retryWhen, finalize, catchError, delayWhen } from 'rxjs/operators';
 
 import { useEventCallback } from 'rxjs-hooks';
-import { AuthModel } from '@/store/auth';
+import { LoginModel } from '@/store/login';
+import { getPageQuery } from '@/utils';
 
 import { Message, Card } from 'lego-ui';
 
@@ -25,17 +26,20 @@ export interface LoginSettings {
 }
 
 const Login: React.FC<LoginSettings> = ({ retryCount = 2, retryDelayTime = 5 }: LoginSettings) => {
-    useDocumentTitle('登录 | lego-ui AdminPro');
+    // useDocumentTitle('登录 | lego-ui AdminPro');
     const [loading, setLoading] = React.useState<boolean>(false);
     const [submitButtonDisabled, setSubmitButtonDisabled] = React.useState<boolean>(false);
 
-    const { isLogin, setAuth } = useStore(store => ({
+    const { isLogin, actionSetAuth, actionRouter } = useStore(store => ({
         isLogin: store.auth.isLogin,
-        setAuth: store.auth.setAuth
+        actionSetAuth: store.auth.setLoginStatus,
+        actionRouter: store.router
     }));
 
-    const handleSetAuth = (authData: AuthModel) => {
-        setAuth(authData);
+    const handleSetLogin = (loginStatus: LoginModel) => {
+        actionSetAuth(loginStatus);
+        const { redirect } = getPageQuery();
+        actionRouter.replace(redirect);
     };
 
     const [handleLogin] = useEventCallback(
@@ -44,7 +48,7 @@ const Login: React.FC<LoginSettings> = ({ retryCount = 2, retryDelayTime = 5 }: 
                 debounceTime(500),
                 tap(() => setLoading(true)),
                 switchMap(submitData => fetchLogin(submitData)),
-                tap((repData: ResponseData) => handleSetAuth(repData.data)),
+                tap((repData: ResponseData) => handleSetLogin(repData.data)),
                 finalize(() => {
                     setLoading(false);
                 }),

@@ -3,7 +3,7 @@ import { IMenuItem } from '@/typings';
 import { MenuProps } from 'lego-ui/dist/lib/menu';
 
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
-import { getSelectedMenusKey } from './utils';
+import { getSelectedMenusKey } from '@/layouts/utils';
 import upperFirst from '@/utils/string/upper-first';
 
 import { Layout, Menu } from 'lego-ui';

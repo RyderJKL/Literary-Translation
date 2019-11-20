@@ -4,7 +4,7 @@ import { IMenuItem } from '@/typings';
 
 // import { toJS } from 'mobx';
 import Breadcrumb from 'lego-ui/dist/lib/breadcrumb';
-import { matchMenusWithPathname } from '@/layouts/basic-layout/components/side-bar/utils';
+import { matchMenusWithPathname } from '@/layouts/utils';
 
 export interface IBreadCrumbsProps extends RouteComponentProps {
     menusData: IMenuItem[];
