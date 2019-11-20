@@ -1,4 +1,5 @@
 import { IRoute, IMenuItem, MenuItemPropertyProps } from '@/typings';
+import { clone } from 'ramda';
 import isEqual from 'lodash/isEqual';
 import memoizeOne from 'memoize-one';
 import * as pathToRegexp from 'path-to-regexp';
@@ -22,7 +23,7 @@ const memoizeFormatter = memoizeOne(formatter, isEqual);
 
 export function getMenusData(routesData: IRoute[]): IMenuItem[] {
     // todo
-    const originMenusData = memoizeFormatter(routesData);
+    const originMenusData = memoizeFormatter(clone(routesData));
     return originMenusData;
 }
 

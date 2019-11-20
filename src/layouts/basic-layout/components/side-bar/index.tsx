@@ -28,7 +28,7 @@ const Sidebar: React.FC<SideBarProps> = ({
     history,
     collapse,
     theme,
-    logo = '/static/icons-svg/logo.svg',
+    logo = '@/static/logo.svg',
     title = 'lego-pro'
 }) => {
     const [activeMenuIndex, setActiveMenuIndex] = React.useState<string>('home');
@@ -77,7 +77,7 @@ const Sidebar: React.FC<SideBarProps> = ({
         <Layout.Aside collapse={collapse} className={sidebarCls}>
             <div className={styles.legoProSidebarLogo}>
                 <a href='/'>
-                    <img className={styles.legoProSidebarLogoIcon} src={logo} alt='logo' />
+                    <img className={styles.legoProSidebarLogoIcon} src={require('@/static/logo.svg')} alt='logo' />
                     {/*<h1 className={styles.legoProSidebarLogoTitle}>{title}</h1>*/}
                 </a>
             </div>
