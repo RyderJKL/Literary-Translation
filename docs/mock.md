@@ -1,12 +1,16 @@
 # Mock
 
-支持 [mockjs](https://github.com/nuysoft/Mock/wiki/Getting-Started)
+## Mock
 
-# Mock
+集成 [mock.js](https://github.com/nuysoft/Mock/wiki/Getting-Started) 构造 `template`;
 
-使用 [mock](https://github.com/nuysoft/Mock) 模拟接口请求，模板配置请参考官方文档。
+运行 `yarn mock` 可开启 mock 服务。
 
-## 如何启用 mock 接口 ?
+## 如何编写 mock 接口
+
+样例代码请参考 `mock/templates/user.ts` 以及其它已有的模块文件。
+
+## 使用 mock
 
 举个栗子：
 
@@ -20,7 +24,3 @@ $request.get('/user/profile', { username: 'jack' }, { params: { mock: 'true' } }
 
 `@/utils/requset` 就会将该接口的 `url` 替换为 `${process.env.MOCK_API}/${url}`，同时会在 `HttpRequest` 的 `parameters` 中清除该 `mock` 值，不用担心会污染到后端接口。
   
-## 添加 mock 数据
-
-样例代码请参考 `mock/templates/user.ts` 以及其它已有的模块文件。
-
