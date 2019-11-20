@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
 import useStore from '@/hooks/use-store';
-import { getMenusData } from '../utils';
-
+import { getMenusData } from '@/layouts/utils';
+import useDocumentTitle from '@/hooks/useDocumentTitle';
 import { Layout, Button, Icon } from 'lego-ui';
 
 import SideBar from './components/side-bar';
@@ -13,13 +13,16 @@ import themeDefaultSettings from '@/config/default-settings';
 
 // import Exception from '@/components/exception';
 
-// import { toJS } from 'mobx';
-
 export interface IBasicLayoutProps extends RouteComponentProps {
     route: IRoute;
 }
 
-const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route }) => {
+const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route, history }) => {
+    const {
+        location: { pathname }
+    } = history;
+    useDocumentTitle(route, pathname);
+
     const { sidebarCollapse, changeSidebarCollapse, isLogin } = useStore(store => ({
         changeSidebarCollapse: store.UI.toggleSidebarCollapse,
         isLogin: store.auth.isLogin,
@@ -36,11 +39,7 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route }) => {
 
     return (
         <Layout withAside={true}>
-            <SideBar
-                menusData={menusData}
-                collapse={sidebarCollapse}
-                theme={settings.navTheme}
-            />
+            <SideBar menusData={menusData} collapse={sidebarCollapse} theme={settings.navTheme} />
             <Layout>
                 <Layout.Header>
                     <Button onClick={changeSidebarCollapse}>

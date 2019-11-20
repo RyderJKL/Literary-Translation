@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import UserLogin, { ILoginState } from './components';
 import { fetchLogin } from './services';
-// import useDocumentTitle from '@/hooks/useDocumentTitle';
 import useStore from '@/hooks/use-store';
 import styles from './styles.scss';
 
@@ -26,7 +25,6 @@ export interface LoginSettings {
 }
 
 const Login: React.FC<LoginSettings> = ({ retryCount = 2, retryDelayTime = 5 }: LoginSettings) => {
-    // useDocumentTitle('登录 | lego-ui AdminPro');
     const [loading, setLoading] = React.useState<boolean>(false);
     const [submitButtonDisabled, setSubmitButtonDisabled] = React.useState<boolean>(false);
 
@@ -88,7 +86,7 @@ const Login: React.FC<LoginSettings> = ({ retryCount = 2, retryDelayTime = 5 }: 
                 <Card className={styles.loginCard}>
                     <div className={styles.loginHeader}>
                         <div className={styles.logo}>
-                            <img  src={require('@/static/logo.svg')}/>
+                            <img src={require('@/static/logo.svg')} />
                         </div>
                         <h1>lego-ui AdminPro</h1>
                     </div>
