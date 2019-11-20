@@ -5,7 +5,7 @@ import { renderRoutes } from '@/router/helper';
 import { createBrowserHistory } from 'history';
 import { RouterStore as MoxReactRouterStore, syncHistoryWithStore } from 'mobx-react-router';
 
-import NotFound from '@/components/not-found/NotFound';
+import NotFound from '@/components/exception/not-found';
 export const browserHistory = createBrowserHistory();
 export const syncRouter = new MoxReactRouterStore();
 export const history = syncHistoryWithStore(browserHistory, syncRouter);

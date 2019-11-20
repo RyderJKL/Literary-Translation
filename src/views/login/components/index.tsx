@@ -52,7 +52,7 @@ const UserLogin: React.FC<LoginProps> = (props: LoginProps) => {
                     <Input
                         value={username}
                         size='large'
-                        placeholder=''
+                        placeholder='lego'
                         prefix={<Icon type='account' />}
                         onChange={e => setUsername(e.target.value)}
                     />
@@ -64,7 +64,7 @@ const UserLogin: React.FC<LoginProps> = (props: LoginProps) => {
                         type={passwordVisible ? 'text' : 'password'}
                         value={password}
                         size='large'
-                        placeholder=''
+                        placeholder='admin'
                         prefix={<Icon type='password' />}
                         suffix={
                             <button onClick={e => setPasswordVisible(!passwordVisible)} className={styles.pwdVisbleBtn}>

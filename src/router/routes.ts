@@ -1,7 +1,7 @@
-// https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 import * as Loadable from 'react-loadable';
 import components from './modules/components';
-import NotFound from '@/components/not-found/NotFound';
+import exception from './modules/exception';
+import NotFound from '@/components/exception/not-found';
 import { IRoute, Roles } from '@/typings';
 
 export const commonRoute: IRoute = {
@@ -65,7 +65,7 @@ export const authorityRoute: IRoute = {
             path: '/dashboard',
             name: '监控页',
             component: Loadable({
-                loader: () => import('@/views/dashboard/Dashboard'),
+                loader: () => import('@/views/dashboard'),
                 loading() {
                     return 'loading';
                 }
@@ -74,7 +74,8 @@ export const authorityRoute: IRoute = {
                 roles: [Roles.admin]
             }
         },
-        components
+        components,
+        exception
     ]
 };
 

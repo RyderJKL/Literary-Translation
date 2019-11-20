@@ -6,12 +6,12 @@ import useDocumentTitle from '@/hooks/useDocumentTitle';
 import { Layout, Button, Icon } from 'lego-ui';
 
 import SideBar from './components/side-bar';
+import BasicLayoutFooter from './components/footer';
 import BreadCrumbs from './components/bread-crumbs';
+import Styles from './styles.scss';
 
 import { IRoute } from '@/typings';
 import themeDefaultSettings from '@/config/default-settings';
-
-// import Exception from '@/components/exception';
 
 export interface IBasicLayoutProps extends RouteComponentProps {
     route: IRoute;
@@ -38,19 +38,21 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route, history }) 
     const menusData = getMenusData(route.routes);
 
     return (
-        <Layout withAside={true}>
+        <Layout withAside={true} className={Styles.basicLayoutContainer}>
             <SideBar menusData={menusData} collapse={sidebarCollapse} theme={settings.navTheme} />
             <Layout>
-                <Layout.Header>
-                    <Button onClick={changeSidebarCollapse}>
-                        <Icon key={'arrow-left-double'} />
+                <Layout.Header className={Styles.basicLayoutHeader}>
+                    <Button size={'small'} onClick={changeSidebarCollapse}>
+                        <Icon type={sidebarCollapse ? 'arrow-right-double' : 'arrow-left-double'} />
                     </Button>
                 </Layout.Header>
-                <Layout.Content>
+                <Layout.Content className={Styles.basicLayoutContent}>
                     <BreadCrumbs menusData={menusData} />
                     {children}
                 </Layout.Content>
-                <Layout.Footer>footer</Layout.Footer>
+                <Layout.Footer>
+                    <BasicLayoutFooter />
+                </Layout.Footer>
             </Layout>
         </Layout>
     );

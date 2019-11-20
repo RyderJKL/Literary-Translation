@@ -1,0 +1,14 @@
+@import '~@/styles/variables.scss';
+
+.basicLayoutContainer {
+    background: $background-color-base;
+}
+
+.basicLayoutHeader {
+    background: $background-color-light;
+    box-shadow: 0 1px 4px rgba(0,21,41,.08)
+}
+
+.basicLayoutContent {
+    min-height: 40vh;
+}

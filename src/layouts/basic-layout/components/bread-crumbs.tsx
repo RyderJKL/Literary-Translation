@@ -2,15 +2,14 @@ import * as React from 'react';
 import { RouteComponentProps, withRouter, Link } from 'react-router-dom';
 import { IMenuItem } from '@/typings';
 
-// import { toJS } from 'mobx';
-import Breadcrumb from 'lego-ui/dist/lib/breadcrumb';
+import { Breadcrumb } from 'lego-ui';
 import { matchMenusWithPathname } from '@/layouts/utils';
 
 export interface IBreadCrumbsProps extends RouteComponentProps {
     menusData: IMenuItem[];
 }
 
-const BreadCrumbs: React.FC<IBreadCrumbsProps> = ({ menusData, children, history }) => {
+const BreadCrumbs: React.FC<IBreadCrumbsProps> = ({ menusData, history }) => {
     const [breadCrumbsData, setBreadCrumbsData] = React.useState<IMenuItem[]>([]);
 
     const refreshBreadCrumbs = () => {
@@ -19,9 +18,6 @@ const BreadCrumbs: React.FC<IBreadCrumbsProps> = ({ menusData, children, history
         } = history;
 
         const matchMenus = matchMenusWithPathname(menusData, pathname);
-        // const getHomeMenus = matchMenusWithPathname(menusData, '/home');
-        // console.log(toJS(matchMenus));
-        // console.log(toJS(getHomeMenus));
         setBreadCrumbsData(matchMenus);
     };
 
