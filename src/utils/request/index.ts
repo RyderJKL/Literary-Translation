@@ -16,16 +16,12 @@ class CustomInterceptor {
             mergeMap(event => {
                 // 这里可根据后台接口约定自行判断
 
-                // for network error
-                if (event instanceof HttpResponse && (event.status !== 200 || event.body.errorCode)) {
+                // for error
+                if (event instanceof HttpResponse && (event.status !== 200 || !event.body.code)) {
                     return new Observable(observer => observer.error(event));
                 }
 
-                return new Observable(
-                    observer => observer.next(event)
-                    // observer.next(extractDataFromRequest(event as HttpResponse<any>))
-                    // observer.next(extractDataFromRequest(event as HttpResponse<any>))
-                );
+                return new Observable(observer => observer.next(event));
             }),
             catchError(res => {
                 // network error
@@ -37,7 +33,7 @@ class CustomInterceptor {
                 }
 
                 // business error
-                if (res.body.errorCode) {
+                if (!res.body.code) {
                     businessErrorHandler(res);
                     return new Observable(observer => observer.error(res));
                 }

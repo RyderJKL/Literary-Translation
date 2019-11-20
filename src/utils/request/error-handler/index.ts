@@ -29,11 +29,13 @@ export const networkErrorHandler = (networkResponse: HttpErrorResponse): void =>
 
     Message.$message({
         content: errorText,
-        type: 'error',
-        key: -2
+        type: 'error'
     });
 };
 
+/**
+ * business 异常处理程序
+ */
 export const businessErrorHandler = (response): void => {
     const {
         body: { message },
@@ -44,7 +46,6 @@ export const businessErrorHandler = (response): void => {
     Message.$message({
         content: message,
         type: 'error',
-        key: -1
     });
 };
 

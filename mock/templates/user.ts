@@ -43,7 +43,6 @@ export const userLogin = {
         // mock error
         if (username !== 'lego' || password !== 'admin') {
             return {
-                errorCode: 80001,
                 message: '用户名或者密码不正确'
             };
         }
