@@ -2,7 +2,7 @@
 
 ## Mock
 
-集成 [mock.js](https://github.com/nuysoft/Mock/wiki/Getting-Started) 构造 `template`;
+集成 [mock.js](https://github.com/nuysoft/Mock/wiki/Getting-Started) 以构造 `template`;
 
 运行 `yarn mock` 可开启 mock 服务。
 
@@ -10,9 +10,59 @@
 
 样例代码请参考 `mock/templates/user.ts` 以及其它已有的模块文件。
 
+```js
+// mock/templates/user.ts
+import { postUserLogin } from '@/views/login/services/url';
+
+export const userLogin = {
+    url: postUserLogin,
+    type: 'post',
+    response: config => {
+        const { username, password } = config.body;
+
+        // mock error
+        if (username !== 'lego' || password !== 'admin') {
+            return {
+                errorCode: 80001,
+                message: '用户名或者密码不正确'
+            };
+        }
+
+        const token = tokens[username];
+
+        return {
+            code: 20000,
+            data: token
+        };
+    }
+};
+```
+
+### mock 接口规范
+
+mock 接口返回的格式分为两种:
+
+- 正常的接口返回格式：
+
+```json 
+{
+    code: number,
+    data: any
+}
+```
+
+- 包含异常的接口返回格式：
+
+```json 
+{
+    errorCode: number,
+    message: string 
+}
+```
+
 ## 使用 mock
 
-举个栗子：
+举个例子：
 
 ```
 $request.post('/user/login', { username: 'jack' }, { params: { mock: 'true' } })

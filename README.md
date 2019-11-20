@@ -36,6 +36,15 @@ yarn dev:mock
 yarn build:prod
 ```
 
+## 代码贡献
+
+贡献代码请发起 [`Merge Request`](https://docs.gitlab.com/ee/gitlab-basics/add-merge-request.html).
+
+请先克隆代码到本地，然后检一个自己的分支出来，代码提交后请将需要合并的代码 `Merge Request` 到 `dev` 分支， `Assignee` 请分配给 `chenrong` 或者 `jixuechong`。
+
+被 `Assignee` 的人在完成 `code review` 后确保所有`discussions` 都被 `resolve` 在合并到代码。
+
 ## 更多
 
 请参看 [docs 文档](./docs/开发指南.md)
+
