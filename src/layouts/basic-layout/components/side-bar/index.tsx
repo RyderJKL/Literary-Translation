@@ -5,7 +5,7 @@ import { MenuProps } from 'lego-ui/dist/lib/menu';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import { getSelectedMenusKey } from '@/layouts/utils';
 import upperFirst from '@/utils/string/upper-first';
-
+import useHistoryListener from '@/hooks/use-history-listener';
 import { Layout, Menu } from 'lego-ui';
 
 import classNames from 'classnames';
@@ -43,13 +43,7 @@ const Sidebar: React.FC<SideBarProps> = ({
         setActiveMenuIndex(currentActive);
     }
 
-    React.useEffect(() => {
-        handleHighlightCurrentPath();
-
-        history.listen(location => {
-            handleHighlightCurrentPath();
-        });
-    }, []);
+    useHistoryListener(handleHighlightCurrentPath);
 
     const renderMenus = (menuData: IMenuItem[]) =>
         menuData.map((menuItem, index) => {

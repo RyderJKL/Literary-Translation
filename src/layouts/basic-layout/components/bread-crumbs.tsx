@@ -2,6 +2,7 @@ import * as React from 'react';
 import { RouteComponentProps, withRouter, Link } from 'react-router-dom';
 import { IMenuItem } from '@/typings';
 
+import useHistoryListener from '@/hooks/use-history-listener';
 import { Breadcrumb } from 'lego-ui';
 import { matchMenusWithPathname } from '@/layouts/utils';
 
@@ -21,13 +22,7 @@ const BreadCrumbs: React.FC<IBreadCrumbsProps> = ({ menusData, history }) => {
         setBreadCrumbsData(matchMenus);
     };
 
-    React.useEffect(() => {
-        refreshBreadCrumbs();
-
-        history.listen(location => {
-            refreshBreadCrumbs();
-        });
-    }, []);
+    useHistoryListener(refreshBreadCrumbs);
 
     const renderBreadCrumbItem = breadCrumbsList => {
         return breadCrumbsList.map((item, index) => {
