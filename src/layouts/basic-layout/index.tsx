@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { useHistory, Redirect, RouteComponentProps } from 'react-router-dom';
+
 import useStore from '@/hooks/use-store';
-import { getMenusData } from '@/layouts/utils';
 import useDocumentTitle from '@/hooks/use-document-title';
+
 import { Layout } from 'lego-ui';
 
 import SideBar from './components/side-bar';
@@ -10,10 +11,14 @@ import BasicLayoutFooter from './components/footer';
 import BasicLayoutHeader from './components/header';
 import AccountMenu from './components/account-menu';
 import BreadCrumbs from './components/bread-crumbs';
+
+import themeDefaultSettings from '@/config/default-settings';
+import { getMenusData, matchMenusWithPathname } from '@/layouts/utils';
+import pathToRegexp from 'path-to-regexp';
+
 import styles from './styles.scss';
 
 import { IRoute } from '@/typings';
-import themeDefaultSettings from '@/config/default-settings';
 
 export interface IBasicLayoutProps extends RouteComponentProps {
     route: IRoute;
@@ -36,6 +41,17 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route }) => {
 
     const menusData = getMenusData(route.routes);
 
+    const getBreadCrumbsItems = () => {
+        const matchMenus = matchMenusWithPathname(menusData, pathname);
+        const homeMenu = matchMenusWithPathname(menusData, '/home')[0];
+
+        if (pathToRegexp('/home').test(pathname)) {
+            return matchMenus;
+        }
+
+        return [homeMenu, ...matchMenus];
+    };
+
     if (!isLogin) {
         return <Redirect to={'/user/login'} />;
     }
@@ -53,7 +69,7 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route }) => {
                     </BasicLayoutHeader>
                 </Layout.Header>
                 <Layout.Content className={styles.basicLayoutRightBlockContent}>
-                    <BreadCrumbs menusData={menusData} />
+                    <BreadCrumbs breadCrumbsData={getBreadCrumbsItems()} />
                     {children}
                 </Layout.Content>
                 <Layout.Footer>

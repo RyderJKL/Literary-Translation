@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { IMenuItem } from '@/typings';
 import { MenuProps } from 'lego-ui/dist/lib/menu';
-
-import { useHistory, Link } from 'react-router-dom';
+import { last } from 'ramda';
+import { useLocation, Link } from 'react-router-dom';
 import { getSelectedMenusKey } from '@/layouts/utils';
 import upperFirst from '@/utils/string/upper-first';
 import useHistoryListener from '@/hooks/use-history-listener';
@@ -31,13 +31,11 @@ const Sidebar: React.FC<SideBarProps> = ({
     title = 'lego-pro'
 }) => {
     const [activeMenuIndex, setActiveMenuIndex] = React.useState<string>('home');
-    const {
-        location: { pathname }
-    } = useHistory();
+    const location = useLocation();
 
     function handleHighlightCurrentPath() {
-        const menuKeys = getSelectedMenusKey(menusData, pathname);
-        const currentActive = menuKeys.pop();
+        const menuKeys = getSelectedMenusKey(menusData, location.pathname);
+        const currentActive = last(menuKeys);
         setActiveMenuIndex(currentActive);
     }
 

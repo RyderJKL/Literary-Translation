@@ -1,30 +1,15 @@
 import * as React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Breadcrumb } from 'lego-ui';
-
-import useHistoryListener from '@/hooks/use-history-listener';
-import { matchMenusWithPathname } from '@/layouts/utils';
 
 import { IMenuItem } from '@/typings';
 
 export interface IBreadCrumbsProps {
-    menusData: IMenuItem[];
+    breadCrumbsData: IMenuItem[];
 }
 
-const BreadCrumbs: React.FC<IBreadCrumbsProps> = ({ menusData }) => {
-    const [breadCrumbsData, setBreadCrumbsData] = React.useState<IMenuItem[]>([]);
-    const {
-        location: { pathname }
-    } = useHistory();
-
-    const getBreadCrumbs = () => {
-        const matchMenus = matchMenusWithPathname(menusData, pathname);
-        setBreadCrumbsData(matchMenus);
-    };
-
-    useHistoryListener(getBreadCrumbs);
-
+const BreadCrumbs: React.FC<IBreadCrumbsProps> = ({ breadCrumbsData }) => {
     const renderBreadCrumbItem = breadCrumbsList => {
         return breadCrumbsList.map((item, index) => {
             if (item.children) {

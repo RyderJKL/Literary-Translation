@@ -1,5 +1,5 @@
 import { IRoute, IMenuItem, MenuItemPropertyProps } from '@/typings';
-import { clone, equals } from 'ramda';
+import { clone, equals, last } from 'ramda';
 import memoizeOne from 'memoize-one';
 import * as pathToRegexp from 'path-to-regexp';
 
@@ -8,7 +8,7 @@ function formatter(routesData: IRoute[]): IMenuItem[] {
     return routesData
         .filter(item => item.path)
         .filter(item => item.name)
-       .map(routeItem => {
+        .map(routeItem => {
             if (routeItem.routes && routeItem.routes.length) {
                 routeItem.children = formatter(routeItem.routes);
             }
@@ -21,8 +21,7 @@ const memoizeFormatter = memoizeOne(formatter, equals);
 
 export function getMenusData(routesData: IRoute[]): IMenuItem[] {
     // todo
-    const originMenusData = memoizeFormatter(clone(routesData));
-    return originMenusData;
+    return memoizeFormatter(clone(routesData));
 }
 
 /**
@@ -89,17 +88,21 @@ export const getFlatMenus = memoizeOne(_getFlatMenus, equals);
 
 export function _matchMenusWithPathname(menusDta: IMenuItem[], pathname: string): IMenuItem[] {
     const flatMenus = getFlatMenus(menusDta);
-    return pathnameToList(pathname)
-        .map(path => flatMenus.filter(menuItem => menuItem.path && pathToRegexp(menuItem.path).test(path)).pop())
-        .filter(item => item);
+
+    const getMatchMenu = targetPath => flatMenus.filter(item => pathToRegexp(item.path).test(targetPath));
+
+    const pathArr = pathnameToList(pathname);
+    const result = pathArr.map(path => last(getMatchMenu(path))).filter(item => item);
+
+    return result;
 }
 
 export const matchMenusWithPathname = memoizeOne(_matchMenusWithPathname, equals);
 
-export function getCurrentMenuItemWitPathname (route: IRoute, pathname?: string) {
+export function getCurrentMenuItemWitPathname(route: IRoute, pathname?: string) {
     const menusData = getMenusData(route.routes);
-    const matchMenus = matchMenusWithPathname(menusData, pathname).filter(item => item.path);
-    return matchMenus.pop();
+    const matchMenus = matchMenusWithPathname(menusData, pathname);
+    return last(matchMenus);
 }
 
 export function getSelectedMenusKey(menusDta: IMenuItem[], pathname: string): string[] {
