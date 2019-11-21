@@ -1,6 +1,5 @@
 import { IRoute, IMenuItem, MenuItemPropertyProps } from '@/typings';
-import { clone } from 'ramda';
-import isEqual from 'lodash/isEqual';
+import { clone, equals } from 'ramda';
 import memoizeOne from 'memoize-one';
 import * as pathToRegexp from 'path-to-regexp';
 
@@ -18,7 +17,7 @@ function formatter(routesData: IRoute[]): IMenuItem[] {
         });
 }
 
-const memoizeFormatter = memoizeOne(formatter, isEqual);
+const memoizeFormatter = memoizeOne(formatter, equals);
 
 export function getMenusData(routesData: IRoute[]): IMenuItem[] {
     // todo
@@ -50,7 +49,7 @@ function flatMenusKeys(
     return keys;
 }
 
-const memoizeFlatMenusKeys = memoizeOne(flatMenusKeys, isEqual);
+const memoizeFlatMenusKeys = memoizeOne(flatMenusKeys, equals);
 
 export function getFlatMenuKeys(menusData: IMenuItem[], menuItemPropertyProps?: MenuItemPropertyProps): string[] {
     return memoizeFlatMenusKeys(menusData, menuItemPropertyProps);
@@ -85,7 +84,8 @@ export function _getFlatMenus(menusData: IMenuItem[]): IMenuItem[] {
 
     return menusMap;
 }
-export const getFlatMenus = memoizeOne(_getFlatMenus, isEqual);
+
+export const getFlatMenus = memoizeOne(_getFlatMenus, equals);
 
 export function _matchMenusWithPathname(menusDta: IMenuItem[], pathname: string): IMenuItem[] {
     const flatMenus = getFlatMenus(menusDta);
@@ -94,7 +94,7 @@ export function _matchMenusWithPathname(menusDta: IMenuItem[], pathname: string)
         .filter(item => item);
 }
 
-export const matchMenusWithPathname = memoizeOne(_matchMenusWithPathname, isEqual);
+export const matchMenusWithPathname = memoizeOne(_matchMenusWithPathname, equals);
 
 export function getCurrentMenuItemWitPathname (route: IRoute, pathname?: string) {
     const menusData = getMenusData(route.routes);

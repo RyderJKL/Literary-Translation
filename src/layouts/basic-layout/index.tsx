@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { Redirect, RouteComponentProps } from 'react-router-dom';
+import { useHistory, Redirect, RouteComponentProps } from 'react-router-dom';
 import useStore from '@/hooks/use-store';
 import { getMenusData } from '@/layouts/utils';
-import useDocumentTitle from '@/hooks/useDocumentTitle';
+import useDocumentTitle from '@/hooks/use-document-title';
 import { Layout } from 'lego-ui';
 
 import SideBar from './components/side-bar';
 import BasicLayoutFooter from './components/footer';
 import BasicLayoutHeader from './components/header';
-import Account from './components/account';
+import AccountMenu from './components/account-menu';
 import BreadCrumbs from './components/bread-crumbs';
 import styles from './styles.scss';
 
@@ -19,11 +19,10 @@ export interface IBasicLayoutProps extends RouteComponentProps {
     route: IRoute;
 }
 
-const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route, history }) => {
+const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route }) => {
     const {
         location: { pathname }
-    } = history;
-
+    } = useHistory();
 
     useDocumentTitle(route, pathname);
 
@@ -50,7 +49,7 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route, history }) 
                         sidebarCollapse={sidebarCollapse}
                         onChangeSidebarCollapse={changeSidebarCollapse}
                     >
-                        <Account/>
+                        <AccountMenu />
                     </BasicLayoutHeader>
                 </Layout.Header>
                 <Layout.Content className={styles.basicLayoutRightBlockContent}>

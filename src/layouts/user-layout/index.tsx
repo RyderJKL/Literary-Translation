@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from './styles.scss';
 import { RouteComponentProps } from 'react-router';
-import useDocumentTitle from '@/hooks/useDocumentTitle';
+import useDocumentTitle from '@/hooks/use-document-title';
 import { IRoute } from '@/typings';
 
 export interface UserLayoutProps extends RouteComponentProps {

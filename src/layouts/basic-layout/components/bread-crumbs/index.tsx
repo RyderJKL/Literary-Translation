@@ -1,28 +1,29 @@
 import * as React from 'react';
-import { RouteComponentProps, withRouter, Link } from 'react-router-dom';
-import { IMenuItem } from '@/typings';
+import { Link, useHistory } from 'react-router-dom';
+
+import { Breadcrumb } from 'lego-ui';
 
 import useHistoryListener from '@/hooks/use-history-listener';
-import { Breadcrumb } from 'lego-ui';
 import { matchMenusWithPathname } from '@/layouts/utils';
 
-export interface IBreadCrumbsProps extends RouteComponentProps {
+import { IMenuItem } from '@/typings';
+
+export interface IBreadCrumbsProps {
     menusData: IMenuItem[];
 }
 
-const BreadCrumbs: React.FC<IBreadCrumbsProps> = ({ menusData, history }) => {
+const BreadCrumbs: React.FC<IBreadCrumbsProps> = ({ menusData }) => {
     const [breadCrumbsData, setBreadCrumbsData] = React.useState<IMenuItem[]>([]);
+    const {
+        location: { pathname }
+    } = useHistory();
 
-    const refreshBreadCrumbs = () => {
-        const {
-            location: { pathname }
-        } = history;
-
+    const getBreadCrumbs = () => {
         const matchMenus = matchMenusWithPathname(menusData, pathname);
         setBreadCrumbsData(matchMenus);
     };
 
-    useHistoryListener(refreshBreadCrumbs);
+    useHistoryListener(getBreadCrumbs);
 
     const renderBreadCrumbItem = breadCrumbsList => {
         return breadCrumbsList.map((item, index) => {
@@ -40,4 +41,4 @@ const BreadCrumbs: React.FC<IBreadCrumbsProps> = ({ menusData, history }) => {
     return <Breadcrumb>{renderBreadCrumbItem(breadCrumbsData)}</Breadcrumb>;
 };
 
-export default withRouter(BreadCrumbs);
+export default BreadCrumbs;

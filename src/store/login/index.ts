@@ -1,5 +1,5 @@
 import { action, computed, observable } from 'mobx';
-import { checkIsLogin, removeLoginStatus, saveLoginStatus } from './utils';
+import { checkIsLogin, removeLoginStatus, saveLoginStatus, getLoginStatus } from './utils';
 import { LoginModel, LoginStore } from './interface';
 export * from './interface';
 
@@ -8,6 +8,7 @@ export class Login implements LoginStore {
 
     constructor() {
         this.token = '';
+        this.initLoginStatus();
     }
 
     @computed
@@ -16,8 +17,15 @@ export class Login implements LoginStore {
     }
 
     @action.bound
+    private initLoginStatus() {
+        const lastedToken = getLoginStatus();
+        if (lastedToken) {
+            this.token = lastedToken;
+        }
+    }
+
+    @action.bound
     public logout(): void {
-        console.log('logout');
         this.token = '';
         removeLoginStatus();
     }

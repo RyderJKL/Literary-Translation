@@ -2,7 +2,7 @@ import * as React from 'react';
 import { IMenuItem } from '@/typings';
 import { MenuProps } from 'lego-ui/dist/lib/menu';
 
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { getSelectedMenusKey } from '@/layouts/utils';
 import upperFirst from '@/utils/string/upper-first';
 import useHistoryListener from '@/hooks/use-history-listener';
@@ -13,7 +13,7 @@ import styles from './side-bar.scss';
 
 const { Submenu, Item } = Menu;
 
-export interface SideBarProps extends RouteComponentProps {
+export interface SideBarProps {
     collapse: boolean;
     theme: MenuProps['theme'];
     menusData: IMenuItem[];
@@ -25,19 +25,17 @@ export interface SideBarProps extends RouteComponentProps {
 
 const Sidebar: React.FC<SideBarProps> = ({
     menusData,
-    history,
     collapse,
     theme,
     logo = '@/static/logo.svg',
     title = 'lego-pro'
 }) => {
     const [activeMenuIndex, setActiveMenuIndex] = React.useState<string>('home');
+    const {
+        location: { pathname }
+    } = useHistory();
 
     function handleHighlightCurrentPath() {
-        const {
-            location: { pathname }
-        } = history;
-
         const menuKeys = getSelectedMenusKey(menusData, pathname);
         const currentActive = menuKeys.pop();
         setActiveMenuIndex(currentActive);
@@ -82,4 +80,4 @@ const Sidebar: React.FC<SideBarProps> = ({
     );
 };
 
-export default withRouter(Sidebar);
+export default Sidebar;

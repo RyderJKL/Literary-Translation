@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Avatar, Dropdown, Button } from 'lego-ui';
-import styles from './account.scss';
+import styles from './account-menu.scss';
 import userStore from '@/hooks/use-store';
 
 const { Menu } = Dropdown;
@@ -11,9 +11,9 @@ export interface AccountProps {
     avatarUrl?: string;
 }
 
-const AccountMenu: React.FC<AccountProps> = ({ name, avatarUrl }) => {
+const AccountMenu: React.FC<AccountProps> = ({ avatarUrl }) => {
     const { actionLogout } = userStore(store => ({
-        actionLogout: store.auth.logout,
+        actionLogout: store.auth.logout
     }));
 
     const AccountContent = (
@@ -29,7 +29,7 @@ const AccountMenu: React.FC<AccountProps> = ({ name, avatarUrl }) => {
         <div>
             <Dropdown content={AccountContent}>
                 <Button className={styles.accountButton}>
-                    <Avatar theme={'light'} />
+                    <Avatar theme={'light'} src={avatarUrl} />
                 </Button>
             </Dropdown>
         </div>
