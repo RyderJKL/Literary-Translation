@@ -1,13 +1,15 @@
 @import '~@/styles/variables';
 
 .basicLayoutHeaderContainer {
+    display: flex;
     background: $background-color-light;
-    box-shadow: 0 1px 4px rgba(0,21,41,.08)
+    justify-content: space-between;
+    width: 100%;
+    line-height: 38px;
 }
 
 .basicLayoutHeaderTrigger {
 }
 
 .basicLayoutRight {
-
 }

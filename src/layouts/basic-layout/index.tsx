@@ -8,8 +8,9 @@ import { Layout } from 'lego-ui';
 import SideBar from './components/side-bar';
 import BasicLayoutFooter from './components/footer';
 import BasicLayoutHeader from './components/header';
+import Account from './components/account';
 import BreadCrumbs from './components/bread-crumbs';
-import Styles from './styles.scss';
+import styles from './styles.scss';
 
 import { IRoute } from '@/typings';
 import themeDefaultSettings from '@/config/default-settings';
@@ -22,6 +23,8 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route, history }) 
     const {
         location: { pathname }
     } = history;
+
+
     useDocumentTitle(route, pathname);
 
     const { sidebarCollapse, changeSidebarCollapse, isLogin } = useStore(store => ({
@@ -32,23 +35,25 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route, history }) 
 
     const settings = themeDefaultSettings;
 
+    const menusData = getMenusData(route.routes);
+
     if (!isLogin) {
         return <Redirect to={'/user/login'} />;
     }
 
-    const menusData = getMenusData(route.routes);
-
     return (
-        <Layout withAside={true} className={Styles.basicLayoutContainer}>
+        <Layout withAside={true} className={styles.basicLayoutContainer}>
             <SideBar menusData={menusData} collapse={sidebarCollapse} theme={settings.navTheme} />
             <Layout>
-                <Layout.Header>
+                <Layout.Header className={styles.basicLayoutRightBlockHeader}>
                     <BasicLayoutHeader
                         sidebarCollapse={sidebarCollapse}
                         onChangeSidebarCollapse={changeSidebarCollapse}
-                    />
+                    >
+                        <Account/>
+                    </BasicLayoutHeader>
                 </Layout.Header>
-                <Layout.Content className={Styles.basicLayoutContent}>
+                <Layout.Content className={styles.basicLayoutRightBlockContent}>
                     <BreadCrumbs menusData={menusData} />
                     {children}
                 </Layout.Content>

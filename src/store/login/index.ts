@@ -17,6 +17,7 @@ export class Login implements LoginStore {
 
     @action.bound
     public logout(): void {
+        console.log('logout');
         this.token = '';
         removeLoginStatus();
     }
