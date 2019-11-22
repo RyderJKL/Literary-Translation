@@ -1,7 +1,8 @@
 const path = require('path');
 const config = require('./config');
-// const tsImportPluginFactory = require('ts-import-plugin');
-const resolve = (dir) => path.resolve(__dirname, '..', dir);
+// https://www.npmjs.com/package/webpack-theme-color-replacer
+const ThemeColorReplacer = require('webpack-theme-color-replacer');
+const resolve = dir => path.resolve(__dirname, '..', dir);
 
 module.exports = {
     context: path.resolve(__dirname, '../'),
@@ -9,10 +10,7 @@ module.exports = {
         main: './src/index.tsx'
     },
     resolve: {
-        modules: [
-            resolve('src'),
-            resolve('node_modules'),
-        ],
+        modules: [resolve('src'), resolve('node_modules')],
         extensions: ['.ts', '.tsx', '.js', '.json', '.css', '.scss'],
         alias: {
             '@': resolve('src')
@@ -21,10 +19,7 @@ module.exports = {
     output: {
         path: config.build.assetsRoot,
         filename: '[name].js',
-        publicPath:
-            process.env.NODE_ENV === 'production'
-                ? config.build.assetsPublicPath
-                : config.dev.assetsPublicPath
+        publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath
     },
     module: {
         rules: [
@@ -35,7 +30,7 @@ module.exports = {
                     useBabel: true,
                     babelCore: '@babel/core'
                 },
-                exclude: /node_modules/,
+                exclude: /node_modules/
             },
             {
                 test: /\.(png|jpe?g|gif)(\?.*)?$/,
@@ -54,5 +49,51 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+    plugins: [
+        new ThemeColorReplacer({
+            // colors from src/styles/lego-ui-theme.scss
+            matchColors: [
+                // 主题颜色
+                '#7774e7',
+                '#8c8aeb',
+
+                // 危险颜色
+                '#ed4014',
+                '#f16643',
+
+                // 提示颜色
+                '#1890ff',
+                '#52c41a',
+                '#f5222d',
+                '#faad14',
+
+                // 边框颜色
+                '#e6ecf5',
+
+                // 禁用颜色
+                '#e9ecef',
+
+                // 背景颜色
+                '#f8f8f8',
+                // 'lighten($primary-color, 30%)',
+                '#fff',
+
+                // 文字颜色
+                '#414a63',
+                '#616a6e',
+                '#888da8',
+
+                // 深色
+                '#000',
+                '#6b6e67',
+                '#001529',
+                '#fff',
+                '#cdc7c7',
+                '#7f7e7e'
+            ],
+            fileName: 'css/theme-colors-[contenthash:8].css',
+            isJsUgly: process.env.NODE_ENV !== 'development'
+        })
+    ]
 };

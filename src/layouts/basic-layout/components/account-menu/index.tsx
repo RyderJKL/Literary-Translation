@@ -1,15 +1,20 @@
 import * as React from 'react';
+
 import { Avatar, Dropdown, Button } from 'lego-ui';
-import styles from './account-menu.scss';
+
+import ThemeSwitcher from '@/components/theme-swticher';
+
 import userStore from '@/hooks/use-store';
 
-const { Menu } = Dropdown;
-const { Item } = Menu;
+import styles from './account-menu.scss';
 
 export interface AccountProps {
     name?: string;
     avatarUrl?: string;
 }
+
+const { Menu } = Dropdown;
+const { Item } = Menu;
 
 const AccountMenu: React.FC<AccountProps> = ({ avatarUrl }) => {
     const { actionLogout } = userStore(store => ({
@@ -18,7 +23,7 @@ const AccountMenu: React.FC<AccountProps> = ({ avatarUrl }) => {
 
     const AccountContent = (
         <Menu>
-            <Item>个人中心</Item>
+            <Item><ThemeSwitcher title={'主题配置'}/></Item>
             <Item>
                 <div onClick={actionLogout}>退出</div>
             </Item>

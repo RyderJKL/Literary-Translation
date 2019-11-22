@@ -1,18 +1,36 @@
-import { observable, action } from 'mobx';
+import { observable, action, toJS } from 'mobx';
+import themeDefault, { DefaultSettings } from '@/config/default-settings';
 
-export class UIStore {
-    @observable public sidebarCollapse: boolean;
+export interface UIModel {
+    sidebarCollapse: boolean;
+    themeSettings: DefaultSettings;
+}
 
-    constructor () {
+export interface UIStore extends UIModel {
+    toggleSidebarCollapse(): void;
+    changeThemeSettings(key: keyof DefaultSettings, value: number | boolean | string): void;
+}
+
+export class UI implements UIStore {
+    @observable public sidebarCollapse;
+    @observable public themeSettings;
+
+    constructor() {
         this.sidebarCollapse = false;
+        this.themeSettings = themeDefault;
     }
 
     @action.bound
-    public toggleSidebarCollapse () {
+    public toggleSidebarCollapse(): void {
         this.sidebarCollapse = !this.sidebarCollapse;
+    }
+
+    @action.bound
+    public changeThemeSettings(key, value): void {
+        this.themeSettings[key] = value;
     }
 }
 
-const UI = new UIStore();
+const ui = new UI();
 
-export default UI;
+export default ui;

@@ -13,9 +13,8 @@ import styles from './side-bar.scss';
 
 const { Submenu, Item } = Menu;
 
-export interface SideBarProps {
+export interface SideBarProps extends MenuProps {
     collapse: boolean;
-    theme: MenuProps['theme'];
     menusData: IMenuItem[];
     defaultSelectedMenuKeys?: string;
     defaultOpenMenuKeys?: string;
@@ -24,11 +23,13 @@ export interface SideBarProps {
 }
 
 const Sidebar: React.FC<SideBarProps> = ({
+    logo = '@/static/logo.svg',
+    title = 'lego-pro',
     menusData,
     collapse,
     theme,
-    logo = '@/static/logo.svg',
-    title = 'lego-pro'
+    accordion = false,
+    mode = 'vertical'
 }) => {
     const [activeMenuIndex, setActiveMenuIndex] = React.useState<string>('home');
     const location = useLocation();
@@ -71,7 +72,7 @@ const Sidebar: React.FC<SideBarProps> = ({
                     {/*<h1 className={styles.legoProSidebarLogoTitle}>{title}</h1>*/}
                 </a>
             </div>
-            <Menu collapse={collapse} mode='vertical' theme={theme} accordion={false} activeIndex={activeMenuIndex}>
+            <Menu collapse={collapse} mode={mode} theme={theme} accordion={accordion} activeIndex={activeMenuIndex}>
                 {renderMenus(menusData)}
             </Menu>
         </Layout.Aside>

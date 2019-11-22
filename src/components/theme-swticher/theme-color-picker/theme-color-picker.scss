@@ -1,0 +1,18 @@
+@import '~@/styles/lego-ui-theme';
+
+.themeColorPicker {
+    display: flex;
+    justify-content: space-between;
+}
+
+.themeColorPickerItem {
+    list-style: none;
+    width: 25px;
+    height: 25px;
+    border: 1px solid $border-color;
+    border-radius: 2px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}

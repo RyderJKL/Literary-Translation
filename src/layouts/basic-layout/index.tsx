@@ -31,10 +31,11 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route }) => {
 
     useDocumentTitle(route, pathname);
 
-    const { sidebarCollapse, changeSidebarCollapse, isLogin } = useStore(store => ({
+    const { sidebarCollapse, changeSidebarCollapse, isLogin, navTheme } = useStore(store => ({
         changeSidebarCollapse: store.UI.toggleSidebarCollapse,
         isLogin: store.auth.isLogin,
-        sidebarCollapse: store.UI.sidebarCollapse
+        sidebarCollapse: store.UI.sidebarCollapse,
+        navTheme: store.UI.themeSettings.navTheme
     }));
 
     const settings = themeDefaultSettings;
@@ -58,7 +59,7 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route }) => {
 
     return (
         <Layout withAside={true} className={styles.basicLayoutContainer}>
-            <SideBar menusData={menusData} collapse={sidebarCollapse} theme={settings.navTheme} />
+            <SideBar menusData={menusData} collapse={sidebarCollapse} theme={navTheme} />
             <Layout>
                 <Layout.Header className={styles.basicLayoutRightBlockHeader}>
                     <BasicLayoutHeader
