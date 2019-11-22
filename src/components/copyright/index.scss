@@ -1,0 +1,11 @@
+@import '~lego-ui/dist/lib/styles/variables';
+
+.copyright {
+    margin: 0;
+    padding: ($base-padding * 1.2) ($base-padding * 1.6);
+    font-size: $font-size-base;
+    color: $text-color-light;
+    text-align: center;
+    line-height: $line-height-base;
+    box-sizing: border-box;
+}

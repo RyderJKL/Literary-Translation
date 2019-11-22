@@ -1,23 +1,18 @@
-import auth from './login';
 import common from './common';
 import UI from './ui';
-import role from './role';
-import { syncRouter } from '@/router/router';
-import routesStore from './routes';
 
 export const createStore = () => {
     return {
-        auth,
         common,
-        UI,
-        role,
-        router: syncRouter,
-        routes: routesStore
+        UI
     };
 };
 
 const rootStore = createStore();
 
 export type StoreType = typeof rootStore;
+export { default as  connect } from './connect';
+export * from './common';
+export * from './ui';
 
 export default rootStore;

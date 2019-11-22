@@ -7,8 +7,8 @@ import http from 'http';
 import chalk from 'chalk';
 import terminalLink from 'terminal-link';
 import Ora from 'ora';
-
-import templates from './templates/index';
+import fs from 'fs';
+import path from 'path';
 
 // const chalkError = chalk.bold.red;
 const chalkWarning = chalk.keyword('orange');
@@ -50,9 +50,19 @@ app.use((req, res, next) => {
 });
 
 stdWarning('---xxx---');
-templates.forEach(template => {
-    stdInfo(`${template.type}:: ${apiPrefix}${template.url}`);
-    app[template.type](`${apiPrefix}${template.url}`, (req, res) => res.send(template.response(req)));
+fs.readdirSync(path.join(__dirname, 'templates')).forEach((file) => {
+    if (path.parse(file).ext !== '.ts' || file === 'index.ts') {
+        return;
+    }
+
+    const tpls = require(path.join(__dirname, `templates/${file}`));
+
+    for (const tplName in tpls) {
+        const { type, url, response } = tpls[tplName];
+
+        stdInfo(`${type}:: ${apiPrefix}${url}`);
+        app[type](`${apiPrefix}${url}`, (req, res) => res.send(response(req)));
+    }
 });
 stdWarning('---xxx---');
 

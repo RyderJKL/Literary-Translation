@@ -1,59 +1,73 @@
-import { Roles } from '@/typings';
-import { postUserLogin } from '@/views/login/services/url';
+import { mock } from './';
+import * as config from '../../src/config';
 
-export interface IToken {
-    [index: string]: {
-        token: string;
-        username: string;
-    };
-}
+const adminToken = '666ecb94f2d49cd27ca0e0c48c36666';
+const basicToken = '2226ecb94f2d49cd27ca0e0c48c3222'
 
-export interface IUser {
-    [index: string]: {
-        roles: Roles;
-        avatar: '';
-        name: 'Super Admin';
-    };
-}
-
-const tokens: IToken = {
-    lego: {
-        token: 'admin-token',
-        username: 'lego'
-    }
+const userInfo = {
+    age: 18,
+    gender: 'man',
+    avatar: 'http://lego-ui.lvwan-inc.com/assets/avatar.jpg',
+    section: '绿湾大前端'
 };
 
-export const useInfo = {
-    url: '/user/info',
-    type: 'get',
-    response: () => {
-        return {
-            code: 60204,
-            message: 'Account and password are incorrect.'
-        };
-    }
+const adminUserInfo = {
+    username: 'superman',
+    accout: 'admin',
+    role: 1,
+    ...userInfo
 };
 
-export const userLogin = {
-    url: postUserLogin,
+const basicUserInfo= {
+    username: 'batman',
+    accout: 'user',
+    role: 2,
+    ...userInfo
+};
+
+// user login interface
+export const login = mock({
+    url: '/user/login',
     type: 'post',
-    response: config => {
-        const { username, password } = config.body;
+    response: (req) => {
+        const { username, password } = req.body;
 
-        // mock error
-        if (username !== 'lego' || password !== 'admin') {
+        if (!['admin', 'user'].includes(username) || password !== 'lego-ui') {
             return {
-                message: '用户名或者密码不正确'
+                code: -10001,
+                message: '账号不存在或密码错误！'
             };
         }
 
-        const token = tokens[username];
+        return {
+            code: 20000,
+            data: {
+                userInfo: username === 'admin' ? adminUserInfo : basicUserInfo,
+                token: username === 'admin' ? adminToken : basicToken
+            }
+        };
+    }
+});
+
+// get userInfo interface
+export const getUserinfo = mock({
+    url: '/user/info',
+    type: 'get',
+    response: (req) => {
+        const token = req.headers[config.auth_save_name];
+
+        if (![adminToken, basicToken].includes(token as string)) {
+            return {
+                code: -10002,
+                message: '用户未登录'
+            };
+        }
 
         return {
             code: 20000,
-            data: token
+            data: {
+                userInfo: token === adminToken ? adminUserInfo : basicUserInfo
+            }
         };
     }
-};
-
-export default [userLogin, useInfo];
+});

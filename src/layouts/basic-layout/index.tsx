@@ -1,46 +1,55 @@
 import * as React from 'react';
-import { Redirect, RouteComponentProps } from 'react-router-dom';
-import useStore from '@/hooks/use-store';
-import { getMenusData } from '@/layouts/utils';
-import useDocumentTitle from '@/hooks/useDocumentTitle';
-import { Layout } from 'lego-ui';
-
-import SideBar from './components/side-bar';
-import BasicLayoutFooter from './components/footer';
-import BasicLayoutHeader from './components/header';
-import BreadCrumbs from './components/bread-crumbs';
+import { RouteComponentProps } from 'react-router-dom';
+import { Layout, utils } from 'lego-ui';
+import { connect, UserInfo } from '@/store';
+import { rootPath, loginPath, routes } from '@/config/routes';
+import $request, { Response } from '@/utils/request';
+import { transforToMenu } from '@/utils/router';
 import Styles from './styles.scss';
 
-import { IRoute } from '@/typings';
-import themeDefaultSettings from '@/config/default-settings';
-
-export interface IBasicLayoutProps extends RouteComponentProps {
-    route: IRoute;
+export interface BasicLayoutProps  {
+    userInfo: UserInfo;
+    router: RouteComponentProps;
+    saveUserInfo: (userInfo: UserInfo) => void;
 }
 
-const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route, history }) => {
-    const {
-        location: { pathname }
-    } = history;
-    useDocumentTitle(route, pathname);
+console.log(transforToMenu(routes, rootPath));
 
-    const { sidebarCollapse, changeSidebarCollapse, isLogin } = useStore(store => ({
-        changeSidebarCollapse: store.UI.toggleSidebarCollapse,
-        isLogin: store.auth.isLogin,
-        sidebarCollapse: store.UI.sidebarCollapse
-    }));
+const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
+    const { children, userInfo, router, saveUserInfo } = props;
 
-    const settings = themeDefaultSettings;
+    React.useEffect(() => {
+        if (utils.isExist(userInfo)) {
+            return;
+        }
 
-    if (!isLogin) {
-        return <Redirect to={'/user/login'} />;
-    }
+        $request.get('/user/info')
+            .subscribe((res: Response) => {
+                if (res.code !== 20000) {
+                    return router.history.replace(`${rootPath}${loginPath}`);
+                }
 
-    const menusData = getMenusData(route.routes);
+                saveUserInfo(res.data.userInfo);
+            });
+    }, []);
+
+    // const { sidebarCollapse, changeSidebarCollapse, isLogin } = useStore(store => ({
+    //     changeSidebarCollapse: store.UI.toggleSidebarCollapse,
+    //     isLogin: store.auth.isLogin,
+    //     sidebarCollapse: store.UI.sidebarCollapse
+    // }));
+    //
+    // const settings = themeDefaultSettings;
+    //
+    // if (!isLogin) {
+    //     return <Redirect to={'/user/login'} />;
+    // }
+
+    // const menusData = getMenusData(route.routes);
 
     return (
         <Layout withAside={true} className={Styles.basicLayoutContainer}>
-            <SideBar menusData={menusData} collapse={sidebarCollapse} theme={settings.navTheme} />
+            {/*<SideBar menusData={menusData} collapse={sidebarCollapse} theme={settings.navTheme} />
             <Layout>
                 <Layout.Header>
                     <BasicLayoutHeader
@@ -55,9 +64,13 @@ const BasicLayout: React.FC<IBasicLayoutProps> = ({ children, route, history }) 
                 <Layout.Footer>
                     <BasicLayoutFooter />
                 </Layout.Footer>
-            </Layout>
+            </Layout>*/}
+            { children }
         </Layout>
     );
 };
 
-export default BasicLayout;
+export default connect(BasicLayout, (store) => ({
+    userInfo: store.common.userInfo,
+    saveUserInfo: store.common.saveUserInfo
+}));

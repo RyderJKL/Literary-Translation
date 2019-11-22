@@ -50,9 +50,9 @@ class CustomInterceptor {
 }
 
 // 创建实例
-const request$ = new Rjax({
+const $request = new Rjax({
     // 设置请求基路径，可选
-    baseURL: '',
+    baseURL: '/mock-api/v1',
     // 设置请求超时时间，可选
     timeout: 100000,
     // 是用作 xsrf token 的值的cookie的名称，默认'XSRF-TOKEN'，可选
@@ -70,4 +70,14 @@ const request$ = new Rjax({
     interceptors: [new CustomInterceptor()]
 });
 
-export default request$;
+export interface Data {
+    [ key: string]: any;
+}
+
+export interface Response {
+    code: number;
+    message?: string;
+    data?: Data;
+}
+
+export default $request;

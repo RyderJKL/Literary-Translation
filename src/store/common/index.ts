@@ -1,15 +1,20 @@
 import { observable, action } from 'mobx';
 
+export interface UserInfo {
+    account: string;
+    role: 1 | 2;
+    username: string;
+    age: number;
+    gender: 'man'| 'womam';
+    avatar: string;
+    section: string;
+};
+
 export class CommonStore {
-    @observable public id = '123';
-    @observable public name = 'jack';
+    @observable public userInfo: UserInfo;
 
     @action
-    public changeName = value => {
-        this.name = value;
-    };
+    public saveUserInfo = (userInfo: UserInfo) => this.userInfo = userInfo;
 }
 
-const common = new CommonStore();
-
-export default common;
+export default new CommonStore();

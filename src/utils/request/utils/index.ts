@@ -1,5 +1,6 @@
 import { HttpResponse } from 'rjax';
-import { API_PREFIX } from '@/config';
+import * as config from '@/config';
+import { getToken } from '@/utils/auth';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
@@ -23,7 +24,7 @@ export const requestInterceptor = req => {
     // 如果是在开发环境，并且该请求开启了 mock，则将该次请求处理成 mock-api
     if (isDevelopment && useMockApi) {
         // "/api/user/login" => "/mock-api/v1/user/login"
-        url = url.replace(`${API_PREFIX}`, `${process.env.MOCK_API}`);
+        url = url.replace(`${config.API_PREFIX}`, `${process.env.MOCK_API}`);
     }
 
     // 一定要用clone的方法进行拦截修改，为了保持请求的不可变性！！！！
@@ -31,9 +32,11 @@ export const requestInterceptor = req => {
         // 修改请求的url
         url,
         // 修改请求体
-        body: { ...req.body }
+        body: { ...req.body },
         // 添加请求头
-        // headers: req.headers.set('Authorization', 'authToken'),
+        headers: config.auth_save_method === 'storage'
+            ? req.headers.set(config.auth_save_name, getToken())
+            : req.headers
     });
     return newReq;
 };
