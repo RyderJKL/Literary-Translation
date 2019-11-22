@@ -11,10 +11,6 @@
     "build:sit": "cross-env NODE_ENV=production && npm run check-env && env_config=sit node webpack-config/build.js",
     "lint-fix": "tslint --fix 'src/**/*.ts' 'src/**/*.tsx'"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged",
-    "commit-msg": "node scripts/verifyCommitMsg.js"
-  },
   "lint-staged": {
     "./src/**/*.{ts,tsx}": [
       "tslint --fix",
