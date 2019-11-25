@@ -22,10 +22,10 @@ export interface ThemeSwitcherProps {
 const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ title = '主题配置', drawerWidth = 280 }) => {
     const [themeDrawVisible, setThemeDrawVisible] = useState(false);
 
-    const { themeDefault, actionChangeThemeSettings } = userStore(store => ({
-        themeDefault: store.UI.themeSettings,
-        actionChangeThemeSettings: store.UI.changeThemeSettings
-    }));
+    // const { themeDefault, actionChangeThemeSettings } = userStore(store => ({
+    //     themeDefault: store.UI.themeSettings,
+    //     actionChangeThemeSettings: store.UI.changeThemeSettings
+    // }));
 
     const ItemWrapper: React.FC<{ itemTitle: string }> = ({ itemTitle, children }) => (
         <div className={style.itemWrapper}>
@@ -56,10 +56,10 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ title = '主题配置', d
                 <Drawer.Header title={title} onClose={() => setThemeDrawVisible(false)} />
                 <Drawer.Body>
                     <ItemWrapper itemTitle={'导航栏主题'}>
-                        <ThemeMode
-                            theme={themeDefault.navTheme}
-                            onChange={navTheme => actionChangeThemeSettings('navTheme', navTheme)}
-                        />
+                        {/*/!*<ThemeMode*!/*/}
+                        {/*/!*    theme={themeDefault.navTheme}*!/*/}
+                        {/*/!*    onChange={navTheme => actionChangeThemeSettings('navTheme', navTheme)}*!/*/}
+                        {/*/>*/}
                     </ItemWrapper>
                     <Divider />
                     <ItemWrapper itemTitle={'主题色值'}>

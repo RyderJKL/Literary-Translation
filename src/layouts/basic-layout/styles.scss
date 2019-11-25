@@ -1,13 +1,10 @@
 @import '~@/styles/variables.scss';
 
 .basicLayoutContainer {
-<<<<<<< HEAD
     min-height: 100vh;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-=======
-    background: $background-color-base;
 }
 
 .basicLayoutRightBlockHeader {
@@ -16,5 +13,4 @@
 
 .basicLayoutRightBlockContent {
     min-height: 40vh;
->>>>>>> feature/cherong
 }
