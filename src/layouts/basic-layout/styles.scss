@@ -1,8 +1,20 @@
 @import '~@/styles/variables.scss';
 
 .basicLayoutContainer {
+<<<<<<< HEAD
     min-height: 100vh;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+=======
+    background: $background-color-base;
+}
+
+.basicLayoutRightBlockHeader {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06)
+}
+
+.basicLayoutRightBlockContent {
+    min-height: 40vh;
+>>>>>>> feature/cherong
 }

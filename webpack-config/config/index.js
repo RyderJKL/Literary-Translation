@@ -1,10 +1,12 @@
 'use strict';
 const path = require('path');
+const appName = require('../../package').name;
 // const devConfig = require('./dev.env');
 
 const MOCK_PORT = 8123;
 
 module.exports = {
+    appName: appName,
     siteSettings: {
         title: 'lego-ui AdminPro',
         // 相对于项目根目录
@@ -13,13 +15,13 @@ module.exports = {
     dev: {
         // Paths
         assetsPublicPath: '/',
-        // assetsSubDirectory: 'static',
+        assetsSubDirectory: 'static',
         proxyTable: {
             '/api': {
                 target: `http://localhost/`
             },
             '/mock-api/v1': {
-                target: `http://localhost:${MOCK_PORT}`,
+                target: `http://localhost:${MOCK_PORT}`
             }
         },
 
@@ -97,4 +99,4 @@ module.exports = {
         // `npm run build:prod --generate_report`
         generateAnalyzerReport: process.env.npm_config_generate_report || false
     }
-}
+};

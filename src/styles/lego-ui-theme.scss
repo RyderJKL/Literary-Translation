@@ -1,1 +1,82 @@
+// 默认字体图标
 $iconfont: '~@/static/iconfonts/';
+
+// 类名前缀
+$prefix: 'lego-pro';
+
+// 默认字体
+$global-font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑',
+    Arial, sans-serif;
+
+// 主题颜色
+$primary-color: #7774e7;
+$primary-active-color: #8c8aeb;
+
+// 危险颜色
+$danger-color: #ed4014;
+$danger-active-color: #f16643;
+
+// 提示颜色
+$info-color: #1890ff;
+$success-color: #52c41a;
+$error-color: #f5222d;
+$warning-color: #faad14;
+
+// 边框颜色
+$border-color: #e6ecf5;
+
+// 禁用颜色
+$disabled-color: #e9ecef;
+
+// 背景颜色
+$background-color-base: #f8f8f8;
+$background-color-active: lighten($primary-color, 30%);
+$background-color-light: #fff;
+
+// 文字颜色
+$text-color-base: #414a63;
+$text-color-gray: #616a6e;
+$text-color-light: #888da8;
+
+// 深色
+$dark-border-color: #000;
+$dark-disabled-color: #6b6e67;
+$dark-background-color: #001529;
+$dark-text-color-base: #fff;
+$dark-text-color-gray: #cdc7c7;
+$dark-text-color-light: #7f7e7e;
+
+// 字体大小
+$font-size-base: 14px;
+$font-size-small: $font-size-base - 2px;
+$font-size-large: $font-size-base + 2px;
+
+// 菜单 layout.aside
+$menu-size-base: 58px;
+
+// 标准行高
+$line-height-base: 1.5;
+
+// io组件基准高度
+$io-height-base: 32px;
+$io-height-small: 26px;
+$io-height-large: 42px;
+
+// 下拉组件最高高度
+$dropdown-max-height: 250px;
+
+// 全局圆角
+$border-radius-base: 3px;
+
+// 组件填充
+$base-padding: 10px;
+
+// 连接颜色
+$link-color: #2d8cf0;
+$link-color-active: #57a3f3;
+
+// 动画时间
+$anim-duration: 0.2s;
+
+// 遮罩背景颜色
+$mask-color: rgba(0, 0, 0, 0.45);

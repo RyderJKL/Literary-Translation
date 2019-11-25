@@ -6,18 +6,13 @@
         // 用实验性的装饰器特性
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
-        "target": "es6",
-        "lib": [
-            "dom",
-            "es7"
-        ],
+        "target": "es5",
+        "lib": ["dom", "es7"],
         "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"],
             "packages/*": ["./packages/*"]
         },
-        // 未使用的变量
-//        "noUnusedLocals": true,
         "skipLibCheck": true,
         "module": "ESNext",
         "moduleResolution": "node",

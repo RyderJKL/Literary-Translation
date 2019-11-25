@@ -22,16 +22,14 @@ const SideMenuLayout: React.SFC<SideMenuLayoutPorps> = ({ children, collapse, th
     return (
         <Layout withAside={true} className={styles.sideLayoutContainer}>
             <Layout.Aside className={asideClass} collapse={collapse}>
-                <Logo collapse={collapse} theme={theme}/>
+                <Logo collapse={collapse} theme={theme} />
 
-                <NavMenu mode='vertical' theme={theme}/>
+                <NavMenu mode='vertical' theme={theme} />
             </Layout.Aside>
             <Layout>
-                <Layout.Content>
-                    { children }
-                </Layout.Content>
+                <Layout.Content>{children}</Layout.Content>
                 <Layout.Footer>
-                    <Copyright/>
+                    <Copyright />
                 </Layout.Footer>
             </Layout>
         </Layout>

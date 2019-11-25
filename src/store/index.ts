@@ -9,7 +9,7 @@ export const createStore = () => {
 const rootStore = createStore();
 
 export type StoreType = typeof rootStore;
-export { default as  connect } from './connect';
+export { default as connect } from './connect';
 export * from './common';
 
 export default rootStore;

@@ -10,7 +10,7 @@ import styles from './styles.scss';
 import SideMenuLayout from './components/sidemenu-layout';
 import TopMenuLayout from './components/topmenu-layout';
 
-export interface BasicLayoutProps  {
+export interface BasicLayoutProps {
     userInfo: UserInfo;
     router: RouteComponentProps;
     saveUserInfo: (userInfo: UserInfo) => void;
@@ -19,7 +19,6 @@ export interface BasicLayoutProps  {
 export type BasicLayoutState = DefaultSettings;
 
 class BasicLayout extends React.PureComponent<BasicLayoutProps, BasicLayoutState> {
-
     public constructor(props: BasicLayoutProps) {
         super(props);
 
@@ -28,9 +27,7 @@ class BasicLayout extends React.PureComponent<BasicLayoutProps, BasicLayoutState
             ...JSON.parse(localStorage.getItem(config.SETTINGS_STORAGE_NAME))
         };
 
-        [
-            'updateCollapse'
-        ].forEach((fn) => {
+        ['updateCollapse'].forEach(fn => {
             this[fn] = this[fn].bind(this);
         });
     }
@@ -40,11 +37,14 @@ class BasicLayout extends React.PureComponent<BasicLayoutProps, BasicLayoutState
     }
 
     private updateCollapse() {
-        this.setState({
-            collapse: !this.state
-        }, () => {
-            this.saveLocalStorage();
-        });
+        this.setState(
+            {
+                collapse: !this.state
+            },
+            () => {
+                this.saveLocalStorage();
+            }
+        );
     }
 
     public componentDidMount() {
@@ -54,14 +54,13 @@ class BasicLayout extends React.PureComponent<BasicLayoutProps, BasicLayoutState
             return;
         }
 
-        $request.get('/user/info')
-            .subscribe((res: Response) => {
-                if (res.code !== 20000) {
-                    return router.history.replace(`${rootPath}${loginPath}`);
-                }
+        $request.get('/user/info').subscribe((res: Response) => {
+            if (res.code !== 20000) {
+                return router.history.replace(`${rootPath}${loginPath}`);
+            }
 
-                saveUserInfo(res.data.userInfo);
-            });
+            saveUserInfo(res.data.userInfo);
+        });
     }
 
     public render() {
@@ -70,27 +69,21 @@ class BasicLayout extends React.PureComponent<BasicLayoutProps, BasicLayoutState
 
         return (
             <section className={styles.basicLayoutContainer}>
-                {
-                    layout === 'sidemenu' &&
-                    <SideMenuLayout
-                        theme={navTheme}
-                        collapse={collapse}
-                        updateCollapse={this.updateCollapse}>
-                        { children }
+                {layout === 'sidemenu' && (
+                    <SideMenuLayout theme={navTheme} collapse={collapse} updateCollapse={this.updateCollapse}>
+                        {children}
                     </SideMenuLayout>
-                }
-                {
-                    layout === 'topmenu' &&
-                    <TopMenuLayout>
-                        { children }
-                    </TopMenuLayout>
-                }
+                )}
+                {layout === 'topmenu' && <TopMenuLayout>{children}</TopMenuLayout>}
             </section>
         );
     }
 }
 
-export default connect(BasicLayout, (store) => ({
-    userInfo: store.common.userInfo,
-    saveUserInfo: store.common.saveUserInfo
-}));
+export default connect(
+    BasicLayout,
+    store => ({
+        userInfo: store.common.userInfo,
+        saveUserInfo: store.common.saveUserInfo
+    })
+);

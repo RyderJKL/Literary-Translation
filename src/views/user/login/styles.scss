@@ -2,16 +2,16 @@
 @import '~lego-ui/dist/lib/styles/mixin';
 
 .loginContainer {
-   width: 100%;
-   height: 100vh;
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-   background-color: #ebebeb;
-   background-image: url('~@/static/images/login-bg.jpg');
-   background-repeat: no-repeat;
-   background-position: left bottom;
-   background-size: 40% auto;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #ebebeb;
+    background-image: url('~@/static/images/login-bg.jpg');
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: 40% auto;
 }
 
 .loginCardWrapper {

@@ -1,0 +1,15 @@
+@import '~@/styles/variables';
+
+.basicLayoutHeaderContainer {
+    display: flex;
+    background: $background-color-light;
+    justify-content: space-between;
+    width: 100%;
+    line-height: 38px;
+}
+
+.basicLayoutHeaderTrigger {
+}
+
+.basicLayoutRight {
+}
