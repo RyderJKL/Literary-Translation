@@ -1,0 +1,10 @@
+import { IRoute, IMenuItem, MenuItemPropertyProps } from '@/typings';
+export declare function getMenusData(routesData: IRoute[]): IMenuItem[];
+export declare function getFlatMenuKeys(menusData: IMenuItem[], menuItemPropertyProps?: MenuItemPropertyProps): string[];
+export declare function pathnameToList(pathname: string): string[];
+export declare function _getFlatMenus(menusData: IMenuItem[]): IMenuItem[];
+export declare const getFlatMenus: typeof _getFlatMenus;
+export declare function _matchMenusWithPathname(menusDta: IMenuItem[], pathname: string): IMenuItem[];
+export declare const matchMenusWithPathname: typeof _matchMenusWithPathname;
+export declare function getCurrentMenuItemWitPathname(route: IRoute, pathname?: string): IMenuItem;
+export declare function getSelectedMenusKey(menusDta: IMenuItem[], pathname: string): string[];

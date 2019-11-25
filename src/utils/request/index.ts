@@ -18,23 +18,11 @@ class CustomInterceptor {
         // 拦截响应
         return next.handle(newReq).pipe(
             // tap((x) => console.log('拦截响应', x)),
-<<<<<<< HEAD
-            // mergeMap(event => {
-            //     // 这里可根据后台接口约定自行判断
-            //
-            //     // for error
-            //     if (event instanceof HttpResponse && (event.status !== 200 || !event.body.code)) {
-            //         return new Observable(observer => observer.error(event));
-            //     }
-            //
-            //     return new Observable(observer => observer.next(event));
-            // }),
-=======
             mergeMap(event => {
                 // 这里可根据后台接口约定自行判断
 
                 // for error
-                if (event instanceof HttpResponse && (event.status !== 200)) {
+                if (event instanceof HttpResponse && event.status !== 200) {
                     return new Observable(observer => observer.error(event));
                 }
 
@@ -45,7 +33,6 @@ class CustomInterceptor {
 
                 return new Observable(observer => observer.next(event));
             }),
->>>>>>> be5f87304e68a81ef9eed1a77935480770d03725
             catchError(res => {
                 // network error
                 if (res.status !== 200) {

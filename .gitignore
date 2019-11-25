@@ -1,7 +1,6 @@
 node_modules/
 .DS_Store.
 npm-debug.*
-dist/
 lib/
 package-lock.json
 .idea/
