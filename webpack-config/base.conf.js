@@ -11,11 +11,13 @@ module.exports = {
     resolve: {
         modules: [
             resolve('src'),
+            resolve('packages'),
             resolve('node_modules'),
         ],
         extensions: ['.ts', '.tsx', '.js', '.json', '.css', '.scss'],
         alias: {
-            '@': resolve('src')
+            '@': resolve('src'),
+            'packages': resolve('packages')
         }
     },
     output: {
