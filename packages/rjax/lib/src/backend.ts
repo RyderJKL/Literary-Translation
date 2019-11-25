@@ -5,9 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Observable } from 'rxjs';
-import { HttpRequest } from './request';
-import { HttpEvent } from './response';
+
+import {Observable} from 'rxjs';
+import {HttpRequest} from './request';
+import {HttpEvent} from './response';
+
 /**
  * Transforms an `HttpRequest` into a stream of `HttpEvent`s, one of which will likely be a
  * `HttpResponse`.
@@ -20,9 +22,10 @@ import { HttpEvent } from './response';
  *
  * @publicApi
  */
-export declare abstract class HttpHandler {
-    abstract handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
+export abstract class HttpHandler {
+  abstract handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
 }
+
 /**
  * A final `HttpHandler` which will dispatch the request via browser HTTP APIs to a backend.
  *
@@ -33,6 +36,6 @@ export declare abstract class HttpHandler {
  *
  * @publicApi
  */
-export declare abstract class HttpBackend implements HttpHandler {
-    abstract handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
+export abstract class HttpBackend implements HttpHandler {
+  abstract handle(req: HttpRequest<any>): Observable<HttpEvent<any>>;
 }
