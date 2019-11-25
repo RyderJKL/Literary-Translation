@@ -20,7 +20,7 @@ export interface LoginFormProps extends CreateFormProps {
 
 const { preClass } = utils;
 
-const LoginForm: React.FC<LoginFormProps> = (props) => {
+const LoginForm: React.FC<LoginFormProps> = props => {
     const {
         form: { Validator, verify },
         submitLoading,
@@ -67,7 +67,10 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
                         placeholder='密码： lego-ui'
                         prefix={<Icon type='password' />}
                         suffix={
-                            <button onMouseDown={() => setPasswordVisible(!passwordVisible)} className={styles.pwdVisbleBtn}>
+                            <button
+                                onMouseDown={() => setPasswordVisible(!passwordVisible)}
+                                className={styles.pwdVisibleBtn}
+                            >
                                 <Icon type={passwordVisible ? 'eye-close' : 'eye'} />
                             </button>
                         }

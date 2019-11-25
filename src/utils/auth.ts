@@ -17,7 +17,7 @@ function getCookie(key: string): string {
         res = parts.slice(1).join('=');
 
         if (res.charAt(0) === '"') {
-            res = res.slice(1, -1)
+            res = res.slice(1, -1);
         }
 
         break;
@@ -31,19 +31,19 @@ export function logined(): boolean {
 }
 
 export function updateAutoLogin(auto: boolean) {
-    localStorage.setItem(config.auth_clean_save_name, auto.toString());
+    localStorage.setItem(config.AUTH_CLEAN_SAVE_NAME, auto.toString());
 }
 
 export function updateToken(token: string) {
-    if (config.auth_save_method === 'cookie') {
+    if (config.AUTH_SAVE_METHOD === 'cookie') {
         return;
     }
 
-    localStorage.setItem(config.auth_save_name, token);
+    localStorage.setItem(config.AUTH_SAVE_NAME, token);
 }
 
 export function getToken(): string {
-    return config.auth_save_method === 'storage'
-        ? localStorage.getItem(config.auth_save_name)
-        : getCookie(config.auth_save_name);
+    return config.AUTH_SAVE_METHOD === 'storage'
+        ? localStorage.getItem(config.AUTH_SAVE_NAME) || ''
+        : getCookie(config.AUTH_SAVE_NAME) || '';
 }

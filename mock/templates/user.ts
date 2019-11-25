@@ -1,8 +1,8 @@
 import { mock } from './';
-import * as config from '../../src/config';
+import * as config from '@/config';
 
 const adminToken = '666ecb94f2d49cd27ca0e0c48c36666';
-const basicToken = '2226ecb94f2d49cd27ca0e0c48c3222'
+const basicToken = '2226ecb94f2d49cd27ca0e0c48c3222';
 
 const userInfo = {
     age: 18,
@@ -18,7 +18,7 @@ const adminUserInfo = {
     ...userInfo
 };
 
-const basicUserInfo= {
+const basicUserInfo = {
     username: 'batman',
     accout: 'user',
     role: 2,
@@ -29,7 +29,7 @@ const basicUserInfo= {
 export const login = mock({
     url: '/user/login',
     type: 'post',
-    response: (req) => {
+    response: req => {
         const { username, password } = req.body;
 
         if (!['admin', 'user'].includes(username) || password !== 'lego-ui') {
@@ -53,8 +53,8 @@ export const login = mock({
 export const getUserinfo = mock({
     url: '/user/info',
     type: 'get',
-    response: (req) => {
-        const token = req.headers[config.auth_save_name];
+    response: req => {
+        const token = req.headers[config.AUTH_SAVE_NAME];
 
         if (![adminToken, basicToken].includes(token as string)) {
             return {

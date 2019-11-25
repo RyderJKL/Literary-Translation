@@ -34,8 +34,8 @@ export const requestInterceptor = req => {
         // 修改请求体
         body: { ...req.body },
         // 添加请求头
-        headers: config.auth_save_method === 'storage'
-            ? req.headers.set(config.auth_save_name, getToken())
+        headers: config.AUTH_SAVE_METHOD === 'storage'
+            ? req.headers.set(config.AUTH_SAVE_NAME, getToken())
             : req.headers
     });
     return newReq;

@@ -18,32 +18,32 @@ ReactDom.render(
     <StoreProvider>
         <BrowserRouter>
             <Switch>
-                {
-                    compileRoutes(routes, rootPath).map((route) => {
-                        const { path, title, redirect, layout, component, requiredAuth } = route;
+                {compileRoutes(routes, rootPath).map(route => {
+                    const { path, title, redirect, layout, component, requiredAuth } = route;
 
-                        return (
-                            <Route key={path} path={path} exact={true} render={(props) => {
-
-                                document.title = `${title} | ${config.site_name}`;
+                    return (
+                        <Route
+                            key={path}
+                            path={path}
+                            exact={true}
+                            render={props => {
+                                document.title = `${title} | ${config.SITE_NAME}`;
 
                                 if (utils.isExist(redirect)) {
-                                    return <Redirect to={redirect} from={path}/>
+                                    return <Redirect to={redirect} from={path} />;
                                 }
 
                                 if (requiredAuth && !logined()) {
-                                    return <Redirect to={`${rootPath}${loginPath}?redirect=${path}`} from={path}/>
+                                    return <Redirect to={`${rootPath}${loginPath}?redirect=${path}`} from={path} />;
                                 }
 
-                                return <DynamicImport
-                                            title={title}
-                                            layout={layout}
-                                            router={props}
-                                            component={component}/>;
-                            }}/>
-                        );
-                    })
-                }
+                                return (
+                                    <DynamicImport title={title} layout={layout} router={props} component={component} />
+                                );
+                            }}
+                        />
+                    );
+                })}
             </Switch>
         </BrowserRouter>
     </StoreProvider>,

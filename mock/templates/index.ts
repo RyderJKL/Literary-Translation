@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { Response } from '../../src/utils/request';
+import { Response } from '@/utils/request';
 
 export interface MockTpl {
     url: string;
