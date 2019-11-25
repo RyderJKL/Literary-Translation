@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { withRouter, Link, RouteComponentProps } from 'react-router-dom';
 import { Observable, throwError as _throw, timer } from 'rxjs';
-import { switchMap, tap, debounceTime, finalize, retry, retryWhen, catchError, delayWhen } from 'rxjs/operators';
+import { switchMap, tap, debounceTime, retry, retryWhen, catchError, delayWhen } from 'rxjs/operators';
 import { useEventCallback } from 'rxjs-hooks';
 import { Message, Card, Alert, utils } from 'lego-ui';
 import LoginForm, { LoginFormValues } from './components/login-form';
-import { Response } from '@/utils/request';
 import { updateAutoLogin, updateToken } from '@/utils/auth';
 import { parseQueryString } from '@/utils/url-parse';
-import $request from '@/utils/request';;
+import $request, { Response } from '@/utils/request';;
 import useStore from '@/hooks/use-store';
 import styles from './styles.scss';
 
@@ -36,6 +35,8 @@ const Login: React.FC<LoginProps> = ({ retryCount, retryDelayTime, history }) =>
                 }),
                 switchMap((payload) => $request.post('/user/login', payload)),
                 tap((res: Response) => {
+                    setLoading(false)
+
                     if (res.code !== 20000) {
                         return setErrMsg(res.message);
                     }
@@ -45,7 +46,6 @@ const Login: React.FC<LoginProps> = ({ retryCount, retryDelayTime, history }) =>
 
                     history.replace(parseQueryString().redirect || '/');
                 }),
-                finalize(() => setLoading(false)),
                 retry(retryCount),
                 catchError(() => {
                     Message.$message({
@@ -76,7 +76,7 @@ const Login: React.FC<LoginProps> = ({ retryCount, retryDelayTime, history }) =>
                 <Card className={styles.loginCard}>
                     <div className={styles.loginHeader}>
                         <div className={styles.logo}>
-                            <img src={require('@/static/logo.svg')} />
+                            <img src={require('@/static/logo/primary.svg')} />
                         </div>
                         <h1>lego-ui AdminPro</h1>
                     </div>
@@ -87,7 +87,7 @@ const Login: React.FC<LoginProps> = ({ retryCount, retryDelayTime, history }) =>
                         submitButtonDisabled={submitButtonDisabled}
                     />
                     <div className={styles.loginFooter}>
-                        尚未拥有账号？<Link to='/user/sign'>注册</Link>
+                        尚未拥有账号？<Link to='/user/sign-up'>注册</Link>
                     </div>
                 </Card>
             </div>

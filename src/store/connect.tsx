@@ -11,6 +11,7 @@ export default function connect(
     store: (store: StoreType) => ConnectStore
 ) {
     const connectComponent: React.SFC<React.Props<ConnectStore>> = (props, ref: React.Ref<any>) => {
+        // tslint:disable-next-line:react-hooks-nesting
         const globalStore = React.useContext(storeContext);
 
         return React.createElement(component, { ...props, ...store(globalStore), ref });

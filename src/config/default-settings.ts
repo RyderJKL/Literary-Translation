@@ -11,17 +11,17 @@ export interface DefaultSettings {
     contentWidth: ContentWidth;
     fixedHeader: boolean;
     autoHideHeader: boolean;
-    fixSidebar: boolean;
+    collapse: boolean;
 }
 
-const theme: DefaultSettings = {
-    navTheme: 'dark',
+const defaultSettings: DefaultSettings = {
+    navTheme: 'light',
     primaryColor: '#1890FF',
     layout: 'sidemenu',
     contentWidth: 'Fluid',
     fixedHeader: false,
     autoHideHeader: false,
-    fixSidebar: false,
+    collapse: false
 };
 
-export default theme;
+export default defaultSettings;

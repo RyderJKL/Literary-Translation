@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Layout, utils } from 'lego-ui';
+import { utils } from 'lego-ui';
 import { connect, UserInfo } from '@/store';
-import { rootPath, loginPath, routes } from '@/config/routes';
+import { rootPath, loginPath } from '@/config/routes';
+import * as config from '@/config';
+import defaultSettings, { DefaultSettings } from '@/config/default-settings';
 import $request, { Response } from '@/utils/request';
-import { transforToMenu } from '@/utils/router';
-import Styles from './styles.scss';
+import styles from './styles.scss';
+import SideMenuLayout from './components/sidemenu-layout';
+import TopMenuLayout from './components/topmenu-layout';
 
 export interface BasicLayoutProps  {
     userInfo: UserInfo;
@@ -13,12 +16,40 @@ export interface BasicLayoutProps  {
     saveUserInfo: (userInfo: UserInfo) => void;
 }
 
-console.log(transforToMenu(routes, rootPath));
+export type BasicLayoutState = DefaultSettings;
 
-const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
-    const { children, userInfo, router, saveUserInfo } = props;
+class BasicLayout extends React.PureComponent<BasicLayoutProps, BasicLayoutState> {
 
-    React.useEffect(() => {
+    public constructor(props: BasicLayoutProps) {
+        super(props);
+
+        this.state = {
+            ...defaultSettings,
+            ...JSON.parse(localStorage.getItem(config.SETTINGS_STORAGE_NAME))
+        };
+
+        [
+            'updateCollapse'
+        ].forEach((fn) => {
+            this[fn] = this[fn].bind(this);
+        });
+    }
+
+    private saveLocalStorage() {
+        localStorage.setItem(config.SETTINGS_STORAGE_NAME, JSON.stringify(this.state));
+    }
+
+    private updateCollapse() {
+        this.setState({
+            collapse: !this.state
+        }, () => {
+            this.saveLocalStorage();
+        });
+    }
+
+    public componentDidMount() {
+        const { userInfo, saveUserInfo, router } = this.props;
+
         if (utils.isExist(userInfo)) {
             return;
         }
@@ -31,44 +62,33 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
 
                 saveUserInfo(res.data.userInfo);
             });
-    }, []);
+    }
 
-    // const { sidebarCollapse, changeSidebarCollapse, isLogin } = useStore(store => ({
-    //     changeSidebarCollapse: store.UI.toggleSidebarCollapse,
-    //     isLogin: store.auth.isLogin,
-    //     sidebarCollapse: store.UI.sidebarCollapse
-    // }));
-    //
-    // const settings = themeDefaultSettings;
-    //
-    // if (!isLogin) {
-    //     return <Redirect to={'/user/login'} />;
-    // }
+    public render() {
+        const { children } = this.props;
+        const { layout, navTheme, collapse } = this.state;
 
-    // const menusData = getMenusData(route.routes);
-
-    return (
-        <Layout withAside={true} className={Styles.basicLayoutContainer}>
-            {/*<SideBar menusData={menusData} collapse={sidebarCollapse} theme={settings.navTheme} />
-            <Layout>
-                <Layout.Header>
-                    <BasicLayoutHeader
-                        sidebarCollapse={sidebarCollapse}
-                        onChangeSidebarCollapse={changeSidebarCollapse}
-                    />
-                </Layout.Header>
-                <Layout.Content className={Styles.basicLayoutContent}>
-                    <BreadCrumbs menusData={menusData} />
-                    {children}
-                </Layout.Content>
-                <Layout.Footer>
-                    <BasicLayoutFooter />
-                </Layout.Footer>
-            </Layout>*/}
-            { children }
-        </Layout>
-    );
-};
+        return (
+            <section className={styles.basicLayoutContainer}>
+                {
+                    layout === 'sidemenu' &&
+                    <SideMenuLayout
+                        theme={navTheme}
+                        collapse={collapse}
+                        updateCollapse={this.updateCollapse}>
+                        { children }
+                    </SideMenuLayout>
+                }
+                {
+                    layout === 'topmenu' &&
+                    <TopMenuLayout>
+                        { children }
+                    </TopMenuLayout>
+                }
+            </section>
+        );
+    }
+}
 
 export default connect(BasicLayout, (store) => ({
     userInfo: store.common.userInfo,

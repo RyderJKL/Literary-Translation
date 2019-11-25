@@ -10,3 +10,4 @@ export const AUTH_CLEAN_SAVE_NAME = 'lego-ui-admin-pro-auto-login';
 
 export const SITE_NAME = 'lego-ui AdminPro';
 
+export const SETTINGS_STORAGE_NAME = 'lego-ui AdminPro settings';

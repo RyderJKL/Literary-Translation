@@ -5,7 +5,7 @@ import { utils } from 'lego-ui';
 import styles from './index.scss';
 
 export interface CopyrightProps {
-    className: string;
+    className?: string;
 }
 
 const currentYear = moment().year();

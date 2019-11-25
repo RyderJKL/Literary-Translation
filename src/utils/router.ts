@@ -4,10 +4,10 @@ import { utils } from 'lego-ui';
 
 export type RealRoute = OmitProps<Route, 'routes' | 'icon'>;
 
-export function compileRoutes(routes: Route[], rootPath: string): RealRoute[] {
+export function compileRoutes(customRoutes: Route[], rootPath: string): RealRoute[] {
     let realRoutes: RealRoute[] = [];
 
-    routes.forEach((route) => {
+    customRoutes.forEach((route) => {
         const { path, title, redirect, layout, component, requiredAuth, routes } = route;
 
         if (utils.isExist(component) || utils.isExist(redirect)) {
@@ -35,12 +35,13 @@ export function compileRoutes(routes: Route[], rootPath: string): RealRoute[] {
     return realRoutes;
 }
 
-export interface RouteMenu extends OmitProps<Route, 'routes' | 'layout' | 'component' | 'routes'> {
+export interface RouteMenu extends OmitProps<Route, 'routes' | 'layout' | 'component'> {
     type: 'item' | 'group';
+    items: RouteMenu[];
 }
 
-export function transforToMenu(routes: Route[], rootPath: string): RouteMenu[] {
-    const mainIndex = routes.findIndex((route) => route.path === '');
+export function transforToMenu(customRoutes: Route[], rootPath: string): RouteMenu[] {
+    const mainIndex = customRoutes.findIndex((route) => route.path === '');
 
     const pickItems = (childRoutes: Route[]): RouteMenu[] => {
         const collect = [];
@@ -69,5 +70,5 @@ export function transforToMenu(routes: Route[], rootPath: string): RouteMenu[] {
         return collect;
     }
 
-    return pickItems(routes[mainIndex].routes);
+    return pickItems(customRoutes[mainIndex].routes);
 }

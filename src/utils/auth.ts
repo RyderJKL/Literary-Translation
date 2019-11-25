@@ -6,8 +6,8 @@ function getCookie(key: string): string {
     let res: string;
     const decode = (str: string) => str.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent);
 
-    for (let i = 0; i < cookies.length; i++) {
-        const parts = cookies[i].split('=');
+    for (const cookie of cookies) {
+        const parts = cookie.split('=');
         const name = decode(parts[0]);
 
         if (key !== name) {

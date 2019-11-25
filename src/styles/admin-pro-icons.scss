@@ -152,4 +152,44 @@
     .#{$prefix}icon-warning-fill:before {
         content: "\e7e2";
     }
+
+    .#{$prefix}icon-exception:before {
+        content: "\e7e3";
+    }
+
+    .#{$prefix}icon-detail:before {
+        content: "\e7e4";
+    }
+
+    .#{$prefix}icon-list:before {
+        content: "\e7e5";
+    }
+
+    .#{$prefix}icon-dashboard:before {
+        content: "\e7e6";
+    }
+
+    .#{$prefix}icon-monitor:before {
+        content: "\e7e7";
+    }
+
+    .#{$prefix}icon-setting:before {
+        content: "\e7e8";
+    }
+
+    .#{$prefix}icon-result:before {
+        content: "\e7e9";
+    }
+
+    .#{$prefix}icon-form:before {
+        content: "\e7ea";
+    }
+
+    .#{$prefix}icon-zone:before {
+        content: "\e7eb";
+    }
+
+    .#{$prefix}icon-notice:before {
+        content: "\e7ec";
+    }
 }
