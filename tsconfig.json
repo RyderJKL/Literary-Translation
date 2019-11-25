@@ -13,7 +13,8 @@
         ],
         "baseUrl": ".",
         "paths": {
-            "@/*": ["./src/*"]
+            "@/*": ["./src/*"],
+            "packages/*": ["./packages/*"]
         },
         // 未使用的变量
 //        "noUnusedLocals": true,
@@ -34,6 +35,7 @@
     },
     "skipLibCheck": true,
     "exclude": [
+        "packages",
         "node_modules",
         "build",
         "scripts",

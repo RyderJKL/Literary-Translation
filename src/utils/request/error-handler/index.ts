@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from 'rjax';
+import { HttpErrorResponse } from 'packages/rjax/lib';
 import { Message } from 'lego-ui';
 
 export const codeMessage = {
@@ -28,7 +28,7 @@ export const networkErrorHandler = (networkResponse: HttpErrorResponse): void =>
     console.error(`网络错误: ${errorText}:: ${status}: ${url}`);
 
     Message.$message({
-        content: errorText,
+        content: errorText || '未知错误',
         type: 'error'
     });
 };

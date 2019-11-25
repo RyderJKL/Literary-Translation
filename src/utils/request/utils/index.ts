@@ -1,28 +1,14 @@
-import { HttpResponse } from 'rjax';
+import { HttpResponse } from 'packages/rjax/lib';
 import * as config from '@/config';
 import { getToken } from '@/utils/auth';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-export const requestInterceptor = req => {
-    const {
-        params: { map: paramsMap }
-    } = req;
-
-    let useMockApi = false;
+export const requestInterceptor = (req, useMock = false) => {
     let url = req.url;
 
-    // 任何环境下，只有检测到 useMock，都要过滤掉
-    if (paramsMap.get('useMock')) {
-        if (paramsMap.get('useMock')[0] === 'true') {
-            useMockApi = true;
-        }
-
-        paramsMap.delete('useMock');
-    }
-
     // 如果是在开发环境，并且该请求开启了 mock，则将该次请求处理成 mock-api
-    if (isDevelopment && useMockApi) {
+    if (isDevelopment && useMock) {
         // "/api/user/login" => "/mock-api/v1/user/login"
         url = url.replace(`${config.API_PREFIX}`, `${process.env.MOCK_API}`);
     }
