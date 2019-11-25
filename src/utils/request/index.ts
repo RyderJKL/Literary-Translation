@@ -9,8 +9,8 @@ class CustomInterceptor {
     public intercept(req: HttpRequest<any>, next) {
         const { metas } = req;
 
-        const useMock = metas.mock as boolean;
-        const skipErrorMessage = metas.skipErrorMessage as boolean;
+        const useMock = metas && metas.mock as boolean || false;
+        const skipErrorMessage = metas && metas.skipErrorMessage || false;
 
         // 拦截请求
         const newReq = requestInterceptor(req, useMock);
