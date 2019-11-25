@@ -7,7 +7,7 @@ import { Message, Card, Alert, utils } from 'lego-ui';
 import LoginForm, { LoginFormValues } from './components/login-form';
 import { updateAutoLogin, updateToken } from '@/utils/auth';
 import { parseQueryString } from '@/utils/url-parse';
-import $request, { Response } from '@/utils/request';;
+import $request, { Response } from '@/utils/request';
 import useStore from '@/hooks/use-store';
 import styles from './styles.scss';
 
@@ -17,25 +17,25 @@ export interface LoginProps extends RouteComponentProps {
 }
 
 const Login: React.FC<LoginProps> = ({ retryCount, retryDelayTime, history }) => {
-    const [ loading, setLoading ] = React.useState(false);
-    const [ errMsg, setErrMsg ] = React.useState('');
-    const [ submitButtonDisabled, setSubmitButtonDisabled ] = React.useState<boolean>(false);
+    const [loading, setLoading] = React.useState(false);
+    const [errMsg, setErrMsg] = React.useState('');
+    const [submitButtonDisabled, setSubmitButtonDisabled] = React.useState<boolean>(false);
 
     const { saveUserInfo } = useStore(store => ({
         saveUserInfo: store.common.saveUserInfo
     }));
 
-    const [ handleLogin ] = useEventCallback(
+    const [handleLogin] = useEventCallback(
         ($event: Observable<LoginFormValues>) =>
             $event.pipe(
                 debounceTime(500),
-                tap((payload) => {
+                tap(payload => {
                     setLoading(true);
                     updateAutoLogin(payload.auto_login);
                 }),
-                switchMap((payload) => $request.post('/user/login', payload)),
+                switchMap(payload => $request.post('/user/login', payload, { metas: { skipErrorMessage: true } })),
                 tap((res: Response) => {
-                    setLoading(false)
+                    setLoading(false);
 
                     if (res.code !== 20000) {
                         return setErrMsg(res.message);
@@ -80,7 +80,7 @@ const Login: React.FC<LoginProps> = ({ retryCount, retryDelayTime, history }) =>
                         </div>
                         <h1>lego-ui AdminPro</h1>
                     </div>
-                    <Alert visible={utils.isExist(errMsg)} showIcon={true} type='error' content={errMsg}/>
+                    <Alert visible={utils.isExist(errMsg)} showIcon={true} type='error' content={errMsg} />
                     <LoginForm
                         onSubmit={(values: LoginFormValues) => handleLogin(values)}
                         submitLoading={loading}
