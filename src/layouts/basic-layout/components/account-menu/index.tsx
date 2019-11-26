@@ -23,10 +23,10 @@ const AccountMenu: React.FC<AccountProps> = ({ avatarUrl }) => {
 
     const AccountContent = (
         <Menu>
-            <Item><ThemeSwitcher title={'主题配置'}/></Item>
             <Item>
-                {/*<div onClick={actionLogout}>退出</div>*/}
+                <ThemeSwitcher title={'主题配置'} />
             </Item>
+            <Item>{/*<div onClick={actionLogout}>退出</div>*/}</Item>
         </Menu>
     );
 

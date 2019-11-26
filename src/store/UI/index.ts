@@ -1,4 +1,4 @@
-import { observable, action, toJS } from 'mobx';
+import { observable, action } from 'mobx';
 import themeDefault, { DefaultSettings } from '@/config/default-settings';
 
 export interface UIModel {

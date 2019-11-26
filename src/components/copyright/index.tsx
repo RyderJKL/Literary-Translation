@@ -16,9 +16,7 @@ const Copyright: React.FC<CopyrightProps> = ({ className }) => {
         [className]: utils.isExist(className)
     });
 
-    return (
-        <div className={selfClass}>Copyright &copy; {currentYear} 绿湾大前端</div>
-    );
-}
+    return <div className={selfClass}>Copyright &copy; {currentYear} 绿湾大前端</div>;
+};
 
 export default Copyright;

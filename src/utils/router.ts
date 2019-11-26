@@ -14,7 +14,7 @@ export function compileRoutes(customRoutes: Route[], rootPath: string): RealRout
             realRoutes.push({
                 path: `${rootPath}${path}`,
                 title,
-                redirect: utils.isExist(redirect) ?  `${rootPath}${redirect}` : undefined,
+                redirect: utils.isExist(redirect) ? `${rootPath}${redirect}` : undefined,
                 layout,
                 component,
                 requiredAuth
@@ -22,11 +22,12 @@ export function compileRoutes(customRoutes: Route[], rootPath: string): RealRout
         }
 
         if (utils.isExist(routes)) {
-            const childRealRoutes = compileRoutes(routes, rootPath)
-                .map((childRoute) => Object.assign(childRoute, {
+            const childRealRoutes = compileRoutes(routes, rootPath).map((childRoute) =>
+                Object.assign(childRoute, {
                     layout,
                     requiredAuth: requiredAuth || childRoute.requiredAuth
-                }));
+                })
+            );
 
             realRoutes = realRoutes.concat(childRealRoutes);
         }
@@ -56,19 +57,18 @@ export function transforToMenu(customRoutes: Route[], rootPath: string): RouteMe
                     icon,
                     type: 'item'
                 });
-            }
-            else {
+            } else {
                 collect.push({
                     title,
                     icon,
                     type: 'group',
                     items: pickItems(routes)
-                })
+                });
             }
         });
 
         return collect;
-    }
+    };
 
     return pickItems(customRoutes[mainIndex].routes);
 }

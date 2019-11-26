@@ -21,7 +21,7 @@ const Login: React.FC<LoginProps> = ({ retryCount, retryDelayTime, history }) =>
     const [errMsg, setErrMsg] = React.useState('');
     const [submitButtonDisabled, setSubmitButtonDisabled] = React.useState<boolean>(false);
 
-    const { saveUserInfo } = useStore(store => ({
+    const { saveUserInfo } = useStore((store) => ({
         saveUserInfo: store.common.saveUserInfo
     }));
 
@@ -29,11 +29,11 @@ const Login: React.FC<LoginProps> = ({ retryCount, retryDelayTime, history }) =>
         ($event: Observable<LoginFormValues>) =>
             $event.pipe(
                 debounceTime(500),
-                tap(payload => {
+                tap((payload) => {
                     setLoading(true);
                     updateAutoLogin(payload.auto_login);
                 }),
-                switchMap(payload => $request.post('/user/login', payload, { metas: { skipErrorMessage: true } })),
+                switchMap((payload) => $request.post('/user/login', payload, { metas: { skipErrorMessage: true } })),
                 tap((res: Response) => {
                     setLoading(false);
 
@@ -55,7 +55,7 @@ const Login: React.FC<LoginProps> = ({ retryCount, retryDelayTime, history }) =>
                     setSubmitButtonDisabled(true);
                     return _throw('错误次数超限');
                 }),
-                retryWhen(errors =>
+                retryWhen((errors) =>
                     errors.pipe(
                         tap(() => {
                             Message.$message({

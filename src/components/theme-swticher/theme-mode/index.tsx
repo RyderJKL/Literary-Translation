@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { RadioGroup } from 'lego-ui';
 import { NavTheme } from '@/config/default-settings';
 
@@ -6,7 +6,7 @@ export type Theme = NavTheme;
 
 export interface ThemeModeProps {
     theme?: Theme;
-    onChange (theme: NavTheme): void;
+    onChange(theme: NavTheme): void;
 }
 
 const ThemeMode: React.FC<ThemeModeProps> = ({ theme = 'light', onChange }) => {
@@ -19,7 +19,7 @@ const ThemeMode: React.FC<ThemeModeProps> = ({ theme = 'light', onChange }) => {
                     { value: 'primary', label: '主题色' }
                 ]}
                 defaultValue={theme}
-                onChange={v => onChange(v)}
+                onChange={(v) => onChange(v)}
             />
         </div>
     );

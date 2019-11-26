@@ -18,7 +18,7 @@ ReactDom.render(
     <StoreProvider>
         <BrowserRouter>
             <Switch>
-                {compileRoutes(routes, rootPath).map(route => {
+                {compileRoutes(routes, rootPath).map((route) => {
                     const { path, title, redirect, layout, component, requiredAuth } = route;
 
                     return (
@@ -26,7 +26,7 @@ ReactDom.render(
                             key={path}
                             path={path}
                             exact={true}
-                            render={props => {
+                            render={(props) => {
                                 document.title = `${title} | ${config.SITE_NAME}`;
 
                                 if (utils.isExist(redirect)) {

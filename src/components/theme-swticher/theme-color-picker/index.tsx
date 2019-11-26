@@ -22,7 +22,7 @@ const themeColorPicker: React.FC<ColorPickerProps> = ({
 }) => {
     return (
         <ul className={styles.themeColorPicker}>
-            {themeColors.map(color => (
+            {themeColors.map((color) => (
                 <ThemeColorItem key={color} color={color} onClick={() => onChange(color)} />
             ))}
         </ul>

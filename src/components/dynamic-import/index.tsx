@@ -21,7 +21,6 @@ interface DynamicImportState {
 const { $nprogress } = Nprogress;
 
 class DynamicImport extends React.PureComponent<DynamicImportProps, DynamicImportState> {
-
     private destroyed = false;
 
     public constructor(props: DynamicImportProps) {
@@ -39,24 +38,23 @@ class DynamicImport extends React.PureComponent<DynamicImportProps, DynamicImpor
     public componentDidMount() {
         const { withLayout } = this.state;
         const { layout, component } = this.props;
-        const lastLoader = () => component()
-            .then(({ default: C }) => {
+        const lastLoader = () =>
+            component().then(({ default: C }) => {
                 if (!this.destroyed) {
                     this.setState({ C }, () => $nprogress.done());
                 }
             });
 
         if (withLayout) {
-            layout()
-                .then(({ default: L }) => {
-                    if (!this.destroyed) {
-                        this.setState({ L }, lastLoader);
-                    }
-                });
+            layout().then(({ default: L }) => {
+                if (!this.destroyed) {
+                    this.setState({ L }, lastLoader);
+                }
+            });
+            return;
         }
-        else {
-            lastLoader();
-        }
+
+        lastLoader();
     }
 
     public componentWillUnmount() {
@@ -68,16 +66,15 @@ class DynamicImport extends React.PureComponent<DynamicImportProps, DynamicImpor
         const { router } = this.props;
         const placeholder = (
             <Spin loading={true}>
-                <div style={{ height: 466 }}/>
+                <div style={{ height: 466 }} />
             </Spin>
         );
 
-        const component = () => C === null ? placeholder : React.createElement(C, { router });
+        const component = () => (C === null ? placeholder : React.createElement(C, { router }));
 
         if (withLayout) {
             return L === null ? placeholder : React.createElement(L, { router }, component());
         }
-
 
         return component();
     }

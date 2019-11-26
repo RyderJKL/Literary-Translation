@@ -10,8 +10,8 @@ class CustomInterceptor {
     public intercept(req: HttpRequest<any>, next) {
         const { metas } = req;
 
-        const useMock = metas && metas.mock as boolean || false;
-        const skipErrorMessage = metas && metas.skipErrorMessage || false;
+        const useMock = (metas && (metas.mock as boolean)) || false;
+        const skipErrorMessage = (metas && metas.skipErrorMessage) || false;
 
         // 拦截请求
         const newReq = requestInterceptor(req, useMock);
@@ -19,38 +19,38 @@ class CustomInterceptor {
         // 拦截响应
         return next.handle(newReq).pipe(
             // tap((x) => console.log('拦截响应', x)),
-            mergeMap(event => {
+            mergeMap((event) => {
                 // 这里可根据后台接口约定自行判断
 
                 // for error
                 if (event instanceof HttpResponse && event.status !== 200) {
-                    return new Observable(observer => observer.error(event));
+                    return new Observable((observer) => observer.error(event));
                 }
 
                 // for business error
                 if (event instanceof HttpResponse && !skipErrorMessage && event.body.code !== 2000) {
-                    return new Observable(observer => observer.error(event));
+                    return new Observable((observer) => observer.error(event));
                 }
 
-                return new Observable(observer => observer.next(event));
+                return new Observable((observer) => observer.next(event));
             }),
-            catchError(res => {
+            catchError((res) => {
                 // network error
                 if (res.status !== 200) {
                     networkErrorHandler(res);
 
                     // 将错误信息抛给下个拦截器或者请求调用方
-                    return new Observable(observer => observer.error(res));
+                    return new Observable((observer) => observer.error(res));
                 }
 
                 // business error
                 if (!skipErrorMessage && res.body.code !== 20000) {
                     businessErrorHandler(res);
-                    return new Observable(observer => observer.error(res));
+                    return new Observable((observer) => observer.error(res));
                 }
 
                 // other error
-                return new Observable(observer => observer.error(res));
+                return new Observable((observer) => observer.error(res));
             }),
             finalize(() => {
                 // 无论成功或者失败都会执行

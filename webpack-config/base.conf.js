@@ -26,6 +26,23 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
+                enforce: 'pre',
+                use: [
+                    {
+                        loader: 'eslint-loader',
+                        options: {
+                            cache: true,
+                            fix: true,
+                            emitWarning: true,
+                            emitError: true,
+                            formatter: require('eslint-friendly-formatter')
+                        }
+                    }
+                ],
+                exclude: [/node_modules/, resolve('../packages')]
+            },
+            {
+                test: /\.tsx?$/,
                 loader: 'awesome-typescript-loader',
                 options: {
                     useBabel: true,

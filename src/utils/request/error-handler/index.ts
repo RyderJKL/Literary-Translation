@@ -45,7 +45,6 @@ export const businessErrorHandler = (response): void => {
     console.error(`服务错误: ${message}:: ${url}`);
     Message.$message({
         content: message,
-        type: 'error',
+        type: 'error'
     });
 };
-

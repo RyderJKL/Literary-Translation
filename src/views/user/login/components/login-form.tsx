@@ -20,7 +20,7 @@ export interface LoginFormProps extends CreateFormProps {
 
 const { preClass } = utils;
 
-const LoginForm: React.FC<LoginFormProps> = props => {
+const LoginForm: React.FC<LoginFormProps> = (props) => {
     const {
         form: { Validator, verify },
         submitLoading,
@@ -54,7 +54,7 @@ const LoginForm: React.FC<LoginFormProps> = props => {
                         size='large'
                         placeholder='账号：admin 或 user'
                         prefix={<Icon type='account' />}
-                        onChange={e => setUsername(e.target.value)}
+                        onChange={(e) => setUsername(e.target.value)}
                     />
                 </Validator>
             </Form.Item>
@@ -74,7 +74,7 @@ const LoginForm: React.FC<LoginFormProps> = props => {
                                 <Icon type={passwordVisible ? 'eye-close' : 'eye'} />
                             </button>
                         }
-                        onChange={e => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(e.target.value)}
                         onKeyDown={handleKeyDown}
                     />
                 </Validator>

@@ -17,7 +17,7 @@ export interface Route {
     component?: () => Promise<any>;
     requiredAuth?: boolean;
     routes?: Route[];
-};
+}
 
 export const rootPath = '/';
 
@@ -192,6 +192,6 @@ export const routes: Route[] = [
                 component: () => import('@/views/user/iforgot')
             }
         ]
-    },
+    }
     // todo 404 5xx
 ];

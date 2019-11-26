@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Observable } from 'rxjs';
-import { switchMap, tap, catchError } from 'rxjs/operators';
+import { switchMap, catchError } from 'rxjs/operators';
 
-import { Drawer, Divider, Spin } from 'lego-ui';
+import { Drawer, Divider } from 'lego-ui';
 
-import ThemeMode from './theme-mode';
+// import ThemeMode from './theme-mode';
 import ThemeColorPicker from './theme-color-picker';
 
-import userStore from '@/hooks/use-store';
+// import userStore from '@/hooks/use-store';
 
 import { useEventCallback } from 'rxjs-hooks';
 import { replaceColor } from './replace-theme-color-client';
@@ -36,10 +36,8 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ title = '主题配置', d
 
     const [changeColor] = useEventCallback((event$: Observable<string>) =>
         event$.pipe(
-            tap(value => console.log(value)),
-            switchMap(color => replaceColor(color)),
-            catchError(error => {
-                console.error(error);
+            switchMap((color) => replaceColor(color)),
+            catchError((error) => {
                 return new Observable(error);
             })
         )
@@ -63,7 +61,7 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ title = '主题配置', d
                     </ItemWrapper>
                     <Divider />
                     <ItemWrapper itemTitle={'主题色值'}>
-                        <ThemeColorPicker onChange={color => changeColor(color)} />
+                        <ThemeColorPicker onChange={(color) => changeColor(color)} />
                     </ItemWrapper>
                 </Drawer.Body>
             </Drawer>

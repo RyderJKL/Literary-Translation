@@ -18,28 +18,33 @@ const renderRoutes = (items: RouteMenu[]) => {
 
         if (type === 'group') {
             return (
-                <Menu.Submenu key={key} title={<span><Icon type={icon}/> { title }</span>}>
-                    { renderRoutes(groupItems) }
+                <Menu.Submenu
+                    key={key}
+                    title={
+                        <span>
+                            <Icon type={icon} /> {title}
+                        </span>
+                    }
+                >
+                    {renderRoutes(groupItems)}
                 </Menu.Submenu>
             );
         }
 
-
         return (
             <Menu.Item key={key} index={path}>
-                <Link to={path}>{ title }</Link>
+                <Link to={path}>{title}</Link>
             </Menu.Item>
         );
     });
 };
 
 const NavMenu: React.SFC<NavMenuProps> = ({ mode, theme, location }) => {
-
     return (
         <Menu mode={mode} theme={theme} activeIndex={location.pathname}>
-            { renderRoutes(menuData) }
+            {renderRoutes(menuData)}
         </Menu>
     );
-}
+};
 
 export default withRouter(NavMenu);

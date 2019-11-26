@@ -5,8 +5,8 @@ import styles from './styles.scss';
 const UserLayout: React.FC = ({ children }) => {
     return (
         <div className={styles.userContainer}>
-            { children }
-            <Copyright className={styles.userCopyright}/>
+            {children}
+            <Copyright className={styles.userCopyright} />
         </div>
     );
 };

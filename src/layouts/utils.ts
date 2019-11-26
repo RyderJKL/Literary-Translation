@@ -1,7 +1,7 @@
 // import { IRoute, IMenuItem, MenuItemPropertyProps } from '@/typings';
-import { clone, equals, last } from 'ramda';
-import memoizeOne from 'memoize-one';
-import * as pathToRegexp from 'path-to-regexp';
+// import { clone, equals, last } from 'ramda';
+// import memoizeOne from 'memoize-one';
+// import * as pathToRegexp from 'path-to-regexp';
 
 // formatter routes to menus
 // function formatter(routesData: IRoute[]): IMenuItem[] {
@@ -60,14 +60,14 @@ import * as pathToRegexp from 'path-to-regexp';
  * '/user/settings/111' => ['/user', '/user/settings', '/user/settings/111']
  */
 export function pathnameToList(pathname: string): string[] {
-    const pathSplitArr: string[] = pathname.split('/').filter(item => item);
+    const pathSplitArr: string[] = pathname.split('/').filter((item) => item);
 
     const tmp = [''];
     pathSplitArr.forEach((item, index) => {
         tmp.push(`${tmp[index]}/${item}`);
     });
 
-    return tmp.filter(item => item);
+    return tmp.filter((item) => item);
 }
 
 // export function _getFlatMenus(menusData: IMenuItem[]): IMenuItem[] {

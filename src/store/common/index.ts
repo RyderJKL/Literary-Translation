@@ -5,16 +5,16 @@ export interface UserInfo {
     role: 1 | 2;
     username: string;
     age: number;
-    gender: 'man'| 'womam';
+    gender: 'man' | 'womam';
     avatar: string;
     section: string;
-};
+}
 
 export class CommonStore {
     @observable public userInfo: UserInfo;
 
     @action
-    public saveUserInfo = (userInfo: UserInfo) => this.userInfo = userInfo;
+    public saveUserInfo = (userInfo: UserInfo) => (this.userInfo = userInfo);
 }
 
 export default new CommonStore();

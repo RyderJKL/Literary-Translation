@@ -27,7 +27,7 @@ class BasicLayout extends React.PureComponent<BasicLayoutProps, BasicLayoutState
             ...JSON.parse(localStorage.getItem(config.SETTINGS_STORAGE_NAME))
         };
 
-        ['updateCollapse'].forEach(fn => {
+        ['updateCollapse'].forEach((fn) => {
             this[fn] = this[fn].bind(this);
         });
     }
@@ -82,7 +82,7 @@ class BasicLayout extends React.PureComponent<BasicLayoutProps, BasicLayoutState
 
 export default connect(
     BasicLayout,
-    store => ({
+    (store) => ({
         userInfo: store.common.userInfo,
         saveUserInfo: store.common.saveUserInfo
     })

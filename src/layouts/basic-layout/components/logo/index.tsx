@@ -21,11 +21,11 @@ const Logo: React.SFC<LogoProps> = ({ collapse, theme }) => {
     return (
         <div className={componentClass}>
             <Link to={rootPath}>
-                <span className={styles.logoImg}/>
-                <h1>{ config.SITE_NAME }</h1>
+                <span className={styles.logoImg} />
+                <h1>{config.SITE_NAME}</h1>
             </Link>
         </div>
     );
-}
+};
 
 export default Logo;

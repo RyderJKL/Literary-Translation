@@ -7,13 +7,11 @@ import styles from './index.scss';
 const TopMenuLayout = ({ children }) => {
     return (
         <Layout withAside={true} className={styles.basicLayoutContainer}>
-            <Layout.Aside className={styles.basicLayoutAside}/>
+            <Layout.Aside className={styles.basicLayoutAside} />
             <Layout>
-                <Layout.Content>
-                    { children }
-                </Layout.Content>
+                <Layout.Content>{children}</Layout.Content>
                 <Layout.Footer>
-                    <Copyright/>
+                    <Copyright />
                 </Layout.Footer>
             </Layout>
         </Layout>

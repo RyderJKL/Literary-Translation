@@ -26,6 +26,12 @@ function getCookie(key: string): string {
     return decode(res);
 }
 
+export function getToken(): string {
+    return config.AUTH_SAVE_METHOD === 'storage'
+        ? localStorage.getItem(config.AUTH_SAVE_NAME) || ''
+        : getCookie(config.AUTH_SAVE_NAME) || '';
+}
+
 export function logined(): boolean {
     return utils.isExist(getToken());
 }
@@ -40,10 +46,4 @@ export function updateToken(token: string) {
     }
 
     localStorage.setItem(config.AUTH_SAVE_NAME, token);
-}
-
-export function getToken(): string {
-    return config.AUTH_SAVE_METHOD === 'storage'
-        ? localStorage.getItem(config.AUTH_SAVE_NAME) || ''
-        : getCookie(config.AUTH_SAVE_NAME) || '';
 }

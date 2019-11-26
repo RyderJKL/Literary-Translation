@@ -5,7 +5,7 @@ import { getToken } from '@/utils/auth';
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 export const requestInterceptor = (req, useMock = false) => {
-    let url = req.url;
+    let { url } = req;
 
     // 如果是在开发环境，并且该请求开启了 mock，则将该次请求处理成 mock-api
     if (isDevelopment && useMock) {
@@ -20,16 +20,17 @@ export const requestInterceptor = (req, useMock = false) => {
         // 修改请求体
         body: { ...req.body },
         // 添加请求头
-        headers: config.AUTH_SAVE_METHOD === 'storage'
-            ? req.headers.set(config.AUTH_SAVE_NAME, getToken())
-            : req.headers
+        headers:
+            config.AUTH_SAVE_METHOD === 'storage' ? req.headers.set(config.AUTH_SAVE_NAME, getToken()) : req.headers
     });
     return newReq;
 };
 
 // 对 response 中的 data 进行提取，解压
 export const extractDataFromRequest = (response: HttpResponse<any>, rawResponse = false) => {
-    if (rawResponse) { return response; }
+    if (rawResponse) {
+        return response;
+    }
     const { body: data } = response;
     // todo: extract data or do something
     return data;
