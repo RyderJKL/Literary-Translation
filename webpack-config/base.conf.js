@@ -39,7 +39,7 @@ module.exports = {
                         }
                     }
                 ],
-                exclude: [/node_modules/, resolve('../packages')]
+                exclude: [resolve('node_modules'), resolve('packages')]
             },
             {
                 test: /\.tsx?$/,

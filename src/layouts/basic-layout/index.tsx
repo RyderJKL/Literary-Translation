@@ -54,7 +54,7 @@ class BasicLayout extends React.PureComponent<BasicLayoutProps, BasicLayoutState
             return;
         }
 
-        $request.get('/user/info').subscribe((res: Response) => {
+        $request.get('/user/info', { metas: { mock: true } }).subscribe((res: Response) => {
             if (res.code !== 20000) {
                 return router.history.replace(`${rootPath}${loginPath}`);
             }
@@ -80,10 +80,7 @@ class BasicLayout extends React.PureComponent<BasicLayoutProps, BasicLayoutState
     }
 }
 
-export default connect(
-    BasicLayout,
-    (store) => ({
-        userInfo: store.common.userInfo,
-        saveUserInfo: store.common.saveUserInfo
-    })
-);
+export default connect(BasicLayout, (store) => ({
+    userInfo: store.common.userInfo,
+    saveUserInfo: store.common.saveUserInfo
+}));

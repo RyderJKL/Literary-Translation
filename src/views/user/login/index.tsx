@@ -33,7 +33,9 @@ const Login: React.FC<LoginProps> = ({ retryCount, retryDelayTime, history }) =>
                     setLoading(true);
                     updateAutoLogin(payload.auto_login);
                 }),
-                switchMap((payload) => $request.post('/user/login', payload, { metas: { skipErrorMessage: true } })),
+                switchMap((payload) =>
+                    $request.post('/user/login', payload, { metas: { mock: true, skipErrorMessage: true } })
+                ),
                 tap((res: Response) => {
                     setLoading(false);
 

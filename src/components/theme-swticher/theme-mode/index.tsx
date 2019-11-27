@@ -19,7 +19,7 @@ const ThemeMode: React.FC<ThemeModeProps> = ({ theme = 'light', onChange }) => {
                     { value: 'primary', label: '主题色' }
                 ]}
                 defaultValue={theme}
-                onChange={(v) => onChange(v)}
+                onChange={(v) => onChange(v as NavTheme)}
             />
         </div>
     );
