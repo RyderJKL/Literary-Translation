@@ -39,7 +39,7 @@ const renderRoutes = (items: RouteMenu[]) => {
     });
 };
 
-const NavMenu: React.SFC<NavMenuProps> = ({ mode, theme, location }) => {
+const NavMenu: React.FC<NavMenuProps> = ({ mode, theme, location }) => {
     return (
         <Menu mode={mode} theme={theme} activeIndex={location.pathname}>
             {renderRoutes(menuData)}

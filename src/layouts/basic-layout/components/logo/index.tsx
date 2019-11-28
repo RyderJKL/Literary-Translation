@@ -11,7 +11,7 @@ export interface LogoProps {
     theme: NavTheme;
 }
 
-const Logo: React.SFC<LogoProps> = ({ collapse, theme }) => {
+const Logo: React.FC<LogoProps> = ({ collapse, theme }) => {
     const componentClass = classNames({
         [styles.logo]: true,
         [styles.collapse]: collapse,

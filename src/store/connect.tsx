@@ -10,7 +10,7 @@ export default function connect(
     component: React.ComponentClass<any> | React.FunctionComponent<any>,
     store: (store: StoreType) => ConnectStore
 ) {
-    const connectComponent: React.SFC<React.Props<ConnectStore>> = (props, ref: React.Ref<any>) => {
+    const connectComponent: React.FC<React.Props<ConnectStore>> = (props, ref: React.Ref<any>) => {
         // tslint:disable-next-line:react-hooks-nesting
         const globalStore = React.useContext(storeContext);
 

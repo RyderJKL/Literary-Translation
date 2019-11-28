@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Layout } from 'lego-ui';
+import { Layout, Button } from 'lego-ui';
 import { NavTheme } from '@/config/default-settings';
 import Copyright from '@/components/copyright';
 import classNames from 'classnames';
@@ -13,7 +13,7 @@ export interface SideMenuLayoutPorps {
     updateCollapse: () => void;
 }
 
-const SideMenuLayout: React.SFC<SideMenuLayoutPorps> = ({ children, collapse, theme }) => {
+const SideMenuLayout: React.FC<SideMenuLayoutPorps> = ({ children, collapse, theme }) => {
     const asideClass = classNames({
         [styles.basicLayoutAside]: true,
         [theme]: true
