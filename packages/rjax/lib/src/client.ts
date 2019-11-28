@@ -1097,7 +1097,7 @@ export class HttpClient {
     get(
         url: string,
         options?: {
-            metas?: { [index: string]: string | boolean };
+            metas?: HttpMetas;
             headers?: HttpHeaders | { [header: string]: string | string[] };
             observe?: 'body';
             params?: HttpParams | { [param: string]: string | string[] };
