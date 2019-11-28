@@ -10,8 +10,10 @@
 
 ## use-high-state
 
--   支持嵌套数据结构；
--   支持 state 变更后的 callback 回调;
+-   todo
+    -   [x] 支持嵌套数据结构；
+    -   [x] 支持 state 变更后的 callback 回调;
+    -   [] 支持基本数据类型；
 
 ```typescript
 type defaultSate = {

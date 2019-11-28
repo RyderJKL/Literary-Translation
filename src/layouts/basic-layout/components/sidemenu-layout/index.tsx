@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Layout, Button } from 'lego-ui';
+import { Layout } from 'lego-ui';
 import { NavTheme } from '@/config/default-settings';
 import Copyright from '@/components/copyright';
 import classNames from 'classnames';
