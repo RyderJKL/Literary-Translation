@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { finalize, catchError, mergeMap } from 'rxjs/operators';
-import { Rjax, HttpResponse, HttpRequest } from 'packages/rjax/lib';
+import { Rjax, HttpResponse, HttpRequest, HttpEvent } from 'packages/rjax/lib';
 import { networkErrorHandler, businessErrorHandler } from './error-handler';
 import { requestInterceptor } from './utils';
 import { API_PREFIX } from '@/config';
@@ -18,8 +18,7 @@ class CustomInterceptor {
 
         // 拦截响应
         return next.handle(newReq).pipe(
-            // tap((x) => console.log('拦截响应', x)),
-            mergeMap((event) => {
+            mergeMap((event: HttpEvent<any>) => {
                 // 这里可根据后台接口约定自行判断
 
                 // for error
@@ -28,7 +27,7 @@ class CustomInterceptor {
                 }
 
                 // for business error
-                if (event instanceof HttpResponse && !skipErrorMessage && event.body.code !== 2000) {
+                if (event instanceof HttpResponse && !skipErrorMessage && event.body.code !== 20000) {
                     return new Observable((observer) => observer.error(event));
                 }
 
@@ -65,7 +64,7 @@ const $request = new Rjax({
     // 设置请求基路径，可选
     baseURL: API_PREFIX,
     // 设置请求超时时间，可选
-    timeout: 1000,
+    timeout: 0,
     // 是用作 xsrf token 的值的cookie的名称，默认'XSRF-TOKEN'，可选
     // xsrfCookieName: 'XSRF-TOKEN',
     xsrfCookieName: '',
