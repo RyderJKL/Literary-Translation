@@ -9,6 +9,7 @@ import $request, { Response } from '@/utils/request';
 import styles from './styles.scss';
 import SideMenuLayout from './components/sidemenu-layout';
 import TopMenuLayout from './components/topmenu-layout';
+import { useHighState } from '@/hooks';
 
 export interface BasicLayoutProps {
     userInfo: UserInfo;
@@ -26,22 +27,19 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
         ...JSON.parse(localStorage.getItem(config.SETTINGS_STORAGE_NAME))
     };
 
-    const [basicLayoutState, setBasicLayoutState] = React.useState<BasicLayoutState>(defaultState);
+    const [basicLayoutState, setBasicLayoutState] = useHighState<BasicLayoutState>(defaultState);
 
     const saveLocalStorage = () => {
         localStorage.setItem(config.SETTINGS_STORAGE_NAME, JSON.stringify(basicLayoutState));
     };
 
     const updateCollapse = () => {
-        setBasicLayoutState((prevState) => ({
-            ...prevState,
-            collapse: !basicLayoutState.collapse
-        }));
+        setBasicLayoutState({ collapse: !basicLayoutState.collapse }, saveLocalStorage);
     };
 
-    React.useEffect(() => {
-        saveLocalStorage();
-    }, [basicLayoutState.collapse]);
+    // React.useEffect(() => {
+    //     saveLocalStorage();
+    // }, [basicLayoutState.collapse]);
 
     React.useEffect(() => {
         if (utils.isExist(userInfo)) {
