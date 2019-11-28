@@ -64,7 +64,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
                     saveUserInfo(res.data.userInfo);
                 })
             ),
-        null,
+        undefined,
         [userInfo]
     );
 

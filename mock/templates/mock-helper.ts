@@ -5,7 +5,7 @@ export interface MockTpl {
     url: string;
     type: 'post' | 'get' | 'put' | 'delete' | 'update';
     response: (req: Request) => Response;
-};
+}
 
 const tpl: MockTpl = {
     url: '/tpl',

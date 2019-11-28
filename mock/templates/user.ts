@@ -1,4 +1,4 @@
-import { mock } from './';
+import { mock } from 'root/mock/templates/mock-helper';
 import * as config from '@/config';
 
 const adminToken = '666ecb94f2d49cd27ca0e0c48c36666';

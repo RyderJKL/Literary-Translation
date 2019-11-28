@@ -16,9 +16,9 @@ const chalkSuccess = chalk.bold.green;
 const chalkInfo = chalk.bold.yellow;
 
 // const stdError = msg => console.log(chalkError(msg), '\n');
-const stdWarning = msg => console.log(chalkWarning(msg), '\n');
-const stdSuccess = msg => console.log(chalkSuccess(msg), '\n');
-const stdInfo = msg => console.log(chalkInfo(msg), '\n');
+const stdWarning = (msg) => console.log(chalkWarning(msg), '\n');
+const stdSuccess = (msg) => console.log(chalkSuccess(msg), '\n');
+const stdInfo = (msg) => console.log(chalkInfo(msg), '\n');
 
 const spinner = Ora(chalkInfo('稍安勿躁，mock 服务正在启动中\n')).start();
 spinner.color = 'yellow';
@@ -49,23 +49,35 @@ app.use((req, res, next) => {
     next();
 });
 
+const templates: string[] = [];
+const readAllTemplates = (dir) => {
+    fs.readdirSync(dir).forEach((file) => {
+        const relativeFile = path.resolve(dir, file);
+        if (fs.statSync(relativeFile).isDirectory()) {
+            readAllTemplates(relativeFile);
+        } else if (
+            path.parse(relativeFile).ext === '.ts' &&
+            file !== 'index.ts' &&
+            file !== 'mock-helper.ts'
+        ) {
+            templates.push(require(relativeFile));
+        }
+    });
+};
+
+readAllTemplates(path.join(__dirname, 'templates'));
+
 stdWarning('---xxx---');
-fs.readdirSync(path.join(__dirname, 'templates')).forEach((file) => {
-    if (path.parse(file).ext !== '.ts' || file === 'index.ts') {
-        return;
-    }
 
-    const tpls = require(path.join(__dirname, `templates/${file}`));
-
-    for (const tplName in tpls) {
-        const { type, url, response } = tpls[tplName];
-
+templates.forEach(item => {
+    Object.keys(item).forEach((tplName) => {
+        const { type, url, response } = item[tplName];
         stdInfo(`${type}:: ${apiPrefix}${url}`);
         app[type](`${apiPrefix}${url}`, (req, res) => res.send(response(req)));
-    }
+    })
 });
-stdWarning('---xxx---');
 
+stdWarning('---xxx---');
 // Catch 404 error
 app.use((req, res, next) => {
     const err = new Error('Not Found');
@@ -84,7 +96,6 @@ index.listen(mockSeverPort, () => {
 });
 
 index.on('error', onError);
-
 
 // Event listener for HTTP server "error" event.
 function onError(error: any) {

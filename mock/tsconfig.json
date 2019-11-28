@@ -19,6 +19,7 @@
         // 需要配合使用 tsconfig-paths https://github.com/dividab/tsconfig-paths
         "baseUrl": "../",
         "paths": {
+            "root/*": ["./*"],
             "@/*": ["./src/*"]
         },
         "skipLibCheck": true,
