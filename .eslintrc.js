@@ -24,7 +24,7 @@ module.exports = {
         '@typescript-eslint/interface-name-prefix': 0,
         quotes: ['error', 'single'],
         // 'no-console': 'warn',
-        'no-debugger': 'error',
+        // 'no-debugger': 'error',
         'no-alert': 'error',
         indent: ['error', 4, { SwitchCase: 1 }],
         semi: ['error', 'always'],
