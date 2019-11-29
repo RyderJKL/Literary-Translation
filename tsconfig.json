@@ -39,7 +39,7 @@
         "jest",
         "tslint:latest",
         "tslint-config-prettier",
-        "mock"
+        "./mock"
     ],
     "compileOnSave": false,
     "awesomeTypescriptLoaderOptions": {

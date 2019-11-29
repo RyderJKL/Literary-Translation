@@ -1,12 +1,5 @@
 import { mock } from 'root/mock/templates/mock-helper';
 import { Random, mock as Mock } from 'mockjs';
-import { EnvironmentItem } from '@/views/form/basic/model';
-
-const environmentItem: EnvironmentItem = {
-    id: Random.id(),
-    name: Random.region() + Random.county(true),
-    name_cn: Random.region() + Random.county(true)
-};
 
 export const environments = mock({
     url: '/srm/environments',
@@ -15,9 +8,13 @@ export const environments = mock({
         return {
             code: 20000,
             data: Mock({
-                'array|10': {
-                    object: environmentItem
-                }
+                'list|10': [
+                    {
+                        'id|10-1000000': 3434,
+                        'name|1': () => Random.region() + Random.county(true),
+                        'name_nc|1': () => Random.region() + Random.county(true)
+                    }
+                ]
             })
         };
     }
@@ -48,13 +45,16 @@ export const modules = mock({
     url: '/srm/modules',
     type: 'get',
     response: () => {
-        return Mock({
-            'array|10': {
-                id: Random.id(),
-                'name|1': Random.name(),
-                notes: Random.character()
-            }
-        });
+        return {
+            code: 20000,
+            data: Mock({
+                'array|10': {
+                    id: () => Random.id(),
+                    'name|1': () => Random.name(),
+                    notes: () => Random.character()
+                }
+            })
+        };
     }
 });
 

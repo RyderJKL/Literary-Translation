@@ -2,7 +2,7 @@ const path = require('path');
 const config = require('./config');
 // https://www.npmjs.com/package/webpack-theme-color-replacer
 const ThemeColorReplacer = require('webpack-theme-color-replacer');
-const resolve = dir => path.resolve(__dirname, '..', dir);
+const resolve = (dir) => path.resolve(__dirname, '..', dir);
 
 module.exports = {
     context: path.resolve(__dirname, '../'),
@@ -38,7 +38,7 @@ module.exports = {
                         }
                     }
                 ],
-                exclude: [resolve('node_modules'), resolve('packages')]
+                exclude: [resolve('mock'), resolve('node_modules'), resolve('packages')]
             },
             {
                 test: /\.tsx?$/,
@@ -47,7 +47,7 @@ module.exports = {
                     useBabel: true,
                     babelCore: '@babel/core'
                 },
-                exclude: /node_modules/
+                exclude: [resolve('mock'), resolve('node_modules')]
             },
             {
                 test: /\.(png|jpe?g|gif)(\?.*)?$/,
