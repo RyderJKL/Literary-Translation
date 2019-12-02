@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { Spin, Select, Form, Input, Button, Card } from 'lego-ui';
+import { Select, Form, Input, Button, Card } from 'lego-ui';
+
+import { CreateFormProps } from 'lego-ui/dist/lib/form';
 
 import { of } from 'rxjs';
-import { finalize, switchMap, tap, map, withLatestFrom, catchError, startWith } from 'rxjs/operators';
+import { finalize, switchMap, map, withLatestFrom, startWith } from 'rxjs/operators';
 import ModelConnect from './model-connect';
 import { useHighState } from '@/hooks';
 
@@ -10,7 +12,10 @@ import formStore, { BasicFormStore } from './model';
 import intent, { Intent } from './intent';
 import { useEventCallback } from 'rxjs-hooks';
 
-export interface BasicFormProps {
+import { observer } from 'mobx-react';
+import styles from './style.scss';
+
+export interface BasicFormProps extends CreateFormProps {
     model: BasicFormStore;
     intent: Intent;
 }
@@ -22,12 +27,13 @@ export interface FromState {
     changeReason: string;
 }
 
-const BasicForm: React.FC<BasicFormProps & FromState> = (props) => {
+const BasicForm: React.FC<BasicFormProps & FromState> = observer((props) => {
     const { modules, environments, updateTypes } = props.model;
-
     const { getConfigList$, submitForm$ } = props.intent;
 
-    const [loading, setLoading] = React.useState(false);
+    const {
+        form: { Validator, verify }
+    } = props;
 
     const [formState, setFormState] = useHighState<FromState>({
         module: '',
@@ -38,11 +44,7 @@ const BasicForm: React.FC<BasicFormProps & FromState> = (props) => {
 
     React.useEffect(() => {
         of('')
-            .pipe(
-                tap(() => setLoading(true)),
-                switchMap(() => getConfigList$),
-                finalize(() => setLoading(false))
-            )
+            .pipe(switchMap(() => getConfigList$))
             .subscribe();
     }, []);
 
@@ -50,14 +52,11 @@ const BasicForm: React.FC<BasicFormProps & FromState> = (props) => {
         (event$, formState$) =>
             event$.pipe(
                 withLatestFrom(formState$),
-                map(([event, [formState]]) => formState),
-                switchMap((submitData) =>
-                    submitForm$(submitData).pipe(
-                        map(() => [false]),
-                        catchError(() => {
-                            return of([false]);
-                        }),
-                        startWith([true])
+                map((withLatestData) => withLatestData[1][0]),
+                switchMap((formState) =>
+                    submitForm$(formState).pipe(
+                        startWith([true]),
+                        finalize(() => [false])
                     )
                 )
             ),
@@ -65,12 +64,19 @@ const BasicForm: React.FC<BasicFormProps & FromState> = (props) => {
         [formState]
     );
 
+    const preSubmit = () => {
+        verify((error, values) => {
+            if (!error) {
+                onSubmit(values);
+            }
+        });
+    };
+
     return (
-        <div>
-            <Card>
-                {loading && <Spin loadingText={'数据加载中'} />}
-                <Form>
-                    <Form.Item labelPosition={'top'} label={'产品'}>
+        <Card bordered={true}>
+            <Form className={styles.basicForm}>
+                <Form.Item required={true} labelPosition={'left'} label={'上线产品'}>
+                    <Validator name='module' rules={[{ required: true, message: '请选择产品' }]}>
                         <Select onChange={(value) => setFormState({ module: value })}>
                             {modules &&
                                 modules.map((module, index) => (
@@ -79,8 +85,10 @@ const BasicForm: React.FC<BasicFormProps & FromState> = (props) => {
                                     </Select.Option>
                                 ))}
                         </Select>
-                    </Form.Item>
-                    <Form.Item labelPosition={'top'} label={'上线环境'}>
+                    </Validator>
+                </Form.Item>
+                <Form.Item required={true} labelPosition={'left'} label={'上线环境'}>
+                    <Validator name='environment' rules={[{ required: true, message: '请选择上线环境' }]}>
                         <Select
                             onChange={(value) => {
                                 setFormState({ environment: value });
@@ -93,8 +101,10 @@ const BasicForm: React.FC<BasicFormProps & FromState> = (props) => {
                                     </Select.Option>
                                 ))}
                         </Select>
-                    </Form.Item>
-                    <Form.Item labelPosition={'top'} label={'变更类型'}>
+                    </Validator>
+                </Form.Item>
+                <Form.Item required={true} labelPosition={'left'} label={'变更类型'}>
+                    <Validator name='updateType' rules={[{ required: true, message: '请选择变更类型' }]}>
                         <Select onChange={(value) => setFormState({ updateType: value })}>
                             {updateTypes &&
                                 updateTypes.map((updateItem, index) => (
@@ -103,21 +113,25 @@ const BasicForm: React.FC<BasicFormProps & FromState> = (props) => {
                                     </Select.Option>
                                 ))}
                         </Select>
-                    </Form.Item>
-                    <Form.Item labelPosition={'top'} label={'变更原因'}>
+                    </Validator>
+                </Form.Item>
+                <Form.Item required={true} labelPosition={'left'} label={'变更原因'}>
+                    <Validator name='changeReason' rules={[{ required: true, message: '请输入变更原因' }]}>
                         <Input
                             onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
                                 setFormState({ changeReason: e.target.value })
                             }
                         />
-                    </Form.Item>
-                    <Button loading={submitLoading} type={'primary'} onClick={onSubmit}>
+                    </Validator>
+                </Form.Item>
+                <div className={styles.basicFormSubmitButtonWrapper}>
+                    <Button loading={submitLoading} type={'primary'} onClick={preSubmit}>
                         提交
                     </Button>
-                </Form>
-            </Card>
-        </div>
+                </div>
+            </Form>
+        </Card>
     );
-};
+});
 
-export default ModelConnect(BasicForm, formStore, intent);
+export default ModelConnect(Form.createForm()(BasicForm), formStore, intent);

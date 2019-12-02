@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useObserver } from 'mobx-react-lite'; // 6.x or mobx-react-lite-lite@1.4.0
+import { useObserver } from 'mobx-react'; // 6.x or mobx-react-lite-lite@1.4.0
 
 export const useStoreData = <Selection, ContextData, Store>(
     context: React.Context<ContextData>,
