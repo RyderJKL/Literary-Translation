@@ -1,13 +1,13 @@
 import { Observable } from 'rxjs';
 import { finalize, catchError, mergeMap } from 'rxjs/operators';
-import { Rjax, HttpResponse, HttpRequest, HttpEvent } from 'packages/rjax/lib';
+import { Rjax, HttpResponse, HttpRequest, HttpInterceptor, HttpEvent, HttpHandler } from 'packages/rjax/lib';
 import { networkErrorHandler, businessErrorHandler } from './error-handler';
 import { requestInterceptor } from './utils';
 import { API_PREFIX } from '@/config';
 
 // 自定义拦截器
-class CustomInterceptor {
-    public intercept(req: HttpRequest<any>, next) {
+class CustomInterceptor implements HttpInterceptor {
+    public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
         const { metas } = req;
 
         const useMock = (metas && (metas.mock as boolean)) || false;

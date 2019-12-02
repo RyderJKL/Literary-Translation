@@ -38,14 +38,14 @@ export function compileRoutes(customRoutes: Route[], rootPath: string): RealRout
 
 export interface RouteMenu extends OmitProps<Route, 'routes' | 'layout' | 'component'> {
     type: 'item' | 'group';
-    items: RouteMenu[];
+    items?: RouteMenu[];
 }
 
 export function transforToMenu(customRoutes: Route[], rootPath: string): RouteMenu[] {
     const mainIndex = customRoutes.findIndex((route) => route.path === '');
 
     const pickItems = (childRoutes: Route[]): RouteMenu[] => {
-        const collect = [];
+        const collect: RouteMenu[] = [];
 
         childRoutes.forEach((route) => {
             const { path, title, icon, routes } = route;

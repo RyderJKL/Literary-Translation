@@ -4,8 +4,8 @@
 declare module '*.css' {
     const content: any;
     export default content;
-  // const styles: any;
-  // export = styles;
+    // const styles: any;
+    // export = styles;
 }
 
 declare module '*.scss' {
@@ -14,6 +14,9 @@ declare module '*.scss' {
     // const styles: any;
     // export = styles;
 }
+
+declare module 'webpack-theme-color-replacer';
+declare module 'webpack-theme-color-replacer/client';
 
 declare module 'googlemaps';
 
@@ -45,4 +48,3 @@ const person: personType = {
     name: 'jack',
     age: 343
 };*/
-

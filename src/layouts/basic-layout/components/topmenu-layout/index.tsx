@@ -4,7 +4,7 @@ import Copyright from '@/components/copyright';
 import { Layout } from 'lego-ui';
 import styles from './index.scss';
 
-const TopMenuLayout = ({ children }) => {
+const TopMenuLayout: React.FC = ({ children }) => {
     return (
         <Layout withAside={true} className={styles.basicLayoutContainer}>
             <Layout.Aside className={styles.basicLayoutAside} />

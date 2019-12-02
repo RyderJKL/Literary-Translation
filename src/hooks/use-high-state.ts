@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 
-export function useHighState<S>(initialState: S | (() => S)): [S, (value, callback?: (s: S) => void) => void] {
+export function useHighState<S>(
+    initialState: S | (() => S)
+): [S, (value: Partial<S>, callback?: (s: S) => void) => void] {
     const [state, setState] = useState<S>(initialState);
     const fn = useRef(undefined);
 
-    function updateState(newValue, cb?: (newState: S) => void) {
+    function updateState(newValue: Partial<S>, cb?: (newState: S) => void) {
         setState((prevState) => {
             return {
                 ...prevState,

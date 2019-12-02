@@ -10,8 +10,8 @@ export interface ColorPickerProps {
     onChange?(color: string): void;
 }
 
-const ThemeColorItem = ({ color, onClick }) => (
-    <Tooltip key={color} trigger={'hover'} title={color}>
+const ThemeColorItem: React.FC<{ color: string; onClick: (color: string) => void }> = ({ color, onClick }) => (
+    <Tooltip trigger={'hover'} title={color}>
         <li onClick={() => onClick(color)} style={{ backgroundColor: color }} className={styles.themeColorPickerItem} />
     </Tooltip>
 );
@@ -22,8 +22,8 @@ const themeColorPicker: React.FC<ColorPickerProps> = ({
 }) => {
     return (
         <ul className={styles.themeColorPicker}>
-            {themeColors.map((color) => (
-                <ThemeColorItem key={color} color={color} onClick={() => onChange(color)} />
+            {themeColors.map((color: string) => (
+                <ThemeColorItem key={color} color={color} onClick={onChange} />
             ))}
         </ul>
     );

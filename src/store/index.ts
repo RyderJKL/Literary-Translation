@@ -1,10 +1,8 @@
 import common from './common';
-import ui from './UI';
 
 export const createStore = () => {
     return {
-        common,
-        ui
+        common
     };
 };
 

@@ -1,7 +1,11 @@
-import { HttpErrorResponse } from 'packages/rjax/lib';
+import { HttpErrorResponse, HttpResponse } from 'packages/rjax/lib';
 import { Message } from 'lego-ui';
 
-export const codeMessage = {
+export interface CodeMessage {
+    [index: string]: string;
+}
+
+export const codeMessage: CodeMessage = {
     200: '服务器成功返回请求的数据。',
     201: '新建或修改数据成功。',
     202: '一个请求已经进入后台排队（异步任务）。',
@@ -36,9 +40,9 @@ export const networkErrorHandler = (networkResponse: HttpErrorResponse): void =>
 /**
  * business 异常处理程序
  */
-export const businessErrorHandler = (response): void => {
+export const businessErrorHandler = (response: HttpResponse<any>): void => {
     const {
-        body: { message },
+        body: { message = '服务器报错了' },
         url
     } = response;
 

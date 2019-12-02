@@ -26,17 +26,19 @@ export const updateTypes = mock({
     response: () => {
         return {
             code: 20000,
-            data: [
-                'bug修复',
-                '配置修改',
-                '版本升级',
-                '应用上线',
-                '性能优化',
-                'ansible修改',
-                '服务扩容',
-                '自动化测试',
-                '数据操作'
-            ]
+            data: {
+                list: [
+                    'bug修复',
+                    '配置修改',
+                    '版本升级',
+                    '应用上线',
+                    '性能优化',
+                    'ansible修改',
+                    '服务扩容',
+                    '自动化测试',
+                    '数据操作'
+                ]
+            }
         };
     }
 });
@@ -48,11 +50,13 @@ export const modules = mock({
         return {
             code: 20000,
             data: Mock({
-                'array|10': {
-                    id: () => Random.id(),
-                    'name|1': () => Random.name(),
-                    notes: () => Random.character()
-                }
+                'list|10': [
+                    {
+                        id: () => Random.id(),
+                        'name|1': () => Random.name(),
+                        notes: () => Random.character()
+                    }
+                ]
             })
         };
     }

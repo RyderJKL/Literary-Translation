@@ -15,25 +15,32 @@ export interface Modules {
 export interface Store {
     environments: EnvironmentItem[];
     updateTypes: string[];
-    models: Modules;
+    modules: Modules[];
     name: string;
+}
+
+export interface SetConfigListProps {
+    environments: EnvironmentItem[];
+    updateTypes: string[];
+    modules: Modules[];
 }
 
 export interface BasicFormStore extends Store {
     submit(): void;
-    setConfigList(value): void;
+    setConfigList(props: SetConfigListProps): void;
 }
 
 class BasicForm implements BasicFormStore {
-    @observable public environments;
-    @observable public updateTypes;
-    @observable public models;
-    @observable public name;
+    @observable public environments: EnvironmentItem[];
+    @observable public updateTypes: string[];
+    @observable public modules: Modules[];
+    @observable public name: string;
 
     @action
-    public setConfigList = (value): void => {
-        this.environments = value;
-        this.name = 'chen rong';
+    public setConfigList = (configList: SetConfigListProps): void => {
+        this.environments = configList.environments;
+        this.updateTypes = configList.updateTypes;
+        this.modules = configList.modules;
     };
 
     @action

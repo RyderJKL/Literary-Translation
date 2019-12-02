@@ -15,8 +15,8 @@ export interface IBreadCrumbsProps {
 }
 
 const BreadCrumbs: React.FC<IBreadCrumbsProps> = ({ breadCrumbsData }) => {
-    const renderBreadCrumbItem = (breadCrumbsList) => {
-        return breadCrumbsList.map((item, index) => {
+    const renderBreadCrumbItem = (breadCrumbsList: IMenuItem[]) => {
+        return breadCrumbsList.map((item: IMenuItem, index: number) => {
             if (item.children) {
                 return <Breadcrumb.Item key={item.path || index}> {item.name}</Breadcrumb.Item>;
             }

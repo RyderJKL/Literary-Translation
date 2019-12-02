@@ -1,10 +1,10 @@
-import { HttpResponse } from 'packages/rjax/lib';
+import { HttpResponse, HttpRequest } from 'packages/rjax/lib';
 import * as config from '@/config';
 import { getToken } from '@/utils/auth';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-export const requestInterceptor = (req, useMock = false) => {
+export const requestInterceptor = (req: HttpRequest<any>, useMock = false) => {
     let { url } = req;
 
     // 如果是在开发环境，并且该请求开启了 mock，则将该次请求处理成 mock-api

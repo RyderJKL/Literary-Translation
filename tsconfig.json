@@ -17,7 +17,7 @@
         "module": "ESNext",
         "moduleResolution": "node",
         "noResolve": false,
-        "noImplicitAny": false,
+        "noImplicitAny": true,
         "removeComments": true,
         "sourceMap": true,
         "allowJs": false,
