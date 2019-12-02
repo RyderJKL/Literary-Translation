@@ -3,16 +3,14 @@ import { observable, action } from 'mobx';
 export interface EnvironmentItem {
     id: string;
     name: string;
-    name_cn: string;
 }
 
 export interface Modules {
     id: string;
     name: string;
-    notes: string;
 }
 
-export interface Store {
+export interface Model {
     environments: EnvironmentItem[];
     updateTypes: string[];
     modules: Modules[];
@@ -25,7 +23,7 @@ export interface SetConfigListProps {
     modules: Modules[];
 }
 
-export interface BasicFormStore extends Store {
+export interface BasicFormStore extends Model {
     submit(): void;
     setConfigList(props: SetConfigListProps): void;
 }
@@ -45,7 +43,7 @@ class BasicForm implements BasicFormStore {
 
     @action
     public submit = (): void => {
-        this.name = 'rong';
+        this.name = 'lego admin pro';
     };
 }
 

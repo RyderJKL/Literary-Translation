@@ -2,17 +2,16 @@ import { mock } from 'root/mock/templates/mock-helper';
 import { Random, mock as Mock } from 'mockjs';
 
 export const environments = mock({
-    url: '/srm/environments',
+    url: '/form/basic/environments',
     type: 'get',
     response: () => {
         return {
             code: 20000,
             data: Mock({
-                'list|10': [
+                'list|5': [
                     {
-                        'id|10-1000000': 3434,
-                        'name|1': () => Random.region() + Random.county(true),
-                        'name_nc|1': () => Random.region() + Random.county(true)
+                        id: () => Random.id(),
+                        name: () => Random.province()
                     }
                 ]
             })
@@ -21,7 +20,7 @@ export const environments = mock({
 });
 
 export const updateTypes = mock({
-    url: '/srm/update-types',
+    url: '/form/basic/update-types',
     type: 'get',
     response: () => {
         return {
@@ -44,20 +43,18 @@ export const updateTypes = mock({
 });
 
 export const modules = mock({
-    url: '/srm/modules',
+    url: '/form/basic/modules',
     type: 'get',
     response: () => {
         return {
             code: 20000,
-            data: Mock({
-                'list|10': [
-                    {
-                        id: () => Random.id(),
-                        'name|1': () => Random.name(),
-                        notes: () => Random.character()
-                    }
+            data: {
+                list: [
+                    { id: '1', name: '数据治理' },
+                    { id: '2', name: '机器学习' },
+                    { id: '3', name: '标签系统' }
                 ]
-            })
+            }
         };
     }
 });
