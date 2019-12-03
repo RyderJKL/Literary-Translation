@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Select, Form, Input, Button, Card } from 'lego-ui';
+import { Select, Form, Input, Button, Card, Message } from 'lego-ui';
 
 import { CreateFormProps } from 'lego-ui/dist/lib/form';
 
 import { of } from 'rxjs';
-import { finalize, switchMap, map, withLatestFrom, startWith } from 'rxjs/operators';
+import { finalize, switchMap, map, withLatestFrom, startWith, tap, debounceTime } from 'rxjs/operators';
 import ModelConnect from './model-connect';
 import { useHighState } from '@/hooks';
 
@@ -51,14 +51,17 @@ const BasicForm: React.FC<BasicFormProps & FromState> = observer((props) => {
     const [onSubmit, [submitLoading]] = useEventCallback(
         (event$, formState$) =>
             event$.pipe(
+                debounceTime(500),
                 withLatestFrom(formState$),
+                // withLatestData[1][0] <=> [event, [formState]]
                 map((withLatestData) => withLatestData[1][0]),
                 switchMap((formState) =>
                     submitForm$(formState).pipe(
                         startWith([true]),
                         finalize(() => [false])
                     )
-                )
+                ),
+                tap(() => Message.$message({ type: 'success', content: '提交成功' }))
             ),
         [false],
         [formState]
@@ -73,7 +76,7 @@ const BasicForm: React.FC<BasicFormProps & FromState> = observer((props) => {
     };
 
     return (
-        <Card bordered={true}>
+        <Card>
             <Form className={styles.basicForm}>
                 <Form.Item required={true} labelPosition={'left'} label={'上线产品'}>
                     <Validator name='module' rules={[{ required: true, message: '请选择产品' }]}>

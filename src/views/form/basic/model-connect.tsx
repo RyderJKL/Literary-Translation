@@ -1,24 +1,20 @@
 /**
- * ModelConnect 连接 model 和 intent
+ * ModelConnect 注入 model 和 intent 到 view
  */
 import * as React from 'react';
-import { observer } from 'mobx-react';
 export type ReactComponent = React.FunctionComponent<any>;
 
-export default function ModelConnect<S, I>(
-    ModelConnectWrappedComponent: ReactComponent,
-    store: S,
-    intent?: I
-): ReactComponent {
-    const ObservableComponent: React.FC = (props) => {
-        return React.createElement(observer(ModelConnectWrappedComponent), {
+export default function ModelConnect<S, I>(WrappedComponent: ReactComponent, store: S, intent?: I): ReactComponent {
+    const ConnectComponent: React.FC = (props, ref: React.Ref<any>) => {
+        return React.createElement(WrappedComponent, {
             ...props,
             model: store,
-            intent
+            intent,
+            ref
         });
     };
 
-    ObservableComponent.displayName = ModelConnectWrappedComponent.name || ModelConnectWrappedComponent.displayName;
+    ConnectComponent.displayName = WrappedComponent.name || WrappedComponent.displayName;
 
-    return ObservableComponent;
+    return React.forwardRef(ConnectComponent);
 }
