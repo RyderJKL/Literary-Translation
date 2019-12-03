@@ -10,7 +10,7 @@ export default function ModelConnect<S, I>(WrappedComponent: ReactComponent, sto
             ...props,
             model: store,
             intent,
-            ref
+            forwardRef: ref
         });
     };
 
