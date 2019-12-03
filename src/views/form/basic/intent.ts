@@ -1,7 +1,7 @@
 import { forkJoin, Observable } from 'rxjs';
 import * as Services from '@/views/form/basic/serives';
 import { first, tap } from 'rxjs/internal/operators';
-import store, { SetConfigListProps } from './model';
+import store, { SetConfigListProps } from './store';
 import { map, path } from 'ramda';
 
 export const getConfigList$: Observable<any> = forkJoin({

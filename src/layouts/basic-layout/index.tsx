@@ -8,13 +8,14 @@ import TopMenuLayout from './components/topmenu-layout';
 import defaultSettings, { DefaultSettings } from '@/config/default-settings';
 
 // hooks or 工具函数
+import connect from '@/utils/connect';
 import { useHighState } from '@/hooks';
 import { useObservable } from 'rxjs-hooks';
 import { switchMap, takeWhile, tap } from 'rxjs/operators';
 import $request from '@/utils/request';
 
-// model or store
-import { connect, UserInfo } from '@/store';
+// store
+import common, { CommonStore } from '@/store/common';
 
 // config
 import { rootPath, loginPath } from '@/config/routes';
@@ -25,15 +26,15 @@ import styles from './styles.scss';
 
 // types
 export interface BasicLayoutProps {
-    userInfo: UserInfo;
+    viewStore: CommonStore;
     router: RouteComponentProps;
-    saveUserInfo: (userInfo: UserInfo) => void;
 }
 
 export type BasicLayoutState = DefaultSettings;
 
 const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
-    const { userInfo, saveUserInfo, router, children } = props;
+    const { router, children } = props;
+    const { userInfo, saveUserInfo } = props.viewStore;
 
     const defaultState: BasicLayoutState = {
         ...defaultSettings,
@@ -80,7 +81,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
     );
 };
 
-export default connect(BasicLayout, (store) => ({
-    userInfo: store.common.userInfo,
-    saveUserInfo: store.common.saveUserInfo
+export default connect(BasicLayout, common, (store) => ({
+    userInfo: store.userInfo,
+    saveUserInfo: store.saveUserInfo
 }));

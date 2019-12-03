@@ -5,18 +5,21 @@ import { CreateFormProps } from 'lego-ui/dist/lib/form';
 
 import { of } from 'rxjs';
 import { finalize, switchMap, map, withLatestFrom, startWith, tap, debounceTime } from 'rxjs/operators';
-import ModelConnect from '../../../utils/model-connect';
+import Connect from '@/utils/connect';
 import { useHighState } from '@/hooks';
 
-import formStore, { BasicFormStore } from './model';
+import formStore, { BasicFormStore } from './store';
+import commonStore, { Model as CommonModel } from '@/store/common';
 import intent, { Intent } from './intent';
 import { useEventCallback } from 'rxjs-hooks';
 
 import { observer } from 'mobx-react-lite';
 import styles from './style.scss';
 
+export type ViewStore = BasicFormStore & CommonModel;
+
 export interface BasicFormProps extends CreateFormProps {
-    model: BasicFormStore;
+    viewStore: Partial<ViewStore>;
     intent: Intent;
     name?: string;
     forwardRef?: React.Ref<any>;
@@ -31,7 +34,7 @@ export interface FromState {
 
 const BasicForm: React.FC<BasicFormProps & FromState> = observer(
     ({ forwardRef, ...props }) => {
-        const { modules, environments, updateTypes } = props.model;
+        const { modules, environments, updateTypes, userInfo } = props.viewStore;
         const { getConfigList$, submitForm$ } = props.intent;
 
         const {
@@ -82,6 +85,7 @@ const BasicForm: React.FC<BasicFormProps & FromState> = observer(
             <div ref={forwardRef}>
                 <Card>
                     <h2>{props.name}</h2>
+                    <h2>{userInfo.username}</h2>
                     <Form className={styles.basicForm}>
                         <Form.Item required={true} labelPosition={'left'} label={'上线产品'}>
                             <Validator name='module' rules={[{ required: true, message: '请选择产品' }]}>
@@ -145,4 +149,21 @@ const BasicForm: React.FC<BasicFormProps & FromState> = observer(
     { forwardRef: true }
 );
 
-export default ModelConnect(Form.createForm()(BasicForm), formStore, intent);
+export default Connect(
+    Form.createForm()(BasicForm),
+    {
+        formStore,
+        commonStore
+    },
+    (store) => {
+        return {
+            setConfigList: store.formStore.setConfigList,
+            updateTypes: store.formStore.updateTypes,
+            modules: store.formStore.modules,
+            environments: store.formStore.environments,
+            name: store.formStore.name,
+            userInfo: store.commonStore.userInfo
+        };
+    },
+    intent
+);

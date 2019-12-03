@@ -10,11 +10,21 @@ export interface UserInfo {
     section: string;
 }
 
-export class CommonStore {
-    @observable public userInfo: UserInfo;
-
-    @action
-    public saveUserInfo = (userInfo: UserInfo) => (this.userInfo = userInfo);
+export interface Model {
+    userInfo: UserInfo;
 }
 
-export default new CommonStore();
+export interface CommonStore extends Model {
+    saveUserInfo(userInfo: UserInfo): void;
+}
+
+export class Common implements CommonStore {
+    @observable public userInfo: UserInfo;
+
+    @action.bound
+    public saveUserInfo = (userInfo: UserInfo) => {
+        this.userInfo = userInfo;
+    };
+}
+
+export default new Common();

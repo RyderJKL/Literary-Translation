@@ -10,7 +10,7 @@ export interface Modules {
     name: string;
 }
 
-export interface Model {
+export interface Store {
     environments: EnvironmentItem[];
     updateTypes: string[];
     modules: Modules[];
@@ -23,7 +23,7 @@ export interface SetConfigListProps {
     modules: Modules[];
 }
 
-export interface BasicFormStore extends Model {
+export interface BasicFormStore extends Store {
     submit(): void;
     setConfigList(props: SetConfigListProps): void;
 }
